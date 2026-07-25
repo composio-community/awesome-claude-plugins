@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [ui-ux-suite](https://github.com/Aboudjem/ui-ux-suite) - Design audit that scores UI/UX across 12 dimensions (color contrast, typography, layout, accessibility) grounded in 24 named UX laws with citations. Scans CSS, JSX, and Tailwind configs. WCAG 2.2, APCA, OKLCH. Zero dependencies.
 
 ### Git & Version Control
 
@@ -124,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [sniff](https://github.com/Aboudjem/sniff) - Autonomous QA scanner. Walks your running app in a real browser, discovers its flows, and reports real bugs with reproduction proof, severity, and a fix. Covers broken pages and links, console and network errors, broken forms, responsive layout, and accessibility. CLI plus MCP server, no API key.
 
 ### Backend & Architecture
 
@@ -139,12 +141,14 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [aws-cost-audit](https://github.com/Aboudjem/aws-cost-audit-skill) - Audits a live AWS account read-only, attributes every dollar, finds idle and orphaned resources, checks Savings Plans and RI coverage, and produces a savings plan with confidence levels and reversible, gated actions. Verifies prices live.
 
 ### Documentation & Security
 
 - [documentation-generator](./documentation-generator) - Generate comprehensive documentation from code. READMEs, API docs, and guides.
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
+- [recap-studio](https://github.com/Aboudjem/recap-studio) - Turns a topic or a coding session into a self-contained, offline, dark-mode one-page HTML explainer you can read in about five minutes. Cited sources, no JavaScript output.
 
 ### Developer Productivity
 
@@ -156,6 +160,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [goalify](https://github.com/Aboudjem/goalify) - Scopes a big coding task, locks the few real decisions, and writes a self-contained goal file so a fresh session executes the whole job and verifies every success criterion before calling it done.
+- [humanizer](https://github.com/Aboudjem/humanizer-skill) - Detects 43 AI-writing patterns and rewrites text with burstiness, five voice profiles, and a 0-100 AI-tell score. Pure Markdown, zero dependencies, no network calls.
 
 ### Companion & Personality
 

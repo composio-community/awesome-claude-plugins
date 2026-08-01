@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [UIZZE](https://github.com/uizze/uizze) - Grounds Claude Code in 800,000+ real web and iOS screens, locks a product-specific design contract, and blocks generic UI at a rendered finish gate. [uizze.com](https://uizze.com)
 
 ### Git & Version Control
 

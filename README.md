@@ -145,6 +145,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [documentation-generator](./documentation-generator) - Generate comprehensive documentation from code. READMEs, API docs, and guides.
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
+- [anchorwatch](https://github.com/anchorwatch-dev/anchorwatch) - Guardrails for Claude Code. PreToolUse hooks block destructive shell/git/SQL commands (rm -rf on roots, force-push to main, reset --hard, DROP TABLE, curl | sh), protect .env and key files from reads and writes, and scan every write for leaked credentials, returning a reason Claude acts on. 24 rules, per-project config, zero dependencies, MIT.
 - [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
 
 ### Developer Productivity

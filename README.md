@@ -124,6 +124,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [curation-discipline](https://github.com/jerryliu0103/curation-discipline) - Keeps an agent from silently corrupting a dataset. A staging gate no agent writes past, read-only enforced by a PreToolUse hook rather than by prompt, and a catalogue of pipeline failures that produce no error message.
 
 ### Backend & Architecture
 

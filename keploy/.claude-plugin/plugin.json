@@ -1,0 +1,18 @@
+{
+  "name": "keploy",
+  "description": "Generate, mock and run API tests from real traffic, OpenAPI specs, curl or Postman using Keploy's remote MCP server.",
+  "author": {
+    "name": "Keploy",
+    "url": "https://github.com/keploy"
+  },
+  "homepage": "https://keploy.io/docs/running-keploy/agent-test-generation/",
+  "repository": "https://github.com/keploy/keploy",
+  "license": "Apache-2.0",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Keploy API key",
+      "description": "Keploy API key starting with kep_. Generate one at https://app.keploy.io/settings/api-keys"
+    }
+  }
+}

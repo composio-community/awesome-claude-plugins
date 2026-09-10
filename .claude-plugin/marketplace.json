@@ -249,6 +249,16 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "keploy",
+      "source": "./keploy",
+      "description": "Generate, mock and run API tests from real traffic, OpenAPI specs, curl or Postman",
+      "category": "quality",
+      "tags": ["testing", "api-testing", "mcp", "mocking", "ci"],
+      "author": {
+        "name": "Keploy"
+      }
     }
   ]
 }

@@ -171,6 +171,13 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "keploy",
+      "category": "quality",
+      "description": "Generate, mock and run API tests from real traffic, OpenAPI specs, curl or Postman",
+      "author": "Keploy",
+      "tags": ["testing", "api-testing", "mcp", "mocking", "ci"]
     }
   ],
   "categories": [

@@ -83,6 +83,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
   - [DevOps & Performance](#devops--performance)
   - [Documentation & Security](#documentation--security)
   - [Developer Productivity](#developer-productivity)
+  - [Business & Finance](#business--finance)
   - [Companion & Personality](#companion--personality)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
@@ -157,6 +158,43 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+
+### Business & Finance
+
+- [mcp-amortization](https://github.com/theluckystrike/mcp-amortization) - Loan and lease schedules from the terms of the agreement, to the minor unit.
+- [mcp-asset-register](https://github.com/theluckystrike/mcp-asset-register) - A fixed asset register that depreciates on the rates the tax authorities actually publish, with the schedule, the journal and the gain on sale.
+- [mcp-bank-statement](https://github.com/theluckystrike/mcp-bank-statement) - Bank CSV exports categorised, summarised and reconciled with expenses.
+- [mcp-barcode](https://github.com/theluckystrike/mcp-barcode) - QR codes and barcodes drawn on your machine, with no upload and no network call.
+- [mcp-billing-docs](https://github.com/theluckystrike/mcp-billing-docs) - Credit notes and purchase orders, on the same engine as your invoices.
+- [mcp-calendar](https://github.com/theluckystrike/mcp-calendar) - Read .ics calendars: events, free and busy, conflicts, exports.
+- [mcp-cash-book](https://github.com/theluckystrike/mcp-cash-book) - One double-entry ledger derived from the books you already keep, proved to the minor unit.
+- [mcp-catalogue](https://github.com/theluckystrike/mcp-catalogue) - One price list and one rate card, kept where the invoice and the quote can both read them.
+- [mcp-change-order](https://github.com/theluckystrike/mcp-change-order) - Change orders against a quote or a work order, with the running contract value derived from what the client approved.
+- [mcp-checklist](https://github.com/theluckystrike/mcp-checklist) - Checklists you build once and run many times, and the dated record of each run that somebody signs.
+- [mcp-clauses](https://github.com/theluckystrike/mcp-clauses) - Reusable contract clauses, searched and assembled into Word.
+- [mcp-currency](https://github.com/theluckystrike/mcp-currency) - ECB reference rates: convert, history, and fx_rates for rebilling.
+- [mcp-delivery-schedule](https://github.com/theluckystrike/mcp-delivery-schedule) - Dated deliverables against a quote or a work order, and what is late as at any date you name.
+- [mcp-deposits](https://github.com/theluckystrike/mcp-deposits) - Security and retainer deposits, held per client, on the same engine as your invoices.
+- [mcp-docx](https://github.com/theluckystrike/mcp-docx) - Real Word documents from chat: proposals, contracts, quotes.
+- [mcp-expense-tracker](https://github.com/theluckystrike/mcp-expense-tracker) - Receipts, mileage and expenses that turn into invoice lines.
+- [mcp-image](https://github.com/theluckystrike/mcp-image) - Resize, convert, compress and watermark images, pure JavaScript.
+- [mcp-invoice](https://github.com/theluckystrike/mcp-invoice) - Numbered invoices with tax lines, rendered to a professional PDF.
+- [mcp-kanban](https://github.com/theluckystrike/mcp-kanban) - A task board per project that hands off to the time tracker.
+- [mcp-office-suite](https://github.com/theluckystrike/mcp-office-suite) - One install that exposes every tool of the whole set, 292 of them, for small business accounting and paperwork.
+- [mcp-packing-list](https://github.com/theluckystrike/mcp-packing-list) - Packing slips that carry no prices: what is in each carton, what it weighs, and what is still to pack.
+- [mcp-pdf](https://github.com/theluckystrike/mcp-pdf) - Merge, split, stamp and read PDFs, pure JavaScript.
+- [mcp-per-diem](https://github.com/theluckystrike/mcp-per-diem) - Statutory travel allowances on the rate tables the tax authorities publish, and the trips you priced with them.
+- [mcp-petty-cash](https://github.com/theluckystrike/mcp-petty-cash) - A petty cash float on the imprest system, reconciled to the minor unit.
+- [mcp-price-tracker](https://github.com/theluckystrike/mcp-price-tracker) - Check and watch product prices on ordinary shop pages.
+- [mcp-quotes](https://github.com/theluckystrike/mcp-quotes) - Priced, VAT-correct quotes from chat, and the yes turns into an invoice.
+- [mcp-recurring](https://github.com/theluckystrike/mcp-recurring) - Scheduled invoices, generated into your invoice book with PDFs.
+- [mcp-resume](https://github.com/theluckystrike/mcp-resume) - Resumes and cover letters as Word files from one profile, never invented.
+- [mcp-spreadsheet](https://github.com/theluckystrike/mcp-spreadsheet) - Read, query, edit and convert xlsx and csv files safely.
+- [mcp-statement-of-account](https://github.com/theluckystrike/mcp-statement-of-account) - The one document that answers what a client actually owes you, aged as at any date, with the chaser drafted.
+- [mcp-time-tracker](https://github.com/theluckystrike/mcp-time-tracker) - Track billable time without leaving the chat.
+- [mcp-timezone](https://github.com/theluckystrike/mcp-timezone) - Find meeting slots inside everyone's working hours.
+- [mcp-work-order](https://github.com/theluckystrike/mcp-work-order) - Job orders for trades and field work, priced the way the invoice will be.
+- [mcp-zip](https://github.com/theluckystrike/mcp-zip) - Make a zip, look inside one, and unpack one, entirely on your machine.
 
 ### Companion & Personality
 

@@ -164,6 +164,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Image and Video Generation
 
+- [i-hate-editing](https://github.com/ranahaani/i-hate-editing) - MIT Claude Code skill that turns raw talking-head footage into a finished cut with local whisper.cpp + ffmpeg. The model reads the transcript as text and emits a cut list — it never watches the pixels. Authored by ranahaani.
+
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
 

@@ -91,6 +91,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
 
 ## What Are Claude Plugins?
 
+- [mblode/agent-skills](https://github.com/mblode/agent-skills) — Nobody ships AI slop on purpose. These skills make sure you don't. UI audits, typography, docs, PR review, and releases.
 Claude Plugins are extensions that enhance Claude Code with custom slash commands, specialized agents, hooks, and skills. Plugins can be shared across projects and teams, providing consistent tooling and workflows.
 
 ## Plugins

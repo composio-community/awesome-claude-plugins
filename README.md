@@ -225,6 +225,8 @@ Please ensure your plugin:
 - [Plugin Development Guide](https://code.claude.com/docs/en/plugins)
 - [Discover Plugins](https://code.claude.com/docs/en/discover-plugins)
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - More skills and resources
+- [HostDeFi](https://hostdefi.com) - Agent-ready token-safety scanner with a public A2A agent card, hosted MCP server and x402-paid endpoints for autonomous checks.
+
 
 ## License
 

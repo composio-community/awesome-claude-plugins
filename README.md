@@ -98,6 +98,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Integrations
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
+- [flacli](https://github.com/h-3303/flacli) - Get music onto disk: name songs and albums or hand over a playlist (TIDAL, Deezer, YouTube Music, or an export file), match it against your local library via MusicBrainz, fetch the missing tracks through your own Nicotine+ (Soulseek) client, file and tag them, write an M3U, then tidy the library.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
 
 ### Frontend & Design

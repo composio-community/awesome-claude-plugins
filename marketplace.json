@@ -5,6 +5,18 @@
   "repository": "https://github.com/composio/awesome-claude-plugins",
   "plugins": [
     {
+      "name": "api-market",
+      "category": "integrations",
+      "description": "Discover and call APIs through the API.market hosted OAuth MCP gateway. API pricing and free tiers vary.",
+      "author": "API.market",
+      "tags": [
+        "mcp",
+        "api",
+        "oauth",
+        "agents"
+      ]
+    },
+    {
       "name": "connect-apps",
       "category": "integrations",
       "description": "Connect Claude to 500+ apps - Gmail, Slack, GitHub, Notion, and more",

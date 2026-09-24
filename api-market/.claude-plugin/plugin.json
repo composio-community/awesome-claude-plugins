@@ -1,0 +1,18 @@
+{
+  "name": "api-market",
+  "version": "1.0.0",
+  "description": "Discover and call APIs through the API.market hosted OAuth MCP gateway. API pricing and free tiers vary.",
+  "author": {
+    "name": "API.market",
+    "email": "shashank@noveum.ai"
+  },
+  "homepage": "https://api.market/mcp",
+  "repository": "https://github.com/Noveum/api-market-agent-integrations",
+  "keywords": [
+    "mcp",
+    "api",
+    "oauth",
+    "agents"
+  ],
+  "mcpServers": "./.mcp.json"
+}

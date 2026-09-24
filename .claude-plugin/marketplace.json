@@ -11,6 +11,21 @@
   },
   "plugins": [
     {
+      "name": "api-market",
+      "category": "integrations",
+      "description": "Discover and call APIs through the API.market hosted OAuth MCP gateway. API pricing and free tiers vary.",
+      "author": {
+        "name": "API.market"
+      },
+      "tags": [
+        "mcp",
+        "api",
+        "oauth",
+        "agents"
+      ],
+      "source": "./api-market"
+    },
+    {
       "name": "connect-apps",
       "source": "./connect-apps",
       "description": "Connect Claude to 500+ apps - Gmail, Slack, GitHub, Notion, and more",

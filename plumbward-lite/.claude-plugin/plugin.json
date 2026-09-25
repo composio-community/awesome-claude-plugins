@@ -1,0 +1,15 @@
+{
+  "name": "plumbward-lite",
+  "displayName": "Plumbward Lite",
+  "version": "0.2.2",
+  "description": "Free. Stops Claude deleting your work without showing you the list first, and cuts the habits that burn through your usage limits.",
+  "author": {
+    "name": "Uzayr Hussain"
+  },
+  "license": "LicenseRef-Free-Unmodified",
+  "keywords": [
+    "safety",
+    "cost",
+    "productivity"
+  ]
+}

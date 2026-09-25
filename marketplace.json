@@ -171,6 +171,13 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "plumbward-lite",
+      "category": "productivity",
+      "description": "Free file-safety and token-cost skills: dry-run shows the full list before anything is deleted, moved or overwritten and waits for your yes; token-diet cuts the habits that burn usage limits. Measured, traces public.",
+      "author": "Uzayr Hussain",
+      "tags": ["safety", "dry-run", "tokens", "cost", "free"]
     }
   ],
   "categories": [

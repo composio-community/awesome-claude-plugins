@@ -1,5 +1,6 @@
 <h1 align="center">Awesome Claude Code Plugins</h1>
 
+<p align="center">
 <a href="https://dashboard.composio.dev/login?utm_source=Github&utm_medium=Banner&utm_content=AwesomePlugins">
   <img width="1280" alt="Awesome Claude Plugins" src="./cover_image.png">
 </a>
@@ -8,8 +9,6 @@
 <p align="center">
   <a href="https://awesome.re">
     <img src="https://awesome.re/badge.svg" alt="Awesome" />
-
-    
   </a>
   <a href="https://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" />

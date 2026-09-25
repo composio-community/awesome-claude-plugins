@@ -1,6 +1,5 @@
 <h1 align="center">Awesome Claude Code Plugins</h1>
 
-<p align="center">
 <a href="https://dashboard.composio.dev/login?utm_source=Github&utm_medium=Banner&utm_content=AwesomePlugins">
   <img width="1280" alt="Awesome Claude Plugins" src="./cover_image.png">
 </a>
@@ -9,6 +8,8 @@
 <p align="center">
   <a href="https://awesome.re">
     <img src="https://awesome.re/badge.svg" alt="Awesome" />
+
+    
   </a>
   <a href="https://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" />
@@ -99,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [stayingapi/hotel-mcp](https://github.com/stayingapi/hotel-mcp) - Hosted MCP server that connects Claude to live accommodation data across Airbnb, Booking.com, Vrbo and Google Hotels — search, pricing, availability, property details and reviews from one API.
 
 ### Frontend & Design
 

@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [playcut-brush](https://github.com/mehrang0/playcut-brush) - Your agent designs posters, logos, and app screens as SVG, shown live in a local browser tab that updates on every change.
 
 ### Git & Version Control
 

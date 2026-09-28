@@ -149,6 +149,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [seatbelt](https://github.com/dripston/seatbelt) - Keeps your CLAUDE.md/AGENTS.md rules alive across compaction, resume, and long sessions, and nudges (never blocks) before a shell command matches a rule you've flagged.
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

@@ -96,6 +96,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 500+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [BuyWhere MCP](https://github.com/BuyWhere/buywhere-mcp) - Product search MCP server for AI shopping agents (`npx -y @buywhere/mcp-server` or https://api.buywhere.ai/mcp). Docs: https://docs.buywhere.ai
 
 ### Frontend & Design
 

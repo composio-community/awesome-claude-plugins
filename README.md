@@ -134,6 +134,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### DevOps & Performance
 
+- [Shipvela](./shipvela) - Publish static websites with an OAuth MCP connector, owner-confirmed uploads, deployment status and build logs. Requires a Shipvela account; Hobby includes 3 projects and 20 publishes/month. Compatible Next.js SSR is paid.
 - [perf](./perf) - Performance analysis and optimization. Identify bottlenecks and improve speed.
 - [audit-project](./audit-project) - Full project audit for code quality, dependencies, security, and best practices.
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.

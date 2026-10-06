@@ -1,0 +1,30 @@
+{
+  "name": "shipvela",
+  "displayName": "Shipvela",
+  "version": "0.2.0",
+  "description": "Publish websites from your coding assistant with owner confirmation, deployment status and a live HTTPS URL.",
+  "author": {
+    "name": "Content Petit LLC",
+    "email": "hello@shipvela.com",
+    "url": "https://shipvela.com"
+  },
+  "homepage": "https://shipvela.com/integrations/claude",
+  "repository": "https://github.com/stefanautomateed/shipvela-codex",
+  "license": "MIT",
+  "keywords": [
+    "hosting",
+    "deployment",
+    "websites",
+    "mcp",
+    "codex",
+    "claude",
+    "cursor"
+  ],
+  "icon": "./assets/icon.svg",
+  "documentationUrl": "https://shipvela.com/integrations/claude",
+  "supportUrl": "https://shipvela.com/support",
+  "privacyPolicyUrl": "https://shipvela.com/privacy",
+  "termsOfServiceUrl": "https://shipvela.com/terms",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

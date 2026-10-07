@@ -161,6 +161,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [diffspider](https://github.com/Silvertree2010/diffspider) - Animated braille spider that crawls over every Edit and Write diff in the terminal and marks the changed words in neon. Uses the function hooks API, zero dependencies.
 
 ### Image and Video Generation
 

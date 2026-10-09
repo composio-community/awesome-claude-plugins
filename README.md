@@ -130,6 +130,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [backend-architect](./backend-architect) - Backend architecture patterns, API design, database schemas, and system design.
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
+- [lnpl](https://github.com/choiyounggi/linkly) - Claude Code plugin for LNPL, the language of the linkly LLM-native platform: you declare entities, services and workflows, and the compiler lowers them to a semantic IR that runs on an interpreter or compiles through MLIR to a native binary. LNPL's verb vocabulary is closed, so the plugin routes Claude to the lexicon generated from the compiler's own tables, surfaces `lnpl compile` diagnostics on every save, and gates completion on evidence.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
 
 ### DevOps & Performance

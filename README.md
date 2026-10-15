@@ -120,6 +120,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Code Quality & Testing
 
 - [AgentLint](https://github.com/0xmariowu/AgentLint) - Lint your repo for AI agent compatibility. 33 evidence-backed checks across 5 dimensions. Claude Code plugin.
+- [Check](https://github.com/golproductions/gol-check) - Hook plugin that checks each command and file write on your own machine before it runs: programs, files, folders, git refs, packages and images it names must exist, and scripts must parse; what the machine proves wrong is blocked. Paid, 14-day free trial.
 - [code-review](./code-review) - Comprehensive code review with best practices, patterns, and improvement suggestions.
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.

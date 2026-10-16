@@ -161,6 +161,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [mathlete](https://github.com/janakirampuli/mathlete) - Mental math questions above the prompt while Claude works: a skill tree from addition to 3-digit products, Elo-style adaptive difficulty, XP, levels, achievements, and a mental math tip after every miss. `/math play` practices on demand.
 
 ### Image and Video Generation
 

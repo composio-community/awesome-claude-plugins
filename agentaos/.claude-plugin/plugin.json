@@ -1,0 +1,10 @@
+{
+	"name": "agentaos",
+	"version": "1.1.0",
+	"description": "AgentaOS tools (MCP) and the integration guide for coding agents.",
+	"author": { "name": "AgentaOS", "email": "hello@agentaos.ai" },
+	"homepage": "https://agentaos.ai",
+	"repository": "https://github.com/AgentaOS/agentaos",
+	"license": "Apache-2.0",
+	"keywords": ["payments", "billing", "merchant-of-record"]
+}

@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [call-me](https://github.com/radres/call-me) - Lets Claude ring your iPhone, read a question or update aloud and return your spoken answer as text, or text you and wait for a reply. Hosted MCP server at `https://callmemcp.com/mcp` plus a Claude Code plugin. Needs the paid Call Me iOS app.
 
 ### Frontend & Design
 

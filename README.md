@@ -157,6 +157,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [cutscene](https://github.com/farzam-azhar7777/cutscene-claude-plugin) - Turns what Claude Code just built into a narrated demo video. Claude writes the steps with exact button labels, you approve them, and the Cutscene Chrome extension records in your own signed-in browser. Sends no code or diffs. Free for 10 minutes of video a month. ([Website](https://trycutscene.com))
 
 ### Companion & Personality
 

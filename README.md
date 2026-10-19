@@ -131,6 +131,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
+- [quorus](https://github.com/Quorus-dev/Quorus) - Puts Claude Code in one local room with Codex, Gemini CLI and opencode over MCP: room chat, DMs, file locks, shared state and approvals. @-mention an agent to fix something in its own git worktree; another reviews it. `claude plugin marketplace add Quorus-dev/Quorus` then `claude plugin install quorus@quorus`. MIT.
 
 ### DevOps & Performance
 

@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [sfxmint](https://github.com/flreey/sfxmint-mcp) - Sound effects for apps and games: bundles the SFXMint MCP server and a skill so Claude Code can find a CC0 sound by event, set or description and download WAV/MP3 into the project, with browser autoplay and mute handling. No API key for the library.
 
 ### Git & Version Control
 

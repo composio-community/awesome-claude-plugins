@@ -225,6 +225,7 @@ Please ensure your plugin:
 - [Plugin Development Guide](https://code.claude.com/docs/en/plugins)
 - [Discover Plugins](https://code.claude.com/docs/en/discover-plugins)
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - More skills and resources
+- [Sigistry](https://sigistry.com) - Verified registry of Claude Code plugins and skills; every listing passes a published eight-check security audit
 
 ## License
 

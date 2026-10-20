@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [placecall](https://github.com/voygr-tech/placecall) - Place real phone calls to US businesses (reservations, appointments, quotes) through IVR menus and holds, and get back the outcome and transcript. Signs in with OAuth through the bundled MCP server; install with `/plugin marketplace add voygr-tech/placecall`.
 
 ### Frontend & Design
 

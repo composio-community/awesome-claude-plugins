@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [ClaudeRipple](https://github.com/PBJ-2/clauderipple/tree/main/packages/mod) - Plugin that picks the reasoning effort for every prompt and the worker for every delegated task, keeps the prompt cache warm and shows where each request went. Part of ClaudeRipple, a local router that lets Claude Code and the Claude desktop app's Code tab use GPT (via a ChatGPT subscription), DeepSeek, Gemini, GLM, Kimi and other OpenAI-compatible models while Claude requests stay on the user's own Claude subscription.
 
 ### Frontend & Design
 

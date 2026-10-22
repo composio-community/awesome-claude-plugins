@@ -1,0 +1,114 @@
+{
+  "skill_name": "transform",
+  "triggering": {
+    "positive": [
+      "Set up a dbt project in this repo.",
+      "Build a staging model for the raw orders table.",
+      "Refactor stg_customers and add not_null and unique tests.",
+      "Create a marts model that joins orders and customers.",
+      "Add documentation and tests to this dbt model.",
+      "Define a revenue metric on top of fct_orders.",
+      "Add a customer_region dimension to the customer entity.",
+      "Build dbt semantic models (MetricFlow) for the orders mart.",
+      "Preview this semantic model in Viz.",
+      "Fix the rpt_customer_metrics.sql model. It produces inf and NaN values in calculated columns and is missing the ltv_tier column.",
+      "This model returns wrong numbers for Q4, the revenue is double counted. Fix it.",
+      "Add three new columns to models/marts/customer_metrics.sql: engagement score, churn risk score, and an LTV tier.",
+      "Add a revenue metric to my Ossie semantic model.",
+      "Update semantics/commerce.ossie.yaml to add a lifetime_value field on customers.",
+      "Add a revenue measure to the orders model in my SLayer semantic layer.",
+      "Update semantics/slayer/models/warehouse/customers.yaml to join customers to regions.",
+      "Our semantic layer is SLayer now. Define models for orders and customers."
+    ],
+    "negative": [
+      "What's in this warehouse and which tables matter?",
+      "Profile the events table and flag PII.",
+      "What changed in the warehouse since I last looked?",
+      "Reconcile my dbt project with the current source schema.",
+      "Write the PR description for the branch I just pushed.",
+      "Bump dbt-core to 1.10 in requirements.txt.",
+      "Did my Ossie semantic layer drift from the warehouse?",
+      "What metrics does this repo's semantic layer define, and what tables are behind them?",
+      "This model is wrong, can you work out why?",
+      "Check my models against the warehouse.",
+      "Did my SLayer models drift from the warehouse?",
+      "A SLayer join started fanning out and the revenue measure doubled. Why?"
+    ]
+  },
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Create a staging model for the raw orders table with appropriate tests, against my DuckDB dbt project.",
+      "expected_output": "Proposed dbt model SQL and schema.yml tests presented as a reviewable diff; nothing applied until confirmed.",
+      "files": [],
+      "assertions": [
+        "Changes are presented as diffs, not silently written (Principle 8)",
+        "Generated SQL is valid dbt and SELECT-only against source data",
+        "Any dev-target build surfaces a cost preflight before running (cost before spend)",
+        "Prod-target execution is never proposed (dev-target only)"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Refactor this model to be more readable and add tests, but don't run anything against the warehouse yet.",
+      "expected_output": "A refactor proposed as a diff with tests added; no warehouse execution.",
+      "files": [],
+      "assertions": [
+        "Human-written dbt is treated as authoritative; no silent overwrite",
+        "No warehouse build runs without explicit confirmation and a budget"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "This repo has no dbt project yet. Set one up so I can start building staging models from my DuckDB warehouse.",
+      "expected_output": "A dbt project skeleton bootstrapped via `transform init` with an explicitly confirmed connector, reported as create diffs; nothing hand-written by the agent.",
+      "files": [],
+      "assertions": [
+        "`transform init` never runs without an explicit connector (a flag or a committed connector: in .dex/config.yml); the agent confirms the choice with the user rather than assuming one",
+        "The skeleton is engine-rendered, not agent-freehand (no hand-written dbt_project.yml or profiles.yml)",
+        "The generated profiles.yml has a single dev target, no prod-named target, and no secrets",
+        "Everything created is reported as reviewable create diffs, and an existing dbt project is never overwritten"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Define a revenue metric and a couple of dimensions on top of my orders mart as dbt semantic models.",
+      "expected_output": "Semantic-layer edits written as dbt semantic models (MetricFlow YAML) in the dbt project, presented as a reviewable diff.",
+      "files": [],
+      "assertions": [
+        "The dbt project is the source of truth; edits are diffs to dbt semantic YAML, not a parallel model",
+        "Emitted dbt semantic models are valid MetricFlow YAML",
+        "PII flags propagate into emitted dbt (model and column meta); no example values",
+        "Nothing is applied silently; the change is a reviewable diff"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I added tests to my orders mart last week. Are they actually any good?",
+      "expected_output": "Mutation coverage run on that model, reporting which planted defects the tests failed to catch, each with the test that would catch it. Survivors are relayed as the finding; the score is context, not a grade.",
+      "files": [],
+      "assertions": [
+        "Reaches for `transform test --mutate <model>` rather than reading the tests and judging them by eye",
+        "Relays the surviving defects and their suggested tests, not just a count or a score",
+        "Separates survivors the dev data already tells apart (an assertion would catch them) from ones equivalent on it (only a unit test fixture can), or relays why they were not compared",
+        "Reports the cap and any excluded baseline tests rather than presenting a partial run as complete",
+        "Any metered connector surfaces one batch estimate before running (cost before spend)",
+        "Never claims the project or the warehouse was modified: mutants are ephemeral and confined to a throwaway copy"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "This repo's semantic layer is SLayer. Add a saved revenue measure (sum of amount) to the orders model and join orders to customers on customer_id.",
+      "expected_output": "A `semantic slayer update` plan replacing the configured orders model file as a whole, in the pinned format version, with the measure written as a formula and the join declaring its cardinality; nothing applied until `transform apply`.",
+      "files": [],
+      "assertions": [
+        "Reads `semantic.vendor` and routes to `semantic slayer define|update|plan`, not `semantic define|update` (MetricFlow) or `semantic ossie`",
+        "The [slayer] extra is selected by the wrapper; a `reason: prerequisite` refusal is relayed with the install it names, never worked around by editing the file by hand",
+        "Edits only a model file listed in `semantic.slayer.models`, as a whole file at the pinned format `version`",
+        "Never invents what SLayer does not declare: no entities, no aggregation field on the saved measure (the formula carries it), no per-measure time dimension",
+        "Does not generate models with `slayer import-dbt` and does not run SLayer tooling that rewrites the model files",
+        "The change is a reviewable plan applied with `transform apply`; nothing is written silently"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "skill_name": "explore",
+  "triggering": {
+    "positive": [
+      "What's in this warehouse?",
+      "What's in my duckdb?",
+      "What's in this database?",
+      "What data do I have here?",
+      "Take a look at data.duckdb and tell me what's there.",
+      "Do we have any PII in this database?",
+      "Is this data any good?",
+      "Which tables actually matter here?",
+      "What does the customers table contain?",
+      "How do orders and customers join?",
+      "Profile the columns in the events table and flag any PII.",
+      "How many listings have no matching host in this database?",
+      "Run a quick query to check whether order dates have any gaps.",
+      "Draw me an ER diagram of this database.",
+      "Can you visualize how these tables relate?",
+      "Build a staging model for the orders table.",
+      "Build a mart that scores each customer for churn risk. Source data: int_sales__orders_enriched. Explore to understand available columns.",
+      "Fix the rpt_customer_metrics.sql model. It produces inf and NaN values in calculated columns and does not exclude NULL customer_id. The model reads from int_sales__orders_enriched.",
+      "Create models/marts/customer_cohorts.sql showing monthly retention by acquisition cohort. Use the orders and customers source tables.",
+      "The finance team says fct_daily_revenue is double counting refunds since the SAP migration. Find the cause and fix it.",
+      "What metrics does this repo's semantic layer define, and what tables are behind them?"
+    ],
+    "negative": [
+      "Set up a dbt project in this repo.",
+      "Refactor this dbt model and add tests.",
+      "Define a revenue metric on top of fct_orders.",
+      "What changed in the warehouse and did my dbt project drift?",
+      "Build models/marts/basket_composition.sql. Source: ORDERS (order_id VARCHAR, customer_id VARCHAR, ordered_at TIMESTAMP, grand_total DECIMAL, status VARCHAR) and ORDER_LINES (line_id VARCHAR, order_id VARCHAR, sku VARCHAR, qty INTEGER, unit_price DECIMAL). Group baskets by size band and report average margin per band.",
+      "Rename the column cust_id to customer_id across models/staging/sap/, about 30 files, and keep the yml docs in sync.",
+      "The CI job fails on dbt parse after I merged main. Jinja compilation error in macros/cents_to_dollars.sql, undefined variable. Fix the macro.",
+      "Bump dbt-core to 1.10 in requirements.txt and fix the deprecation warnings in dbt_project.yml.",
+      "Add a revenue metric to my Ossie semantic model.",
+      "Check my models against the warehouse."
+    ]
+  },
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I just connected a DuckDB file with a few dozen tables. Help me understand what's in it and which tables are worth my attention.",
+      "expected_output": "A ranked landscape from inventory and a draft .dex/ map, reported as counts plus the map's own budgeted findings, without dumping the full schema into context.",
+      "files": [],
+      "assertions": [
+        "Drives the engine via the wrapper (explore inventory --rank and/or explore map) and reads the JSON envelope; does not invent results",
+        "Reports a ranked shortlist of objects, not all of them; no per-column listing appears for the full warehouse (sense-making, not enumeration)",
+        "When map is run, it relays what the envelope returned: the counts (object_count, profiled_count, relationship_count, pii_column_count) and the budgeted findings the payload carries, without pasting the cache contents or re-listing every column",
+        "No raw rows and no credentials appear anywhere in the output (clean envelope)"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Profile the customers table and tell me about data quality and any sensitive columns.",
+      "expected_output": "Column profiles built from aggregates plus PII flags; min/max suppressed on string and PII columns; no example values surfaced.",
+      "files": [],
+      "assertions": [
+        "Profiles are aggregate-derived (null_fraction, distinct_count, is_unique), never raw rows",
+        "PII is reported as (column, category, confidence) with no example value; the email column is flagged",
+        "min_value and max_value are absent (null) for string and PII columns, and present only for safe numeric or temporal columns",
+        "Stated as read-only against the data"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "How do the tables in this warehouse relate? Show me the joins.",
+      "expected_output": "Inferred joins (and declared ones if a dbt project is present), each labeled by kind with a confidence, derived from metadata rather than by scanning data.",
+      "files": [],
+      "assertions": [
+        "Relationships are returned with from/to datasets and columns and a kind of inferred or declared",
+        "Inferred joins carry a confidence and are clearly distinguished from declared (dbt) joins",
+        "No raw rows are read to establish the joins; the result is metadata-derived (or verified with --verify aggregate probes)",
+        "The output is a relationship summary, not a full schema dump"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "How many orders point at a customer that doesn't exist, and what are the most common order statuses?",
+      "expected_output": "Two answers derived through guarded probes: an orphan count from an overlap-shaped query and a top-K status distribution, both via `explore query` after mapping, never via raw Python or a database CLI.",
+      "files": [],
+      "assertions": [
+        "Runs `explore map` (or confirms the .dex cache exists) before probing, because the query firewall requires the cache",
+        "Answers through `explore query` via the wrapper; does not open the database with ad-hoc Python, duckdb CLI, or any path around the engine",
+        "Probes are aggregate-shaped (counts, GROUP BY on a non-PII column); no SELECT * and no value-carrying aggregate over a PII-flagged column",
+        "If a query is refused by the firewall, the agent rewrites it per the refusal message instead of retrying the same shape or routing around the engine",
+        "Reports the counts and distribution from the envelope's columnar result; respects and mentions truncation notes if present"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "List the region names in this warehouse. The region table is a 5-row lookup dimension.",
+      "expected_output": "After profiling, the region name column's generic flag is de-rated below the firewall threshold by value-shape evidence, so the projection runs; the envelope's PII warning is passed on to the user as a caveat, not treated as an error.",
+      "files": [],
+      "assertions": [
+        "Profiles the table (or confirms the cache) before querying, so the flag carries shape-refined confidence",
+        "Projects the column through `explore query` and reports the values with the envelope's PII warning relayed as a caveat",
+        "Does not treat the warning as a failure, does not weaken or remove any flag, and does not route around the engine"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Your query on products.name got refused as PII, but that column is just product titles, not personal data. Fix it properly.",
+      "expected_output": "A pii_overrides entry in .dex/config.yml naming the fully qualified column (with a reason), presented for the user's review; never a cache edit or a detector change.",
+      "files": [],
+      "assertions": [
+        "Recommends or writes a pii_overrides entry in .dex/config.yml with the fully qualified column path and a reason",
+        "Does not edit .dex/cache.json, does not propose changing the detector or the firewall threshold",
+        "Explains that the override survives re-profiles and takes effect at query time immediately"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Give me a diagram of how the tables in shop.duckdb relate to each other.",
+      "expected_output": "A Mermaid ER diagram produced by `explore diagram` after mapping, reproduced verbatim in a fenced mermaid block, with the engine's own line styles and cardinalities left intact and any elision from the notes mentioned.",
+      "files": [],
+      "assertions": [
+        "Runs `explore map` (or confirms the .dex cache exists) before `explore diagram`, because the diagram renders the cache",
+        "Produces the diagram through `explore diagram` via the wrapper; does not hand-author Mermaid from the relationships envelope or from its own reading of the schema",
+        "Reproduces `data.mermaid` verbatim inside a fenced mermaid block; does not redraw, re-letter, or 'tidy' the glyphs, and does not upgrade an inferred or unverified edge to a solid or exactly-one cardinality",
+        "Reports what the notes say was left out (elided objects or columns) rather than presenting a capped diagram as complete",
+        "Writes a .mmd or markdown file only if the user asked for a file, and does not claim dex wrote one"
+      ]
+    }
+  ]
+}

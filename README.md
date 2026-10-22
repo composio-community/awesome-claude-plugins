@@ -36,13 +36,16 @@
 A curated list of production-ready plugins for Claude Code to supercharge your development workflow.
 </p>
 
-> **Want plugins that do more than generate text?** The [connect-apps](./connect-apps) plugin lets Claude send emails, create issues, post to Slack, and take actions across 500+ apps.
+> **Want plugins that do more than generate text?** The [connect-apps](./connect-apps) plugin lets Claude send emails, create issues, post to Slack, and take actions across 1000+ apps.
 
 ---
 
-## Quickstart: Connect Claude to 500+ Apps
+## Give your skills real-world actions
 
-The **[connect-apps](./connect-apps)** plugin lets Claude perform real actions - send emails, create issues, post to Slack. It handles auth and connects to 500+ apps using Composio under the hood.
+Skills tell your agent **how** to work. An MCP Gateway gives it secure access to the tools it needs.
+
+Composio [MCP Gateway](https://composio.dev/mcp-gateway) provides a single MCP endpoint for 1,000+ integrations with built-in authentication, team-based access controls, audit logs, and production-ready reliability.
+
 
 ### 1. Clone & Run
 
@@ -62,7 +65,7 @@ Paste your API key when asked. (Get a free key at [dashboard.composio.dev](https
 
 ### 3. Try It
 
-Ask Claude to send you a test email. If you receive it, Claude is now connected to 500+ apps.
+Ask Claude to send you a test email. If you receive it, Claude is now connected to 1000+ apps.
 
 **[See all supported apps →](https://composio.dev/tools)**
 
@@ -94,7 +97,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Integrations
 
-- [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 500+ services.
+- [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
 
 ### Frontend & Design
@@ -142,6 +145,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [documentation-generator](./documentation-generator) - Generate comprehensive documentation from code. READMEs, API docs, and guides.
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
+- [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
 
 ### Developer Productivity
 
@@ -159,9 +163,10 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
 - [fable-mode](https://github.com/rennf93/opus-fable-playbook) - Makes Opus 4.8 behave like Claude Fable 5 via a doctrine output style, drift-catching hooks (stop-gate, tool-discipline, honesty nudges), three skills, and a critic agent, validated by a 12-probe eval loop judged pairwise against golden Fable transcripts.
 
-### Image Generation
+### Image and Video Generation
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
+- [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
 
 ## Getting Started
 

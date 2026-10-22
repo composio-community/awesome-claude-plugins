@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [juzpost](https://github.com/juzpost/juzpost-claude-plugin) - Draft, schedule and publish social posts to 11 networks (X, LinkedIn, Instagram, TikTok, YouTube, Bluesky and more) from Claude Code through JuzPost's hosted MCP server, confirming with you before anything is scheduled.
 
 ### Frontend & Design
 

@@ -124,6 +124,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [design-to-build](https://github.com/zhyuka/design-to-build) - Drives a build into each hover, focus, press and open state its Figma design draws, and fails the states it lacks. Agents named as reviewers can't write files, even through the shell, and a builder can't stop until its QA command passes after its last edit. A project's own checks count only once proven on a planted bad case. No model calls. Claude Code plugin.
 
 ### Backend & Architecture
 

@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [postey](https://github.com/posteyai/skills) - Draft, schedule and publish social media posts across X, LinkedIn, Bluesky, Threads, TikTok, Instagram, YouTube, Facebook and Pinterest through Postey's hosted MCP server, with a separate caption per network.
 
 ### Frontend & Design
 

@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [market-mirror](https://github.com/DarkWorldCoder/market-mirror) - Test ads, prices, emails and sales pitches on simulated buyers and get a go / iterate / no-go report with an offline dashboard. Self-hosted MCP server, CLI and skills.
 
 ### Frontend & Design
 

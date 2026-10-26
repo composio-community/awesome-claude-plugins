@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [site-skills](https://github.com/BootForm/site-skills) - Build real static sites with Claude Code: VitePress templates (marketing, portfolio, blog, villa), page sections and new content types, plus a working contact form.
 
 ### Git & Version Control
 

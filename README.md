@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [close-knit](https://github.com/bmsdave/getcloseknit/tree/main/agents/claude/plugin) - Find where to live in London and England: a find-a-home skill plus the Close Knit remote MCP server, with sale prices, rents, crime, schools, flood risk and TfL commute times from official open data, every answer with its sources.
 
 ### Frontend & Design
 

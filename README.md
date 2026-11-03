@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [gsc-pap](https://github.com/aliarifsoydas/gsc-pap-claude-plugin) - Google Search Console, GA4 and PageSpeed Insights for Claude Code through a hosted, read-only MCP server: quick wins, content decay, cannibalization, URL inspection, Core Web Vitals and GA4 conversions per page.
 
 ### Frontend & Design
 

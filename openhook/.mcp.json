@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "openhook": {
+      "type": "http",
+      "url": "https://openhook.dev/mcp"
+    }
+  }
+}

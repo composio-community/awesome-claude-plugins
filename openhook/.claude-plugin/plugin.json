@@ -1,0 +1,17 @@
+{
+  "name": "openhook",
+  "version": "1.0.0",
+  "description": "Capture webhook callbacks and inspect their payloads through Openhook MCP.",
+  "author": {
+    "name": "Openhook",
+    "url": "https://github.com/openhook-dev"
+  },
+  "homepage": "https://openhook.dev",
+  "repository": "https://github.com/openhook-dev/openhook-inbox",
+  "license": "MIT",
+  "keywords": [
+    "webhooks",
+    "testing",
+    "mcp"
+  ]
+}

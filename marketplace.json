@@ -171,6 +171,17 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "openhook",
+      "description": "Capture webhook callbacks and inspect their payloads through Openhook MCP.",
+      "category": "quality",
+      "tags": [
+        "webhooks",
+        "testing",
+        "mcp"
+      ],
+      "author": "Openhook"
     }
   ],
   "categories": [

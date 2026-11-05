@@ -249,6 +249,20 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "openhook",
+      "source": "./openhook",
+      "description": "Capture webhook callbacks and inspect their payloads through Openhook MCP.",
+      "category": "quality",
+      "tags": [
+        "webhooks",
+        "testing",
+        "mcp"
+      ],
+      "author": {
+        "name": "Openhook"
+      }
     }
   ]
 }

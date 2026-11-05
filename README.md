@@ -162,6 +162,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [LoreConvo](https://github.com/labyrinth-analytics/loreconvo) - Persistent session memory MCP server. Automatically saves and retrieves conversation context across Claude Code, web chat, and other surfaces. Per-session metadata, tags, project namespacing, and FTS5 search. Free tier: 50 sessions.
+- [LoreDocs](https://github.com/labyrinth-analytics/loredocs) - Knowledge vault MCP server. Organizes durable project docs, specs, and guides with FTS5 search and tagging. Per-vault Pro gating, embedding-based auto-linking, and cross-project context loading. Free tier: 3 vaults.
 
 ### Companion & Personality
 

@@ -128,6 +128,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Agent Memory
 
+- [deja-vu](https://github.com/vshulcz/deja-vu) - Persistent session memory and recall across Claude Code and 42 other coding agents. Indexes existing transcripts on day one and recalls prior fixes via hooks and MCP. ([Docs](https://vshulcz.github.io/deja-vu/))
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
 
 ### Backend & Architecture

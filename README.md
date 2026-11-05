@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [brooks-lint](https://github.com/hyhmrright/brooks-lint) - AI code reviews grounded in six classic engineering books. Diagnoses code across 6 decay risk dimensions with structured findings (Symptom → Source → Consequence → Remedy). Four review modes: PR Review, Architecture Audit, Tech Debt Assessment, Test Quality Review. v0.6 adds Mermaid dependency graphs.
 
 ### Agent Memory
 

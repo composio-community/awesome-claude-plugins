@@ -79,6 +79,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
   - [Frontend & Design](#frontend--design)
   - [Git & Version Control](#git--version-control)
   - [Code Quality & Testing](#code-quality--testing)
+  - [Agent Memory](#agent-memory)
   - [Backend & Architecture](#backend--architecture)
   - [DevOps & Performance](#devops--performance)
   - [Documentation & Security](#documentation--security)
@@ -124,6 +125,10 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+
+### Agent Memory
+
+- [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
 
 ### Backend & Architecture
 

@@ -1,0 +1,526 @@
+---
+name: memory-sync
+description: "Syncs {PROJECT_NAME} instruction memory (CLAUDE.md at any depth, rules, conventions, agents, skills, the memory dir and the per-agent memory stores) against real code: verifies facts, deletes stale, dedups, compresses, re-audits agents; never grows. Excludes docs. Triggers: sync memory, memory sync, memory drift, sync agents, audit agents, обнови CLAUDE.md, синхронизируй память, память устарела"
+user-invocable: true
+argument-hint: "[prompt] [session|branch|commit <sha>[..<sha>]|recent[:N]|all] [hard] [refs] [free-form focus]"
+allowed-tools: Read, Edit, Glob, Grep, Bash, Agent, AskUserQuestion
+model: opus
+---
+
+# Memory Sync ({PROJECT_NAME})
+
+**ROLE:** multi-agent coordinator keeping instruction memory true and small: it diffs memory against the code for a
+scope and repairs it - facts first, dedup second, compression third - never growing the surface.
+
+**Discovery:** `Grep`/`Glob` when available, else the shell probes below (`find`, `grep -rn`, `git ls-files`, `ls`, `wc -l`).
+
+**References** (relative to `.claude/skills/memory-sync/`; subagents get the repo-relative path, never pasted prose):
+
+| Reference | Read it |
+|-----------|---------|
+| `references/memory-guide.md` | Phase 2 - where a fact BELONGS (layer decision tree), compression patterns, obvious-vs-domain gate |
+| `references/agent-audit.md` | Phase 2 agents + skills batches - the best-practice re-audit, run EVERY sweep |
+| `references/hard-sync.md` | Phases 2 and 3 at `{DEPTH}` = `HARD` only - `paths:` precision audit + obvious-knowledge purge, and the `hard` report contract Phase 3 checks |
+| `references/prompting-guide.md` | Phase 2 (every file) and Phase 3 - the merged prompting-quality rule table + lossless guard |
+
+---
+
+## Prompt contract
+
+`$ARGUMENTS` is one free-form RU/EN prompt; the scope token, `hard`, flags and any focus text may sit
+anywhere in it. Resolve scope + depth + focus from it.
+
+1. Scope token: an explicit one wins outright; else the most distinct whole-word keyword hits (table below);
+   tie -> the keyword that comes first in the prompt. Empty -> `session` (default scope), `NORMAL` (default
+   depth), `MEMORY` (default reach).
+2. Focus: prose outside scope/reach/id/path becomes `{FOCUS}` (emphasis); explicit restrictions such as "only rules" or "do not touch agents" instead narrow the authorized write set. Record them in `SCOPE:` and every dispatch.
+3. Ask: ONE `AskUserQuestion` (max 4 questions), before any work, only for outcome-changing ambiguity (e.g.
+   an unresolvable batch split). An empty run asks nothing.
+
+Print the detailed PLAN under Input resolution ONCE before the first action. `DO:` uses 2-5 imperative bullets
+for gather -> sync -> verify -> self-sync -> report, with fan-out counts. Labels are literal; values follow the conversation language.
+
+---
+
+## Input resolution - THREE ORTHOGONAL AXES
+
+The Prompt contract scope sets `{SCOPE}`; `hard` or the same intent in prose sets `{DEPTH}` = `HARD`; a reach token
+or the same intent sets `{REACH}` = `REFS` (default `MEMORY`); the rest is `{FOCUS}`.
+
+**`{SCOPE}` selects WHICH CHANGES drive the sync:**
+
+| `{SCOPE}` | Change-fact source | EN keywords | RU keywords | Mutates? |
+|-----------|--------------------|-------------|-------------|----------|
+| `session` (DEFAULT) | What this conversation did: new modules, renames, removals, env vars, migrations, commands, behaviour changes; the coordinator writes the list (Phase 1 (a)) | *(empty)*, session, this conversation | сессия, эта беседа | yes |
+| `branch` | `git diff $(git merge-base HEAD "$MAIN")..HEAD`, `$MAIN` derived per Safety (Default branch) | branch, diff vs main | ветка, диф с main | yes |
+| `commit <sha>` / `commit <a>..<b>` | `git show <sha>` / `git diff <a>..<b>` | commit, sha | коммит | yes |
+| `recent[:N]` | `git diff HEAD~N..HEAD`, default N=10 | recent, last N commits | последние | yes |
+| `all` | no diff - every checkable fact in every memory file is re-verified against current code | all, everything, re-verify all | всё, все факты | yes |
+
+**`{DEPTH}` selects HOW HARD:**
+
+| `{DEPTH}` | Behaviour |
+|-----------|-----------|
+| `NORMAL` (DEFAULT) | fact sync + dedup + compression |
+| `HARD` | NORMAL plus the two aggressive passes in `references/hard-sync.md`: rules `paths:` precision audit and obvious-knowledge purge. Triggered by the token `hard` or semantically ("почисти жёстко", "too much context", "aggressive", "cut it down") |
+
+**`{REACH}` selects WHAT MAY BE EDITED:**
+
+| `{REACH}` | Editable set | Tokens |
+|-----------|--------------|--------|
+| `MEMORY` (DEFAULT) | the instruction surface below, wherever it lives, tracked or not | *(empty)* |
+| `REFS` | MEMORY plus each git-TRACKED reference file that an ALWAYS-LOADED instruction file cites and tells its reader to open, when that file sits OUTSIDE the instruction tree | `refs`, `reach refs`, референсы, со ссылками |
+
+ALWAYS-LOADED = reaches context with no gate: a rule with no `paths:` key, the CLAUDE.md family, an agent or skill
+body. A `paths:`-gated rule is lazy: its outside references are reported, never edited, at either reach.
+
+At `MEMORY` a tracked outside reference is resolution-checked only (it has consumers this sweep cannot see: CI,
+tests, another tool, a human procedure; batch REACH rule in Phase 2). `REFS` never widens past the three
+non-negotiable exclusions (doc-flow paths, source code, secrets).
+
+> **The axes are independent:** `all hard` re-verifies everything and purges; `session` is the cheap default.
+> Explicit user restrictions override all three.
+
+**Emphasis versus restriction:** ordinary `{FOCUS}` reorders effort without dropping batches. An explicit
+"only rules" authorizes rules alone; "do not touch agents" excludes agent writes. Apply that write filter before
+dispatch, including REFS, salvage, cross-batch pointers and self-sync; report skipped layers. Read only the
+minimum non-secret evidence needed to verify selected files, even when that evidence is outside the write set.
+
+> **Standing emphasis:** {FOCUS_EMPHASIS}
+> Facts before dedup before compression, whatever the emphasis: the order may be SHARPENED, never inverted.
+
+The PLAN:
+
+```
+PLAN — memory-sync
+INPUT:  {ARGUMENTS verbatim, or "(empty)"}
+MODE:   {SCOPE} — {explicit | matched keyword: X | "default (no scope token)"}
+SCOPE:  depth={DEPTH} — {matched signal | "default NORMAL"}; reach={REACH} — {matched token | "default MEMORY"}; focus={FOCUS interpretation | "standing emphasis"}; write restrictions=<explicit limits | none>; batches={batch: N files, ...} (enumerated and filtered this run)
+DO:     gather ({N} Explore) -> sync ({M} agents, one per non-empty batch) -> verify ({K} Explore, one per EDITED batch) -> self-sync -> report
+RESULT: memory-sync report + edited files listed in Phase 6
+```
+
+**PHASE STATUS - print ONE chat line at every phase boundary:**
+`[memory-sync] Phase {N} {name} - started|done: {key numbers}` (facts collected, files inventoried, batches
+spawned, files edited, lines delta, verdicts ok).
+
+## The surface - everything AUTO-LOADED into an LLM context, nothing else
+
+Default surface, subject to explicit user restrictions: root `CLAUDE.md`, every nested `CLAUDE.md` at any depth,
+`CLAUDE.local.md`, `.claude/rules/**/*.md` (recursive), convention files, the `AGENTS.md` family (Claude Code reads it
+only where no `CLAUDE.md`/`CLAUDE.local.md` exists, unless its Project instructions setting adds it; other agent tools
+read it too), `.claude/agents/**` at any depth (subfolders such as `agents/review/` are scanned), `.claude/skills/**`
+(SKILL.md and every `references/*.md`), and both memory kinds: the session memory dir `{MEMORY_DIR}` and the per-agent
+stores, one per agent, loaded only while it runs (`references/memory-guide.md`). If a file can silently enter a
+model's context, it is memory.
+
+Tracking never excludes instructions. Both memory kinds stay in the default surface at both reaches. `MEMORY` names a reach, never a batch.
+
+Batches are **disjoint by construction**, so parallel edits never collide; an overlapping
+batch table is a defect.
+
+Every memory home is its own batch row (the memory dir, each per-agent store; Phase 1 enumerates them; split a store
+tree only when one batch is too big), never folded into a CLAUDE.md, rules, agents or skills batch. One exception keeps
+rule-5 salvage inside one batch: a store classified ORPHAN joins the batch owning the same agent's LIVE store. No live
+store anywhere, or either store outside the authorized write set -> report survivors, remove nothing. Never use this
+exception to cross an explicit exclusion.
+
+<!-- BLOCK: one row per DISJOINT batch - | Batch | Files (concrete paths / globs) | VERIFY-ONLY members + reason | -->
+{BATCH_TABLE}
+
+Surface at generation time: {SURFACE_COUNTS} - a snapshot; the Phase 1 enumeration is the only authority.
+
+> Memory dir: `{MEMORY_DIR}` (`none` = that dir out of scope, its batch dropped, say so in the report). Per-agent
+> stores may exist while it is `none`: enumeration decides them, never this scalar.
+> Task state: {TRACKER_NOTE}.
+
+### EXCLUDED - hard, with reasons
+
+<!-- BLOCK: one row per exclusion - | Excluded path/glob | Reason | -->
+{EXCLUDED_TABLE}
+
+Three exclusions are NON-NEGOTIABLE whatever the table says:
+
+| Exclusion | Rule |
+|-----------|------|
+| Documentation (`docs/**`) | Owned by a separate doc flow. Refs into docs are checked for resolution only; contents are never read-for-edit and NEVER edited |
+| Source code | Read-only evidence facts are verified against - never an edit target, never a place to "fix" a mismatch |
+| Secrets | Never read, never opened, and never write a secret VALUE anywhere. Names, paths and ids are fine |
+
+Operational task state (a task board, a tracker dir) is state, not memory: it changes hourly and its owner is named
+in `{TRACKER_NOTE}`. Excluded.
+
+## House invariants (enforced in EVERY batch)
+
+<!-- BLOCK: one row per invariant - | Invariant | Rule, every cell a fact read from the repo with its source named | -->
+{INVARIANTS_TABLE}
+
+## NON-GROWTH - the prime directive
+
+| Rule | Detail |
+|------|--------|
+| Budget | Each file <= baseline and TOTAL delta <= 0, except HARD PASS A `paths:` repair on a MISSING/TOO_NARROW verdict and verified rule-5 salvage into the SAME agent's authorized live store in the SAME owned batch. Salvage recipient growth <= removed-store lines; TOTAL delta still <= 0. A positive delta is stated first (Phase 6) |
+| Order | **DELETE** (duplicate / obvious / stale / dead) -> **COMPRESS** -> **MOVE** to the right layer -> **ADD** last. Never add before cutting |
+| Longest first | Rank the surface by `wc -l` and compress the top files hardest. Report the top-5 before/after. A long rules file is a bug, not thoroughness |
+| Add gate | A new fact enters only if all hold: non-obvious for a competent model, domain-specific to {PROJECT_NAME}, verified against a real source, and its absence costs a real failure. It must earn its line by displacing another |
+| Traceable | Every surviving claim maps to a file, command output or commit. Verify uncertain claims; still uncertain -> leave and report. Delete only proven stale or disallowed claims |
+| Authority | On conflict: rules + CLAUDE.md beat memory; a nested CLAUDE.md beats the root one for its own subtree |
+| Edit only | Targeted `Edit` diffs, bottom-up by line number. Never `Write` a whole memory file |
+
+Never add the obvious ("write good code", "follow SOLID", "add tests", "handle errors", "do not hardcode secrets",
+restated tool or framework docs); add domain facts, environment quirks, mistakes actually hit and their cause.
+Decision tree: `references/memory-guide.md`.
+
+## Checkable-fact catalogue (what "verify against reality" means here)
+
+Every row is a claim memory makes and the exact command that settles it. A row whose command does not run in this
+repo today is worse than no row: it reports `not run` forever.
+
+<!-- BLOCK: | Claim in a memory file | How to verify (one runnable command + today's short expected answer) | -->
+{FACT_CATALOGUE}
+
+## Agents and skills are ALWAYS RE-AUDITED - non-negotiable
+
+Every run, at every `{SCOPE}` including `session`, authorized agents and skills batches run the full re-audit in
+`references/agent-audit.md`, diff or not. Emphasis changes no audit; explicit write restrictions can exclude these batches,
+reported as skipped.
+
+<!-- BLOCK: | Check | What it asserts | - agent-batch extra checks specific to this project -->
+{AGENT_CHECKS_TABLE}
+
+<!-- BLOCK: | Check | What it asserts | - skill-batch extra checks specific to this project -->
+{SKILL_CHECKS_TABLE}
+
+Live owner map (read-only recon agents never edit anything):
+
+<!-- BLOCK: | Agent | Owned path group | Specialty | read-only? | -->
+{EXPERT_ROSTER_TABLE}
+
+## Runtime workflow seats - edited with the whole instruction set in view
+
+A runtime seat is an agent a program spawns (a workflow file, an orchestrator script, a skill naming a
+`subagent_type`), not one a human routes to. Its effective prompt is the union of four sources:
+
+| # | Source | Where it lives |
+|---|--------|----------------|
+| 1 | the agent body | `.claude/agents/<name>.md` |
+| 2 | the call-site prompt | the text the caller passes when it spawns the seat |
+| 3 | interpolated constants | model-policy tables, preamble/relay blocks, schema fragments the caller splices in |
+| 4 | every other call site | the same seat spawned from a second place, with different text |
+
+<!-- BLOCK: | Seat | Agent file | Call sites (file:line) | Constant blocks it receives | -->
+{RUNTIME_SEAT_ROSTER}
+
+Read all four together before touching a seat's file - editing one blind to the others is how contradictions enter:
+
+| Rule | Detail |
+|------|--------|
+| Facts first | judge on correctness, consistency and contradiction - never on prose taste |
+| Contradiction | quote both texts and report it; reconcile silently only when one side names something that no longer exists - then fix that side and say which |
+| Contract lines | never compress a line a call site depends on: a return-schema field, a tool name, a command, an id, a threshold, a status string |
+| One writer | a seat's file belongs to exactly one batch; its checker re-reads every call site above |
+
+## Delegation (binds every agent this skill spawns)
+
+One subagent = one observable bounded deliverable (one batch), ~<=5 files, ~<=10 steps; larger units split into N
+tasks, all spawned in one message. A batch over ~10 files splits into spawns of <=5 files, disjointness preserved.
+
+Every spawn brief carries six labeled fields, since a subagent starts with an empty context: GOAL (task + why), ROLE (owns, must not touch), SCOPE (paths/commands in and out), CONTEXT (done, by whom, in parallel), CONSUMER (who uses the result + its shape), DONE (acceptance + return: verdict first, evidence, bounded; long output to a file, path returned).
+A bare one-line task is never enough.
+
+## Phase 1 - GATHER (parallel, read-only)
+
+Spawn read-only `Explore` agents in one message:
+
+**(a) change-fact list.** For git scopes, agents read the scope diff and return a terse fact list: added / renamed
+/ removed modules, entry points, env-var names, commands, dependencies, tables, lint or CI gates, behaviours.
+`session` -> no agent: the coordinator writes the list from its own conversation context. `all` -> skipped:
+Phase 2 verifies every fact regardless of any diff.
+
+**(b) target inventory.** Resolve the concrete file list per batch by enumeration, never from a hardcoded list:
+
+<!-- BLOCK: ONE fenced bash block re-deriving the per-batch file list (ls / find -name '*.md' | sort / git ls-files), ENDING with a `sort | uniq -d` disjointness assertion over the concatenated batch lists -->
+{ENUMERATION_BASH}
+
+Whatever that block contains, these bind the enumeration:
+- Prune `.claude/reports/**` (run-artifact snapshots, often full `CLAUDE.md` copies) and `.claude/worktrees/**`
+  (other checkouts of this repo) from every `find`: never memory, whatever the EXCLUDED table says.
+- Re-resolve the runtime-seat roster's call sites: grep each caller file for the seat name; roster line numbers rot,
+  today's bytes decide.
+- Enumerate the per-agent memory stores over the whole tree (`find` / `ls`), never a roster: a store is born wherever
+  a session ran, and one whose agent is gone is still swept. Classify each LIVE / ORPHAN / UNDECIDED per
+  `references/memory-guide.md` rule 5, with the evidence beside the verdict (the EXCLUDED runtime/archived path
+  containing it, or the session root it is). Record each store's index separately from its rows: it is rewritten last.
+- `{REACH}` = `REFS` only: per ALWAYS-LOADED instruction file, list the paths it names and tells its reader to open,
+  keeping the git-tracked ones outside the instruction tree. Each merges into the `{FILE_LIST}` of the batch owning its
+  citing file, with its own `wc -l` baseline, so the disjointness assertion runs over the merged lists. Cited from two
+  batches -> it joins only the batch of the first citing file in path-sort order; the other batch reports findings on
+  it, never edits it. At `MEMORY` no outside file enters any `{FILE_LIST}`.
+
+Filter the result through the EXCLUDED table, one narrow exception: discover and classify per-agent stores before
+applying runtime/archived parent exclusions, then keep only those stores' index + rows for the rule-5 sweep/salvage;
+parent, sibling and any other file stay excluded. An explicit exclusion of memory or the store, a user-narrowed scope and
+every non-negotiable exclusion still win - never read, sweep or salvage an expressly excluded store.
+Record `wc -l` per file (the non-growth baseline) and flag broken references - a memory file pointing at a path that
+no longer exists, including refs into docs (resolution only). Assert disjointness: the concatenated per-batch lists
+through `sort | uniq -d` MUST be empty; a duplicate is a defect - fix the batch table before Phase 2.
+
+Phase 1 output: the change-fact list, per-batch `path:lines` lists, broken refs, re-resolved seat call sites, each
+per-agent store as `index + rows` with its LIVE/ORPHAN/UNDECIDED verdict and evidence, and at `REFS` the outside
+references already merged into those lists.
+
+## Phase 2 - SYNC (one bounded agent per batch, all in one message)
+
+Spawn one subagent per non-empty batch, all in a single message, each with its file list, the change-fact list and
+the prompt below verbatim, every placeholder substituted. Owners come from the roster table; resolve each against
+recursive `find .claude/agents -type f -name '*.md'` (actual `name:`) before spawning; no project owner, or a name
+that no longer resolves -> built-in `general-purpose`.
+
+```
+## memory-sync batch: {BATCH} (scope {SCOPE}, depth {DEPTH})
+
+GOAL: this project's instruction memory has drifted from the code and bloated. Make it TRUE again and SMALLER.
+ROLE: you own exactly the files listed below. You touch nothing else - no source, no docs, no secrets, no task
+      state, no hook file, no other batch's memory file. {M} sibling agents sync other batches in parallel.
+SCOPE - files you may EDIT (nothing else), as path:baseline-lines: {FILE_LIST}
+READ EVIDENCE: minimum actual code, call sites and non-secret configuration key names needed to verify this batch;
+      read-only outside EDIT scope. Never open secrets; docs remain resolution-only. Explicit user read exclusions bind.
+REACH: {REACH}. At MEMORY the editable set is the instruction surface only - a tracked reference OUTSIDE it is
+      RESOLUTION-CHECKED only, and every compression or fact finding on it is REPORTED, never applied. At REFS each
+      cited outside reference IS in the SCOPE list above (merged into the batch owning its citing file) and is
+      editable too, one report row each; non-growth still binds.
+Change facts from scope: {FACTS}   (empty -> verify EVERYTHING against current code)
+Broken refs already found in your files: {BROKEN_REFS}
+Today, for `last_updated` (coordinator resolves it with `date +%F`, never hardcoded): {DATE}
+CONTEXT (already resolved - do NOT re-derive): the file list, its per-file line baselines and the broken refs,
+      all given in this prompt.
+READ FIRST (paths, not pasted prose):
+  .claude/skills/memory-sync/references/memory-guide.md   - layer decision tree, compression patterns, obvious gate
+  .claude/skills/memory-sync/references/agent-audit.md    - agents and skills batches ONLY: the standing re-audit
+  .claude/skills/memory-sync/references/prompting-guide.md - the merged rule table + lossless guard, step 3 below
+  .claude/skills/memory-sync/SKILL.md                     - the checkable-fact catalogue (verification commands), the house invariants
+
+Per file, in THIS priority order:
+1. PRIMARY - fact synchronization:
+   - VERIFY every checkable claim against the repo, by running the command in the fact catalogue (grep/read the
+     ACTUAL code - never from memory, never from another doc).
+   - ADD the facts this scope introduced that belong in THIS file (add gate + non-growth budget still bind).
+   - REMOVE every fact that is no longer true: deleted module, renamed path, retired gate, dead command.
+2. SIDE EFFECTS - never at the expense of facts:
+   - DEDUPLICATE: a fact repeated across files keeps ONE canonical home; copies become a pointer
+     ("canonical: <file> section"). Canonical home in ANOTHER batch -> REPORT it, do not edit a foreign file.
+   - COMPRESS verbose passages into this repo's dense table/pointer style; meaning intact, lines down.
+3. PROMPT QUALITY - instruction files only (CLAUDE.md/rules/AGENTS.md/agent/skill bodies, never code/docs):
+   - Apply `references/prompting-guide.md`'s rule table; rewrite ONLY where its lossless guard allows it -
+     never touch a path, version, flag, threshold, model id, incident-backed `!=`/NEVER row or canonical list.
+   - `{DEPTH}` = NORMAL: fix a violation ONLY where it coincides with a fact/dedup edit already touching that
+     line; otherwise REPORT it. `{DEPTH}` = HARD: rewrite every remaining violation.
+4. MEMORY BATCHES ONLY (the memory dir, a per-agent store) - sweep memory ITSELF under the five rules in
+   .claude/skills/memory-sync/references/memory-guide.md; they are not restated here. A DELETE on the
+   DUPLICATION ground REQUIRES the quoted context line already carrying that fact, returned below - an unproven
+   duplicate STAYS. Rewrite a store's INDEX last, over the surviving set only. Your store's rule-5 verdict comes
+   WITH your file list: LIVE or UNDECIDED -> sweep it and report it, never remove. Proven ORPHAN -> SALVAGE THEN REMOVE,
+   only when both stores are authorized members of this SAME owned batch and neither is expressly excluded:
+   judge every row by rules 1-4, MOVE each survivor into the SAME agent's LIVE store merged with any row on that
+   subject, rewrite THAT store's index, then remove the store DIRECTORY only, never its parent, a sibling, or the
+   workspace/report/archive containing it. A salvaged row is a MOVE, not an ADD: the receiving store may exceed its
+   own baseline by at most the lines the removed store gave up, and the TOTAL delta still binds. Return the
+   per-file `memory` object below; a non-memory batch omits it.
+
+NON-GROWTH (hard): every file ends <= the baseline given beside its path in SCOPE; delete before you add. TWO authorized growths, nothing else: the PASS A frontmatter `paths:` repair at HARD depth on a MISSING or TOO_NARROW verdict, and a rule-5 SALVAGE, bounded by the lines the removed store gave up.
+
+HARD constraints:
+- SELF-SYNC CARVE-OUT: if this skill's own SKILL.md or references are in your batch, facts may be CORRECTED but
+  SCOPE DECISIONS may NOT - the in-scope surface list, the EXCLUDED table, the docs exclusion, the non-growth
+  directive.
+- Bump `last_updated:` to {DATE} in every file you edit - from `date +%F`, NEVER a hardcoded date.
+- Preserve `[DICT: ...]` headers wherever they exist.
+- Stable NUMBERED rule ids are NEVER renumbered and NEVER reordered - other files cite them POSITIONALLY, so a
+  reorder silently repoints every citation. New rule -> APPEND at the end.
+- Keep frontmatter valid; repair `paths:` globs that no longer match anything real.
+- Language policy: {LANGUAGE_POLICY}. An intentional trigger alias stripped as a "violation" is a REGRESSION.
+- NEVER write a secret VALUE (names, paths and ids are fine). Never open a secrets file.
+- Read-only git only: diff/log/show/ls-files/status/merge-base/symbolic-ref. Never checkout/reset/restore/revert.
+- Never run a build, a test suite or a migration as a side effect.
+- VERIFY-ONLY members of your batch: check that refs RESOLVE; never edit their content.
+- A block delimited by another tool's begin/end markers (e.g. `<!-- BEGIN brewcode:semble -->` ..
+  `<!-- END brewcode:semble -->`) is owned by that setup, which re-creates it on upgrade: never compress, move,
+  dedup or delete it, both marker lines included. Dedup from the other copy; report it as `managed by <setup>`.
+- RUNTIME SEATS: a file of yours that the runtime-seat roster names is edited only after you have read all four
+  instruction sources it lists. Quote and REPORT contradictions; never compress a contract line. Return them
+  under "runtime_seats".
+- Uncertain whether a fact is stale? Verify in code. STILL uncertain -> LEAVE IT and REPORT it. Never guess.
+
+CONSUMER: an independent read-only checker re-verifies every claim you make, then the coordinator's report table.
+DONE - return JSON, one entry per file, empty lists if clean:
+{"<path>": {"added": [...], "removed": [...], "fixed": [...], "dedup": [...], "compressed": N,
+            "lines_before": N, "lines_after": N, "broken_refs": [...], "uncertain": [...],
+            "memory": {"verdict": "kept|merged|promoted|deleted", "event": "promoted|deleted|none",
+                       "duplicate_quote": "verbatim context line proving the duplicate - REQUIRED to delete on that ground",
+                       "store": {"verdict": "live|orphan|undecided", "evidence": "the EXCLUDED runtime/archived path containing it, or empty-on-sight, or the session root it is",
+                                 "removed": "<store dir removed | none>",
+                                 "salvaged": [{"row": "...", "into": "<live store path>", "merged_with": "<row | none>"}]}},
+            "prompt_quality": [{"rule": N, "line": N, "before": "...", "after": "..."}],
+            "runtime_seats": [{"seat": "...", "sources_read": ["..."], "contradictions": [{"a": "...", "b": "...", "where": "..."}]}]}}
+At {DEPTH} = HARD each entry ALSO carries a nested "hard": {...} object, shaped exactly as in references/hard-sync.md.
+```
+
+At `{DEPTH}` = `HARD`, the batch prompt also carries, verbatim:
+
+```
+DEPTH = HARD. Also run the two passes in .claude/skills/memory-sync/references/hard-sync.md, in this order:
+  1. `paths:` PRECISION audit  - every rule's glob must match reality and cover exactly its subject.
+  2. OBVIOUS-KNOWLEDGE PURGE   - delete what any competent model already knows; keep only domain facts.
+These passes only shrink, except PASS A frontmatter `paths:` repair on MISSING/TOO_NARROW. The separate common
+rule-5 salvage exception still requires the same-agent, same-owned-batch, authorized-store gates and total budget.
+```
+
+Cross-batch dedup (canonical home in another batch's file) is reported, never edited by the batch owner; the
+coordinator applies the cross-batch pointer after both batches return.
+
+## Phase 3 - VERIFY (independent checkers - this phase GATES the report)
+
+After every batch returns, spawn read-only `Explore` checkers in one message - **one per edited batch, NEVER
+the agent that wrote it**. Each gets that batch's returned JSON, its edited file list, and this prompt verbatim -
+every placeholder substituted:
+
+```
+## memory-sync VERIFY: batch {BATCH} (scope {SCOPE}, depth {DEPTH}, reach {REACH})
+
+GOAL: a batch agent claims it made instruction memory truer and smaller. Prove or disprove every claim against
+      the CODE - never against the doc that agent just wrote. This phase GATES the report.
+ROLE: independent read-only checker. You did NOT write these files and you EDIT nothing - you return verdicts.
+VERIFY TARGETS: {FILE_LIST}. READ EVIDENCE: minimum actual code, call sites, non-secret configuration key names
+      and cited instruction context needed to verify these targets; read-only, not extra edit targets. Never open
+      secrets; docs remain resolution-only. Explicit user read exclusions bind; report unavailable evidence.
+CONTEXT (already resolved - do NOT re-derive): the batch's returned JSON, the per-file line baselines, this
+      repo's git visibility. Sibling checkers verify the other batches in parallel.
+READ FIRST (paths, not pasted prose):
+  .claude/skills/memory-sync/SKILL.md   - the checkable-fact catalogue (verification commands), the house invariants
+  .claude/skills/memory-sync/references/hard-sync.md   - {DEPTH} = HARD only: the two passes and the `hard` report contract you check
+  .claude/skills/memory-sync/references/prompting-guide.md - the merged rule table and lossless guard you re-check in (h) below
+
+Checks - ALL of them, per file:
+a. Re-verify every ADDED and FIXED fact against the ACTUAL code (run the catalogue command, read the file).
+b. Confirm every REMOVED fact is gone from REALITY - the code, the repo - not merely deleted from the doc.
+c. Confirm frontmatter is valid, `last_updated` bumped to today, `[DICT:]` headers intact, and every numbered rule file's ids obey:
+   surviving ids keep their OWN number and their relative order; a HARD run may DROP a row and Phase 2 may APPEND a new id AFTER the highest existing one - nothing is ever renumbered or reordered, and no id may appear before an id smaller than it.
+d. Confirm the non-growth budget held: per-file `wc -l` <= baseline, total delta <= 0 - the only authorized growths are the PASS A frontmatter `paths:` repair at HARD depth on a MISSING or TOO_NARROW verdict, and a rule-5 SALVAGE bounded by the lines its removed store gave up; nothing else may grow.
+e. Scan the FULL content of every edited file for anything resembling a secret VALUE.
+f. Scan for language-policy violations per {LANGUAGE_POLICY} - intentional trigger aliases are ALLOWED hits,
+   explanatory prose outside them is not.
+g. `{DEPTH}` = HARD only: re-read every `hard.obvious_deleted` line and confirm it was GENERIC, not a domain fact;
+   re-resolve every `hard.globs_declared` entry against the working tree (both probes, tracked and untracked);
+   confirm every `hard.domain_kept` line still stands in the file and rule each `hard.discriminator_uncertain` line KEEP or DELETE.
+h. `prompt_quality` entries (if any): re-read each `before`/`after` pair against the cited rule number in
+   `references/prompting-guide.md` and confirm the lossless guard held - no path, version, flag, threshold,
+   model id, incident-backed row or canonical list moved.
+i. Runtime seats (any file the roster names): confirm the batch read every call site listed for that seat,
+   re-read each one yourself, and rule every reported contradiction REAL or SPURIOUS. A contract line that moved -
+   a schema field, tool name, command, id, threshold or status string a call site depends on - is a violation
+   whatever the batch concluded.
+j. REACH boundary: at `{REACH}` = `MEMORY`, confirm no file outside the instruction surface was edited; at `REFS`,
+   confirm every edited outside file is tracked, is cited by an ALWAYS-LOADED instruction file, and falls outside
+   the non-negotiable exclusions.
+k. MEMORY batches: re-read every memory DELETE. A duplication delete stands only if its `duplicate_quote` occurs
+   VERBATIM in the context file it names AND states that fact there - a fabricated or paraphrased quote is a
+   violation and the row comes back. Confirm no SURVIVING row is still an event, and that each rewritten store
+   INDEX lists exactly the survivors - none missing, no dangling `[[link]]` (rules: references/memory-guide.md).
+   STORE REMOVALS: a removal stands only when `store.evidence` PROVES the rule-5 orphan test on today's bytes - the
+   removed path sat inside an EXCLUDED runtime/archived tree, or the directory was empty; a removal without that
+   proof is a VIOLATION. Confirm both stores belong to the SAME agent and owned batch, are authorized write targets
+   and are not expressly excluded. Every `store.salvaged` row must be PRESENT in its live store (merged, not
+   duplicated); ONLY the store directory went - parent, siblings and the containing workspace/report/archive
+   all intact - and that NO store classified live or undecided was removed.
+
+CONSUMER: the coordinator - a non-ok verdict routes a targeted fix back to the agent that wrote the file.
+DONE - return JSON per file, empty list when clean: {"ok": bool, "violations": [...]}
+```
+
+<!-- BLOCK: project-specific VERIFY assertions - git-visibility assertion, id-sequence diff, allowed language hits, anything else -->
+{VERIFY_EXTRA}
+
+**Git visibility - derive it every run** (it changes with `.gitignore`): compare
+`git ls-files -- .claude '*CLAUDE.md' '*AGENTS.md'` with the same surface on disk as a set difference on paths, never
+a count delta (0 tracked rows = git-ignored; any on-disk path absent from the tracked list = MIXED; equal totals
+prove nothing). Visibility at generation: {GIT_VISIBILITY}.
+
+| Visibility | Verification |
+|------------|--------------|
+| git-IGNORED or MIXED | `git status` / `git diff` cannot account for a memory edit: never flag a memory file's absence from the diff. Re-read each edited file directly; the diff check only proves no source, docs, task-state or secrets file changed |
+| fully git-TRACKED | assert every edited file appears in `git diff` and nothing else does |
+
+Violations -> the coordinator sends targeted fixes back to the responsible batch agent (or fixes a trivial pointer itself), then re-verifies only the fixed files.
+**The report may not be emitted until every verdict is ok, or the remaining violations are listed as unresolved.**
+
+## Phase 4 - SELF-SYNC (the skill syncs itself)
+
+After Phase 3, self-sync only files allowed by the user's write restrictions; otherwise report it skipped. Spawn
+one independent read-only checker over the self-synced files (this SKILL.md and the authorized references),
+reported as its own row in the Phase-6 delta table:
+
+| Step | Action |
+|------|--------|
+| Re-enumerate | Re-run the Phase 1 enumeration and compare with the batch table and surface counts, after subtracting this skill's own files (`.claude/skills/memory-sync/**`): the snapshot predates this skill, so counting them reports a phantom `+N` drift every run |
+| Refresh | Update the batch rows, the counts, every fact-catalogue command that no longer matches reality, and the runtime-seat roster's call-site lines (they rot fastest) |
+| Grow a batch | The project gained a memory layer this skill does not cover (a new nested `CLAUDE.md` tree, a new convention dir, a new skills tree) -> add the batch or the section, report it |
+| Drop a batch | A batch whose files are all gone -> remove the row and say so in the report |
+| Sibling refs | Authorized members of the four references (`memory-guide.md`, `agent-audit.md`, `hard-sync.md`, `prompting-guide.md`) follow the same self-sync; their rosters, patterns and checks also drift |
+
+> **CARVE-OUT:** batch agents correct facts but never change scope decisions (surface, EXCLUDED table, docs exclusion,
+> non-growth directive) without explicit user instruction. The coordinator may add/drop Phase-4 batches within
+> authorized scope and reports them; those lines are total-delta-exempt.
+
+## Phase 5 - PROPOSE (assess, never auto-create)
+
+Ask once per run: does {PROJECT_NAME} now need an agent or a skill it does not have? Assess against the bar and
+this repo's own precedents:
+
+<!-- BLOCK: | Propose | Bar it must clear HERE | This repo's precedents | -->
+{PROPOSAL_PRECEDENTS}
+
+If yes, propose in the final report: the name, the description gist, the trigger phrases, the `tools` /
+`allowed-tools` set, and which existing agents own the neighbouring seams.
+**Never create the file without explicit user confirmation.**
+
+## Phase 6 - REPORT (chat only, no report file)
+
+```
+memory-sync complete - scope {SCOPE}, depth {DEPTH}. {N} files scanned, {M} edited.
+
+| File | Added | Removed | Fixed | Dedup | Compressed | Prompt | Verified |
+|------|-------|---------|-------|-------|------------|--------|----------|
+
+| Layer | Lines before | Lines after | Delta |
+|-------|--------------|-------------|-------|
+| TOTAL |              |             | -{N}  |
+
+Longest files: {path (before -> after), ...}   (top 5, what was cut)
+Verification:  {all edits confirmed | {K} unresolved (listed below)}
+Broken refs:   {list | none}   (incl. unresolved docs refs - reported, never edited)
+Uncertain (left in place, verify manually): {list | none}
+Self-sync:     {tables refreshed | batch added/dropped | no change}
+Agent audit:   {N} agents / {M} skills re-audited; {K} findings
+Prompt quality: {N} rewrites applied, {M} reported (references/prompting-guide.md)
+Runtime seats: {N} seats, {M} call sites re-read, {K} contradictions reported
+Memory:        {per home: rows kept / merged / promoted / deleted | no memory home in scope}
+Stores:        {N} enumerated ({N} live / {N} orphan / {N} undecided); removed {list of store dirs | none};
+               salvaged {N} rows -> {destination live stores | none}
+Reach:         {REACH} - {N outside references edited | resolution-checked only}
+Proposal:      {new agent/skill + triggers + neighbours | none}
+```
+
+Total delta MUST be `<= 0`; a positive one is stated first, with per-line justification.
+
+**Nothing changed -> say exactly `memory already in sync for {SCOPE}` and stop.** A run that touched only the root
+CLAUDE.md is incomplete unless the user explicitly restricted writes to it; say which batches were empty or
+excluded and why.
+
+## Safety (baked into every phase)
+
+The Phase-2 HARD constraints (git read-only, secrets, edit surface, no side effects, frontmatter, stable ids,
+non-growth) bind the coordinator exactly as a batch agent. One rule lives only here:
+
+| Rule | Detail |
+|------|--------|
+| Default branch | DERIVE it: `git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null` -> `origin/<name>`, else the bare `{DEFAULT_BRANCH}`; both are valid revisions. Never hardcode `main` |

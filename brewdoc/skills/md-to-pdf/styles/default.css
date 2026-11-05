@@ -1,0 +1,127 @@
+/* === Page Setup === */
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 25mm;
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 7pt;
+    color: #888888;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  }
+}
+
+/* === Base Typography === */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans CJK SC", sans-serif;
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #1a1a1a;
+}
+
+/* === Headings === */
+h1, h2, h3, h4, h5, h6 { margin-top: 12pt; margin-bottom: 4pt; page-break-after: avoid; }
+h1 { font-size: 20pt; color: #1a3a5c; text-align: center; margin-top: 18pt; margin-bottom: 10pt; }
+h2 { font-size: 15pt; color: #1a3a5c; border-bottom: 1px solid #c0c0c0; padding-bottom: 3pt; }
+h3 { font-size: 12pt; color: #2c5282; }
+h4 { font-size: 10pt; color: #2c5282; }
+h5 { font-size: 9pt; color: #4a6fa5; }
+h6 { font-size: 9pt; color: #6b8cba; font-style: italic; }
+
+/* === Paragraphs & Links === */
+p { margin: 4pt 0; }
+a { color: #2b6cb0; text-decoration: underline; }
+@media print { a { text-decoration: none; } }
+
+/* === Tables === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8pt 0;
+  font-size: 8.5pt;
+  page-break-inside: avoid;
+}
+th, td { border: 0.5px solid #c0c0c0; padding: 3px 4px; text-align: left; }
+th { background-color: #1a3a5c; color: #ffffff; font-weight: bold; }
+tr:nth-child(even) { background-color: #f0f4f8; }
+tr:nth-child(odd) { background-color: #ffffff; }
+
+/* === Code Blocks === */
+pre { page-break-inside: avoid; margin: 6pt 0; }
+pre code {
+  display: block;
+  background: #f0f0f0;
+  padding: 6px 8px;
+  border: 0.5px solid #d0d0d0;
+  border-radius: 2px;
+  font-family: "SFMono-Regular", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+  font-size: 8pt;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: inherit;
+  font-weight: normal;
+}
+
+/* === Inline Code === */
+code {
+  background: #f0f0f0;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 8.5pt;
+  color: #c53030;
+  font-weight: bold;
+}
+
+/* === Blockquotes === */
+blockquote {
+  border-left: 3px solid #3182ce;
+  background: #f5f5f5;
+  padding: 6px 10px;
+  margin: 6pt 0;
+  font-style: italic;
+  color: #4a4a4a;
+  page-break-inside: avoid;
+}
+blockquote p { margin: 2pt 0; }
+
+/* === Lists === */
+ul, ol { margin: 4pt 0; padding-left: 18pt; }
+ul ul, ol ol, ul ol, ol ul { padding-left: 14pt; }
+ul ul ul, ol ol ol, ul ul ol, ol ol ul,
+ul ol ul, ol ul ol, ul ol ol, ol ul ul { padding-left: 12pt; }
+li { margin-bottom: 2pt; }
+
+/* === Task Lists === */
+li input[type="checkbox"] { margin-right: 4px; vertical-align: middle; }
+li.task-list-item { list-style-type: none; margin-left: -18pt; }
+
+/* === Horizontal Rules === */
+hr { border: none; border-top: 0.5px solid #cccccc; margin: 10pt 0; }
+
+/* === Images === */
+img { max-width: 100%; height: auto; }
+
+/* === Pygments Syntax Highlighting === */
+.highlight .k, .highlight .kn, .highlight .kd,
+.highlight .kc, .highlight .kr, .highlight .kt { color: #d73a49; font-weight: bold; }
+
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb,
+.highlight .sc, .highlight .sd, .highlight .se, .highlight .sh,
+.highlight .sx, .highlight .si, .highlight .sr { color: #032f62; }
+
+.highlight .n, .highlight .na, .highlight .nc, .highlight .nd,
+.highlight .ne, .highlight .ni, .highlight .nl, .highlight .nn,
+.highlight .nt, .highlight .nv, .highlight .p { color: #24292e; }
+
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .ch,
+.highlight .cs, .highlight .cp, .highlight .cpf { color: #6a737d; font-style: italic; }
+
+.highlight .o, .highlight .ow { color: #d73a49; }
+.highlight .nb, .highlight .bp { color: #005cc5; }
+.highlight .nf, .highlight .fm { color: #6f42c1; }
+
+.highlight .mi, .highlight .mf, .highlight .mh,
+.highlight .mo, .highlight .mb, .highlight .il { color: #005cc5; }
+
+.highlight .w { color: transparent; }

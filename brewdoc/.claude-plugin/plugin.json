@@ -1,0 +1,22 @@
+{
+  "name": "brewdoc",
+  "version": "6.12.5",
+  "description": "Brewdoc - Claude Code documentation tools: doc-staleness tracking, memory-sync generator, my-claude installation docs, Markdown to PDF, publishing to brewpage.app",
+  "author": {
+    "name": "Maksim Kochetkov",
+    "email": "apmatypa88@gmail.com",
+    "url": "https://github.com/kochetkov-ma"
+  },
+  "homepage": "https://github.com/kochetkov-ma/claude-brewcode",
+  "repository": "https://github.com/kochetkov-ma/claude-brewcode.git",
+  "license": "MIT",
+  "keywords": [
+    "brewdoc",
+    "documentation",
+    "memory",
+    "pdf",
+    "publishing",
+    "claude-code"
+  ],
+  "skills": "./skills/"
+}

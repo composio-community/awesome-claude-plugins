@@ -171,6 +171,19 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "brewdoc",
+      "description": "Documentation tools: doc sync, memory-sync generation, installation guides, Markdown to PDF, and BrewPage publishing.",
+      "category": "docs",
+      "tags": [
+        "documentation",
+        "markdown",
+        "pdf",
+        "publishing",
+        "brewpage"
+      ],
+      "author": "Maksim Kochetkov"
     }
   ],
   "categories": [

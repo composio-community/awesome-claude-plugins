@@ -249,6 +249,23 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "brewdoc",
+      "description": "Documentation tools: doc sync, memory-sync generation, installation guides, Markdown to PDF, and BrewPage publishing.",
+      "category": "docs",
+      "tags": [
+        "documentation",
+        "markdown",
+        "pdf",
+        "publishing",
+        "brewpage"
+      ],
+      "source": "./brewdoc",
+      "author": {
+        "name": "Maksim Kochetkov"
+      },
+      "version": "6.12.5"
     }
   ]
 }

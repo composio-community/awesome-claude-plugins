@@ -1,0 +1,38 @@
+{
+  "page": {
+    "size": "A4",
+    "margins": { "top": 25, "right": 20, "bottom": 25, "left": 25 }
+  },
+  "fonts": {
+    "body": "auto",
+    "heading": "auto",
+    "code": "monospace"
+  },
+  "colors": {
+    "primary": "#1a3a5c",
+    "secondary": "#2c5282",
+    "text": "#1a1a1a",
+    "code_bg": "#f0f0f0",
+    "header_bg": "#1a3a5c",
+    "header_fg": "#ffffff",
+    "quote_bg": "#f5f5f5",
+    "border": "#3182ce",
+    "light_bg": "#f0f4f8"
+  },
+  "footer": {
+    "enabled": true,
+    "format": "Page {page} of {total}"
+  },
+  "code": {
+    "theme": "github",
+    "font_size": 8
+  },
+  "typography": {
+    "body_size": 9,
+    "h1_size": 18,
+    "h2_size": 14,
+    "h3_size": 12,
+    "h4_size": 10,
+    "line_height": 1.4
+  }
+}

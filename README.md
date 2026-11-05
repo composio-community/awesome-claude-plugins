@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [pmndrs](https://github.com/pmndrs/claude-code-plugin) - Official Poimandres plugin. Bundles the pmndrs docs MCP server plus skills that make Claude look up the react-three-fiber, drei and zustand docs and the pmndrs example gallery instead of answering from memory.
 
 ### Git & Version Control
 

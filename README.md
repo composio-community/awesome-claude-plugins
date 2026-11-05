@@ -154,6 +154,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [Slime](https://github.com/bitqs/slime) - Turn your real Claude Code session into a turn-based RPG — statusline HUD + PixiJS battle arena where goals are bosses, todos are minions, and tokens are your resource. Pure observer (zero session impact), zero dependencies. [Live demo](https://slime-arena-demo.shuangqu.workers.dev).
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

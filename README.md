@@ -103,6 +103,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Frontend & Design
 
+- [conversion-craft](https://github.com/nemolabsdev/conversion-craft) - Complete conversion-design team: 9 agents, 16 research-sourced skills, and 3 mechanical QA gates (token lint, declared-contrast check, rendered-page geometry audit) for building high-converting sales pages. Adversarially audited by its own art-director agent.
 - [frontend-design](./frontend-design) - Create distinctive, production-grade interfaces. Avoids generic "AI slop" with bold typography, unique color palettes, and creative layouts.
 - [artifacts-builder](./artifacts-builder) - Suite of tools for creating elaborate, multi-component HTML artifacts using React, Tailwind CSS, and shadcn/ui.
 - [theme-factory](./theme-factory) - Applies professional font and color themes to artifacts including slides, docs, reports, and HTML landing pages with 10 pre-set themes.

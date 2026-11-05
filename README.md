@@ -46,7 +46,6 @@ Skills tell your agent **how** to work. An MCP Gateway gives it secure access to
 
 Composio [MCP Gateway](https://composio.dev/mcp-gateway) provides a single MCP endpoint for 1,000+ integrations with built-in authentication, team-based access controls, audit logs, and production-ready reliability.
 
-
 ### 1. Clone & Run
 
 ```bash
@@ -154,6 +153,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [ultracode-live-engineer](https://github.com/AlvaroRaul7/ultracode-live-engineer) - Unattended Claude Code loop that reviews Slack-tagged PRs and works your Jira backlog end to end — self-paced, running phases and tickets in parallel, until you stop it. Escalates anything ambiguous back to a human via a Jira comment + Slack DM instead of guessing.
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.
@@ -219,6 +219,7 @@ Want to add your plugin?
 4. Submit a pull request
 
 Please ensure your plugin:
+
 - Addresses a real use case
 - Doesn't duplicate existing functionality
 - Follows the template structure

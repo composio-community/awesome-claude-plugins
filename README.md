@@ -154,6 +154,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [ultramod](https://github.com/mertkayacs/ultramod) - Ten Claude Code mods in one install: a limits HUD, receipts that flag unverified test claims, a guard with undo for destructive Git and rm commands, and secret redaction, switched by five sets.
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

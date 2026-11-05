@@ -151,6 +151,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
 - [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
+- [squidbrake](https://github.com/batrapulkit/squidbrake) - Hooks that send every Claude Code tool call through a rules gateway: destructive commands like `rm -rf ~/` are blocked, risky ones (git push --force, cloud deletes, payments) wait for human approval from a dashboard or phone, and everything lands in a hash-chained audit trail. Install: `/plugin marketplace add batrapulkit/squidbrake`
 
 ### Developer Productivity
 

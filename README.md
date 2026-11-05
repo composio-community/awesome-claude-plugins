@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [oops](https://github.com/ysb3996-blip/oops) - Lets Claude read the last command that failed in your terminal tab, with its output and exit code and with secrets masked, as recorded by the oops CLI. Use `/oops:err`, or just ask why your last command failed.
 
 ### Agent Memory
 

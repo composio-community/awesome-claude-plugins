@@ -121,6 +121,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Code Quality & Testing
 
 - [AgentLint](https://github.com/0xmariowu/AgentLint) - Lint your repo for AI agent compatibility. 33 evidence-backed checks across 5 dimensions. Claude Code plugin.
+- [Oh My Android](https://github.com/ateymoori/oh-my-android) - Let Claude see and drive the Android Emulator and real phones over adb: screenshots and UI tree in dp, tap and swipe, logcat, dark mode, font scale, RTL. Needs the free Oh My Android macOS app (macOS 26+). Claude Code plugin.
 - [code-review](./code-review) - Comprehensive code review with best practices, patterns, and improvement suggestions.
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.

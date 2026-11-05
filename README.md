@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [stripo](https://github.com/stripoinc/agent-plugin) - Create and edit Stripo emails and templates through the Stripo MCP. Build an email from a description, an existing template, HTML or a screenshot, then make bounded copy, link, image and style edits and verify them against desktop and mobile previews.
 
 ### Frontend & Design
 

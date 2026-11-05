@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [Verdict](https://github.com/ArtJack/verdict) - A skeptical QA agent with memory: baseline → delta runs (`NEW/REGRESSED/RESOLVED`), every red test classified, flaky tests quarantined with an expiry, evidence-cited verdicts. Read-only on your code; ships an MCP server over its state, a CI release gate, and a scored eval suite with published misses.
 
 ### Agent Memory
 

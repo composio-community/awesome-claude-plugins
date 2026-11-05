@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [lurkapi](https://github.com/mesmerlord/lurkapi-claude-plugin) - Social media research on live public data: seven skills (brand lurk, ad library teardowns across Meta, Google, LinkedIn and TikTok, Reddit research, creator vetting, video transcripts, demand research) plus LurkAPI's MCP server for TikTok, Instagram, YouTube, Reddit, X and more, with browser sign-in. Paid per call, with 100 free credits at signup. ([Website](https://lurkapi.com))
 
 ### Frontend & Design
 

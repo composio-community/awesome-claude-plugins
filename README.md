@@ -136,6 +136,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
+- [BrotherSBE](https://github.com/khalilmaaouni/BrotherSBE) - Designs backend and data systems in order (purpose, process, architecture, data, expression, verification) and holds the result to gates that actually run, numbers, migrations, approvals, tests, reporting absent evidence as NO-DATA rather than a pass. Free, MIT licensed.
 
 ### DevOps & Performance
 

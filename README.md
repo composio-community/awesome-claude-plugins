@@ -154,6 +154,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [kit-plugins](https://github.com/sdvsignal/kit-plugins) - Four small plugins in one marketplace: `kit-ship-check` (test + lint + typecheck PASS/FAIL table; can't-run counts as FAIL), `kit-storekit-check` (offline StoreKit / Xcode pre-flight file checks for iOS subscription apps), `kit-explain-diff` (plain-English diff review with risky file:line), `kit-new-feature` (5-line plan, wait for yes, build, test). `/plugin marketplace add sdvsignal/kit-plugins`.
+- [kit-claude-code-starter](https://github.com/sdvsignal/kit-claude-code-starter) - Drop-in Claude Code setup (CLAUDE.md, allowlist, hooks, ship-check / new-feature / explain-diff skills). Free starter; optional fixed-price Setup Sprint on the Kit page.
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

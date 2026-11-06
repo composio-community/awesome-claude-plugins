@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [onemira-mcp](https://github.com/onemira-space/onemira-mcp) - Local AI spoken-context and meeting memory MCP plugin for Claude Code. Streams speaker-attributed transcripts, decisions, and structured Markdown Wiki context captured by standalone C1 hardware with zero cloud. ([Website](https://onemira.com/products/c1))
 
 ### Backend & Architecture
 

@@ -171,6 +171,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+- [insta-edits](https://github.com/faisalkhanzemi/insta-edits-for-claude) - Lets Claude Code edit Instagram Reels inside Edits for Mac through the app's built-in MCP server: keeps Claude's tool list in sync with the full 274-tool editor (cuts on the beat, captions, text, transitions, export), stores the access token in the keychain, and adds an `edits` skill.
 
 ## Getting Started
 

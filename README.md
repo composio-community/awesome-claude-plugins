@@ -136,6 +136,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
+- [t3d](https://github.com/coolsocket/t3d) - DDD + TDD harness for Python projects. Hooks deny external-framework imports in Domain layers and cross-context internal imports at edit time; block Stop if Domain was edited but tests are red. Ships 4 skills (init, new-context, grill-me, sinkin) and a project template with the 4-layer bounded-context skeleton.
 
 ### DevOps & Performance
 

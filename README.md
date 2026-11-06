@@ -99,7 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
-- [mach-gtm-mcp](https://github.com/verma6uc/mach-gtm-mcp) - B2B outbound sales MCP server for software teams: build ICPs, research prospects with verified signals, score leads (0-100), draft personalised cold email/LinkedIn (1-3-1 framework), and build multi-touch sequences. Powered by [Mach GTM](https://machgtm.com). Install: `npx mach-gtm-mcp`
+- [mach-gtm-mcp](https://github.com/verma6uc/mach-gtm-mcp) - MCP server. Five outbound sales helpers for B2B teams: build an ICP, draft a cold email or LinkedIn message from a buying signal you provide, get a prospect research checklist, score a lead 0-100 against your ICP, and lay out a multi-touch sequence. Works only from what you give it; it does not look anything up or send anything. Install: `npx -y github:verma6uc/mach-gtm-mcp`. From the team behind [Mach](https://machgtm.com).
 
 ### Frontend & Design
 

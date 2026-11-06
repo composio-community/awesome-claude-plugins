@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [Fox Trail](https://github.com/patrickkasl/foxtrail) - A calm companion for coding with Claude Code. Every session becomes a fox in a small pack walking through generated worlds in your browser: subagents run along as cubs, commits become cairns, and the pack sits down when things go quiet. Generated ambient music and nature sounds, with a tinnitus comfort mode. Runs locally and sends nothing anywhere.
 
 ### Image and Video Generation
 

@@ -171,6 +171,13 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "screenshot-janitor",
+      "category": "productivity",
+      "description": "Finds screenshots that pile up during each Claude Code session and asks to move them to the Trash before you leave",
+      "author": "MECoban",
+      "tags": ["screenshot", "cleanup", "housekeeping", "trash", "macos", "linux", "hooks"]
     }
   ],
   "categories": [

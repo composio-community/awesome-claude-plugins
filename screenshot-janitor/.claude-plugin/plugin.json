@@ -1,0 +1,20 @@
+{
+  "name": "screenshot-janitor",
+  "version": "1.0.0",
+  "description": "Finds screenshots that pile up during each Claude Code session and, before you leave, asks to move them to the Trash. macOS + Linux. Per-session scoping, safe (recoverable) deletion, zero dependencies.",
+  "author": { "name": "MECoban", "url": "https://github.com/MECoban" },
+  "homepage": "https://github.com/MECoban/screenshot-janitor",
+  "repository": "https://github.com/MECoban/screenshot-janitor",
+  "license": "MIT",
+  "keywords": [
+    "screenshot",
+    "cleanup",
+    "housekeeping",
+    "trash",
+    "desktop",
+    "macos",
+    "linux",
+    "hooks",
+    "skill"
+  ]
+}

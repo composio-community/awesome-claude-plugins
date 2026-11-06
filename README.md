@@ -230,6 +230,7 @@ Please ensure your plugin:
 - [Plugin Development Guide](https://code.claude.com/docs/en/plugins)
 - [Discover Plugins](https://code.claude.com/docs/en/discover-plugins)
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - More skills and resources
+- [loqimean/awesome-claude-code-hooks](https://github.com/loqimean/awesome-claude-code-hooks) - Curated list of Claude Code hooks
 
 ## License
 

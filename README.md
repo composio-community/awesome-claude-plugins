@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [sub-atlias](https://github.com/ridelink0/sub-atlias) - The free sub version of Atlias: shared project memory through MCP tools, knowledge graph queries, and hooks that track edited files, check syntax and test evidence, and flag repeated or destructive commands. Also on npm as sub-atlias.
 
 ### Backend & Architecture
 

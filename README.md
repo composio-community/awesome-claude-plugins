@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [ultimate-frontend-skills](https://github.com/ridelink0/ultimate-frontend-skills) - Frontend design for websites, app screens and game start screens: reference sites to decide against, WebGL gradients, parallax, three.js exploded views, scroll choreography, a copy-in CSS chassis and an audit for common AI-generated design tells.
 
 ### Git & Version Control
 

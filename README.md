@@ -103,6 +103,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Frontend & Design
 
+- [image-deep-research](https://github.com/ridelink0/image-deep-research) - Finds reference images on open, licensed collections (Openverse, Wikimedia Commons, the Art Institute of Chicago, the Met) with every URL verified and every licence kept, renders websites into screenshot contact sheets, measures a site's palette and typefaces, and builds moodboards.
 - [frontend-design](./frontend-design) - Create distinctive, production-grade interfaces. Avoids generic "AI slop" with bold typography, unique color palettes, and creative layouts.
 - [artifacts-builder](./artifacts-builder) - Suite of tools for creating elaborate, multi-component HTML artifacts using React, Tailwind CSS, and shadcn/ui.
 - [theme-factory](./theme-factory) - Applies professional font and color themes to artifacts including slides, docs, reports, and HTML landing pages with 10 pre-set themes.

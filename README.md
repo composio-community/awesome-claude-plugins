@@ -171,6 +171,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+- [shotboard](https://github.com/freeman14/shotboard-mcp) - Claude Code plugin for Shotboard, a closed-source Mac app: connects its local MCP server to search Meta and TikTok ads, extract scripts from links, and generate images, video and audio with 100 media models, plus talking-avatar and shot-with-sound skills. ([Website](https://getshotboard.com))
 
 ## Getting Started
 

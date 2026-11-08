@@ -171,6 +171,13 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "skill-bus",
+      "category": "productivity",
+      "description": "Wire context, conditions, and other skills into any skill invocation — declaratively, without modification",
+      "author": "Community",
+      "tags": ["productivity", "skills", "orchestration", "composition"]
     }
   ],
   "categories": [

@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [kipi-rca](https://github.com/assafkip/kipi-rca) - Root-cause analysis for code: separates the surface cause from the structural cause, tags each cause by type, requires evidence-backed verification, and tracks checkbox action items. /rca-start, /rca-check, and lint hooks.
 
 ### Agent Memory
 
@@ -157,6 +158,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.
+- [prd-os](https://github.com/assafkip/prd-os) - PRD-to-issue state machine with scope enforcement: gated specs, Codex-style reviews that do not rubber-stamp, and receipts for every accepted finding.
+- [reddit-business-research](https://github.com/assafkip/reddit-business-research) - Research what Reddit says about your business, competitors, and market. No API keys needed.
 - [skill-bus](./skill-bus) - The skill for connecting skills. Wire context, conditions, and other skills into any skill invocation — declaratively, without modification. Zero dependencies.
 - [context-mode](https://github.com/mksglu/claude-context-mode) - Process large outputs in sandboxed subprocesses, keeping only summaries in the context window. 98% context savings across 21 benchmarked scenarios.
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
@@ -234,3 +237,4 @@ Please ensure your plugin:
 ## License
 
 MIT - See individual plugins for their specific licenses.
+

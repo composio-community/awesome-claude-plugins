@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [creatorscompanion](https://github.com/Amine-Mhiri/creatorscompanion-plugin) - Connects Claude Code to CreatorsCompanion, a hosted MCP server for content creators: find viral posts in a niche, pull transcripts, and write Reels, TikTok, LinkedIn, X, YouTube and newsletter content in the creator's own voice. Free tier available. ([Website](https://www.creatorscompanion.app/connect))
 
 ### Frontend & Design
 

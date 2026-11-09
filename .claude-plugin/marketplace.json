@@ -249,6 +249,16 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "narva",
+      "source": { "source": "github", "repo": "Negmus/narva-mcp" },
+      "description": "Faceless YouTube videos and Shorts from a topic or script, published to your channel, via the hosted Narva MCP server",
+      "category": "integrations",
+      "tags": ["youtube", "video", "mcp", "content-creation"],
+      "author": {
+        "name": "Narva"
+      }
     }
   ]
 }

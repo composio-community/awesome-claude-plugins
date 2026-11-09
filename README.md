@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [AxiomCore](https://github.com/protonium-labs/axiomcore-plugin) - Project and routine management agent. Keeps projects, recurring routines and notes in one enforced structure — numbered folders, unique task IDs, and a markdown wiki the agent maintains as you work. Two-phase plan → approve → execute workflow, guided onboarding via `/axiom start`, opt-in modules for voice, brand, todos (optional Notion board) and software planning.
 
 ### Companion & Personality
 

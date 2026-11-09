@@ -230,6 +230,7 @@ Please ensure your plugin:
 - [Plugin Development Guide](https://code.claude.com/docs/en/plugins)
 - [Discover Plugins](https://code.claude.com/docs/en/discover-plugins)
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - More skills and resources
+- [Claude Market](https://claudemarket.ai) - Community directory and marketplace for OpenClaw, Hermes Agent, Claude Code, and Codex skills, plugins, and MCP servers
 
 ## License
 

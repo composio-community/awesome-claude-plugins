@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"agentaos": {
+			"type": "http",
+			"url": "https://mcp.agentaos.ai/mcp"
+		}
+	}
+}

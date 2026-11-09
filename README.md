@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [yaps-plugins](https://github.com/richawo/yaps-plugins) - Marketplace of 11 plugins that connect Claude Code to the Yaps desktop app for on-device voice dictation, file and meeting transcription, subtitles and captions, audio cleanup, image background removal, text-to-speech, translation, and local Markdown memory.
 
 ### Frontend & Design
 

@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [pokebuddy](https://github.com/yonatankarp/pokebuddy) - A Gen 1 Pokémon above your prompt that levels up, learns skills and evolves from real work: fixed checks, commits, PRs and session scores. Catch more at random as you work, switch between them, and browse your box and Pokédex in a `/buddy` panel. Pixel art in the terminal and the desktop app.
 
 ### Image and Video Generation
 

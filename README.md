@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [html2wp](https://github.com/iOSDevSK/html2wp-cc-plugin) - Converts HTML to a WordPress block theme. Lovable, Bolt, v0, Claude artifacts or hand-written pages become a standalone theme that runs with no plugin, verified against the original at three viewport widths.
 
 ### Git & Version Control
 

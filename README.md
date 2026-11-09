@@ -230,4 +230,4 @@ Please ensure your plugin:
 
 MIT - See individual plugins for their specific licenses.
 
-- [MemTether](https://github.com/MemTether/MemTether) - Cross-client AI memory hub with bi-temporal governance, supersession chains, hash-chain audit, and 9 MCP tools including `correct_memory` and `timeline`. Local-first, zero cloud.
+- [MemTether](https://github.com/MemTether/MemTether) - Cross-client AI memory hub for AI agents. Local-first, SQLite-backed, MCP server included. Apache-2.0.

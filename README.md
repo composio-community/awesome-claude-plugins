@@ -117,6 +117,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [pr-review](./pr-review) - Comprehensive PR reviews with detailed feedback on code quality, security, and best practices.
 - [changelog-generator](./changelog-generator) - Automatically creates user-facing changelogs from git commits by analyzing history and transforming technical commits into customer-friendly release notes.
 - [ship](./ship) - Complete PR workflow from commit to production. Lint, test, review, and deploy.
+- [babysit-prs](https://github.com/CodePulseHQ/babysit-prs-plugin) - Continuously monitors GitHub PRs for review comments and CI failures, auto-addressing feedback and fixing builds until the PR is approved. Designed to run with `/loop`; pairs with [CodePulse](https://codepulse.review) for automated review coverage.
 
 ### Code Quality & Testing
 

@@ -141,6 +141,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [perf](./perf) - Performance analysis and optimization. Identify bottlenecks and improve speed.
 - [audit-project](./audit-project) - Full project audit for code quality, dependencies, security, and best practices.
+- [OutageDeck](https://github.com/outagedeck/codex-plugins) - Checks vendor-published cloud and SaaS status, incidents, and observed uptime history before code changes, bundling a keyless MCP server with a focused dependency-outage triage skill.
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))

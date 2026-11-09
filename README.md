@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [model-spinners](https://github.com/CharlesSS07/claude-model-spinners) - Spinner verbs that match the active model and effort level. Haiku on low effort gets different verbs than Opus on max.
 
 ### Image and Video Generation
 

@@ -132,6 +132,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Backend & Architecture
 
+- [cohesivity](https://github.com/cohesivity-org/cohesivity-plugin) - cohesivity.ai offers free agent native backend services. Anonymous account (no-signup) to get started through MCP or API. Hosting, postgres, email, storage, containers, LLMs, voice and third-party APIs. Includes free tiers and 5 USD/mo in AI and Search credits. Top-ups through x402.
 - [backend-architect](./backend-architect) - Backend architecture patterns, API design, database schemas, and system design.
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.

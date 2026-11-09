@@ -249,6 +249,16 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "aso-atlas",
+      "source": { "source": "github", "repo": "asoatlas/mcp" },
+      "description": "App Store Optimization: App Store and Google Play keyword research, rank tracking, competitor gaps and app performance via the hosted ASO Atlas MCP server",
+      "category": "integrations",
+      "tags": ["aso", "app-store", "google-play", "mcp", "marketing"],
+      "author": {
+        "name": "ASO Atlas"
+      }
     }
   ]
 }

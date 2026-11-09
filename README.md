@@ -151,6 +151,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
 - [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
+- [Claude-1Password](https://github.com/lucas-saldanha-werneck/Claude-1Password) - Keep secrets out of the chat with 1Password. A hook erases pasted API keys before the model sees them; `op-store` saves a secret through a native dialog with a reveal toggle (piped to `op` as JSON, never on the command line); `op-env` launches Claude Code with `op://` references resolved once. Hooks also block `op read`, `printenv` and `.env` reads.
 
 ### Developer Productivity
 

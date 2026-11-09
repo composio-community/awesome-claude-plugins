@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [claude-poker](https://github.com/eddundead/claude-poker) - 8-bit Texas Hold'em in a Claude Code side pane, to play while Claude works. 1-6 AI opponents at three skill levels, live win odds, custom bets, 10 languages. No dependencies or network access.
 
 ### Image and Video Generation
 

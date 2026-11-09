@@ -154,6 +154,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [agent-trash-guard](https://github.com/hermes-labs-ai/agent-trash-guard) - Recoverable deletion guard for Claude Code, Codex, and Gemini CLI. Blocks permanent deletes and moves files to a recoverable trash directory instead, with native pre-tool adapters for each host.
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

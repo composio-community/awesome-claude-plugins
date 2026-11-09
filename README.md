@@ -128,6 +128,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Agent Memory
 
+- [context-routing](https://github.com/ai-erp-collab/deterministic-context-routing-plugin) - File-based workspace that routes the agent to the few curated pages a task needs, with confidence labels, per-module session logs, and integrity checks.
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
 
 ### Backend & Architecture

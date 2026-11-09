@@ -1,0 +1,97 @@
+{
+  "skill_name": "maintain",
+  "triggering": {
+    "positive": [
+      "What changed in the warehouse since I last looked?",
+      "Did anything drift in my dbt project?",
+      "The orders source gained a column and dropped another; is my project still in sync?",
+      "My stg_customers primary key has duplicates now, what broke?",
+      "The business changed the revenue metric definition; does my semantic model still match?",
+      "Reconcile my models with the current source schema.",
+      "Which of my models are stale after the upstream change?",
+      "The row count on orders dropped overnight; did a load half-fail?",
+      "The unique test on order_id started failing yesterday and nobody changed the model. Figure out what happened.",
+      "Our revenue dashboard dropped 40% overnight but the code has not changed. What is going on upstream?",
+      "Did my Ossie semantic layer drift from the warehouse?",
+      "One of my semantic layer's relationships stopped resolving. What broke?",
+      "This model is wrong, can you work out why?",
+      "The numbers in fct_revenue look too high.",
+      "Some rows are missing from dim_customers.",
+      "The project is broken.",
+      "The shipped_at column in fct_orders is empty and it should not be.",
+      "Check my models against the warehouse.",
+      "There are duplicates in my fact table and I do not know where they come from.",
+      "Diagnose why the accepted_values test on order_status fails.",
+      "Did my SLayer models drift from the warehouse?",
+      "A SLayer join started fanning out and the revenue measure doubled. Why?",
+      "We upgraded SLayer and maintain says every model was removed. What happened?"
+    ],
+    "negative": [
+      "What's in this warehouse and which tables matter?",
+      "Profile the events table and flag PII.",
+      "Set up a dbt project in this repo.",
+      "Build a staging model for raw orders.",
+      "Define a revenue metric on top of fct_orders.",
+      "I just rewrote stg_orders and now the not_null test fails. Fix my SQL.",
+      "Add a revenue metric to my Ossie semantic model.",
+      "Rewrite fct_revenue so revenue is net of refunds.",
+      "Is this data any good?",
+      "Add a revenue measure to the orders model in my SLayer semantic layer."
+    ]
+  },
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "The upstream orders table gained a column and dropped another and changed a type. Tell me what drifted and how to fix it.",
+      "expected_output": "A schema-drift report from diffing the current warehouse against the .dex/ snapshot, followed by proposed reconciliation edits as reviewable diffs; nothing applied.",
+      "files": [],
+      "assertions": [
+        "Drives the maintain skill (check or schema, then reconcile) and reads the JSON envelope; does not invent results",
+        "Structural drift is computed from metadata and the snapshot, not by scanning source rows",
+        "The report distinguishes added, dropped, and type-changed columns and the models they affect",
+        "Proposed reconciliation edits are reviewable diffs, never silently applied",
+        "No raw rows and no credentials appear in the output (clean envelope)"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "My stg_customers model assumes customer_id is unique, but I think that broke. Check the grain.",
+      "expected_output": "A grain-drift finding that the declared unique key now has duplicates (or a changed cardinality), derived from aggregates, with a proposed fix as a diff.",
+      "files": [],
+      "assertions": [
+        "Grain drift is established from SQL aggregates (uniqueness, cardinality), never raw rows",
+        "The finding names the key that lost uniqueness or the changed row-per-entity cardinality",
+        "A key that was proven unique and lapsed is reported differently from a declared grain that never held",
+        "On a billed connector, surfaces the dry-run cost estimate and re-issues with --confirm and a user-agreed budget rather than inventing one; on DuckDB it runs directly",
+        "Any proposed fix is a reviewable diff; nothing is applied silently",
+        "No column-level unique test is proposed against a column covered by a declared composite grain"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Finance changed how revenue is defined and added a new order_status value. Does my semantic model still match, and reconcile it if not.",
+      "expected_output": "A semantic-drift finding (definition change and new categorical value) against the baseline, with a proposed diff to bring the dbt semantic model back in sync; conflicts with hand-written intent surfaced and asked about.",
+      "files": [],
+      "assertions": [
+        "Definition drift is compared against the .dex/ snapshot baseline",
+        "New categorical dimension values and changed metric/measure definitions are surfaced",
+        "Human dbt edits are authoritative by construction; conflicts surface as a diff and ask, never a silent overwrite",
+        "The proposed reconciliation is valid MetricFlow YAML in the existing semantic model"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our semantic layer is SLayer. A source column was dropped and the orders-to-customers join may be fanning out. Check the layer against the warehouse and propose fixes.",
+      "expected_output": "A maintain sweep against the .dex/ snapshot reporting SLayer's declared schema findings and any join cardinality breach, with the removals stored as a separate SLayer plan under `data.semantic_plan_id`; nothing applied.",
+      "files": [],
+      "assertions": [
+        "Drives `maintain check` (or the schema and grain axes) with the [slayer] extra selected by the wrapper, and reads the envelope rather than diffing files by hand",
+        "Never opens a SLayer datasource or runs `slayer validate-models`; the declared_* findings come from dex's own metadata",
+        "A join with no declared cardinality is relayed as unchecked, not as passing",
+        "A model file refused for its format version is relayed as unreadable, not reconciled as removed definitions",
+        "Does not report the absence of entities, MetricFlow measures, or per-measure time dimensions as drift",
+        "Relays both reconcile plan ids when a SLayer plan is stored; each is applied with `transform apply`, never silently"
+      ]
+    }
+  ]
+}

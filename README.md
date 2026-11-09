@@ -163,6 +163,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
 
+- [claude-in-chrome](https://github.com/hamzahamidi/claude-in-chrome-cli) - Drives your real, logged-in Chrome through the Claude in Chrome extension, so pages behind SSO or a cookie wall work without a fresh profile or a re-login. Bundles a skill on when a real session matters, plus `cic.sh` for shell and cron use.
+
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.

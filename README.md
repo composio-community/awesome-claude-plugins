@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [kettle](https://github.com/ChiHanLu/kettle) - Put the kettle on and walk away. Sound cues for Claude Code hook events, so you can leave the terminal and still know what happened: it finished, it needs permission, it's been waiting on you — and when the turn died on an API error (rate limit / overload), which looks exactly like still working. 11 events each independently on/off, random pools, per-event volume, speech, quiet hours, custom audio. macOS/Windows/Linux, zero dependencies.
 
 ### Companion & Personality
 

@@ -83,6 +83,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
   - [Backend & Architecture](#backend--architecture)
   - [DevOps & Performance](#devops--performance)
   - [Documentation & Security](#documentation--security)
+  - [Accessibility](#accessibility)
   - [Developer Productivity](#developer-productivity)
   - [Companion & Personality](#companion--personality)
 - [Getting Started](#getting-started)
@@ -151,6 +152,10 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
 - [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
+
+### Accessibility
+
+- [claude-speak](https://github.com/JosephScript/claude-speak) - Gives Claude Code a voice via your OS's built-in TTS (`say` on macOS, `espeak-ng`/`espeak` on Linux). On-demand `/speak` (verbatim or LLM-summarized) plus an automatic Stop-hook mode that reads every response aloud, with adjustable rate/voice/truncation. No API keys, no external services, no telemetry.
 
 ### Developer Productivity
 

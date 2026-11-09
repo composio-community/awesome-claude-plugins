@@ -144,6 +144,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [cc-aws-keepalive](https://github.com/GeiserX/cc-aws-keepalive) - Keeps Claude Code sessions on AWS Bedrock alive through SSO or SAML credential expiry. Warns before each prompt when credentials are expired or close to expiry, reads fresh credentials from `~/.aws/credentials`, and can show a countdown in the status line and log you back in automatically.
 
 ### Documentation & Security
 

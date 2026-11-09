@@ -161,6 +161,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [context-mode](https://github.com/mksglu/claude-context-mode) - Process large outputs in sandboxed subprocesses, keeping only summaries in the context window. 98% context savings across 21 benchmarked scenarios.
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
+- [plainspeak](https://github.com/mkt-henry/plainspeak) - Makes Claude report in plain language for people who ship products without reading code. Hides file paths, function names, and library talk; keeps commands, addresses, and keys you must type verbatim. Three intensity levels plus a per-user voice interview, remembered across sessions.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
 
 ### Companion & Personality

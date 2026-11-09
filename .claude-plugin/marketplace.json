@@ -249,6 +249,16 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "refyner",
+      "source": "./refyner",
+      "description": "Companion for your Refyner second brain — research grounded in what you've saved, plus propose→confirm capture. Bundles the Refyner MCP (OAuth). Free account at refyner.me.",
+      "category": "integrations",
+      "tags": ["second-brain", "knowledge", "research", "mcp", "notes", "memory"],
+      "author": {
+        "name": "Dragos Rebegea"
+      }
     }
   ]
 }

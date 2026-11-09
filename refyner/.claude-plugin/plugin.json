@@ -1,0 +1,19 @@
+{
+  "name": "refyner",
+  "description": "Companion for your Refyner second brain: research grounded in your saved knowledge, plus propose→confirm capture. Requires a free Refyner account (https://refyner.me).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Dragos Rebegea",
+    "email": "dragos.rebegea@buidly.com"
+  },
+  "license": "MIT",
+  "homepage": "https://refyner.me",
+  "repository": "https://github.com/buidly/refyner-claude",
+  "keywords": ["refyner", "second-brain", "mcp", "research", "notes", "knowledge"],
+  "mcpServers": {
+    "refyner": {
+      "type": "http",
+      "url": "https://refyner.me/api/mcp"
+    }
+  }
+}

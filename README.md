@@ -234,3 +234,5 @@ Please ensure your plugin:
 ## License
 
 MIT - See individual plugins for their specific licenses.
+
+- [MemTether](https://github.com/MemTether/MemTether) - Cross-client AI memory hub for AI agents. Local-first, SQLite-backed, MCP server included. Apache-2.0.

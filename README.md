@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [Mergen Verdict](https://github.com/OnourImpram/mergen) - Independent verification of completion claims. Re-derives the evidence from the repository itself, applies a risk floor that cannot be downgraded, and returns pass, conditional_pass, fail or unverifiable instead of assuming done.
 
 ### Agent Memory
 
@@ -162,6 +163,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [mneme](https://github.com/OnourImpram/mneme) - Local-first memory across sessions where Markdown stays the source of truth and the index is a rebuildable artifact. No model runs on the Stop path, and redaction happens before any derived store.
 
 ### Companion & Personality
 

@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [perisclaw](https://github.com/periskope-org/perisclaw-plugin) - Use your own WhatsApp from Claude: catch up on what needs your reply, search chats and messages, and review and send replies from a card. Connects to the hosted Perisclaw MCP server over OAuth (read-only or read and write); needs a Perisclaw account. ([Website](https://www.perisclaw.com?utm_source=github-composio-awesome-claude-plugins&utm_medium=directory&utm_campaign=mcp-listing))
 
 ### Frontend & Design
 

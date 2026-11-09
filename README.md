@@ -144,6 +144,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [climits](https://github.com/likemusic/climits) - Paces subscription usage against a time line instead of just reporting it: from hooks it warns, pauses a call until the line catches up, asks once when the wait would be long, or — in a headless run — declines with a growing backoff and tells the agent to schedule a wake-up, so an overnight run pauses instead of dying. Python standard library only, enforcement off by default.
 
 ### Documentation & Security
 

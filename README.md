@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [picture-diary](https://github.com/qqq1212341/picture-diary) - Nightly diary of what the agent wasted that day, drawn as a kid's picture-diary PNG (SVG written by the agent, no image API). Mistakes that repeat become CLAUDE.md rule candidates; a rule graduates after 14 quiet days or is retired. Local markdown only.
 
 ### Companion & Personality
 

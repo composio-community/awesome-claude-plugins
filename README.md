@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [cairn](https://github.com/eventually-consistent-code/cairn2) - Tracker-first project management — plans live in git, every piece of work mirrors to the tracker your team actually reads. 37 verbs, 71 MCP tools, eight backends (Jira, GitHub, Linear, GitLab, Asana, Azure Boards, ClickUp, plus a zero-credential local tracker with a dependency graph and one-command promotion to hosted). Goal-backward verification, provenance-backed memory, sprint + estimate population. ([Website](https://www.eventually-consistent.io/projects/cairn/))
 
 ### Companion & Personality
 

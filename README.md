@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [eos](https://github.com/yasinkilinc/eos-agent) - Local project memory for Claude Code. Hooks hand each session a brief of the task's procedure, its last runs and lesson, plus notes earlier sessions wrote, marked stale when the file they describe changes. Also indexes code for impact analysis. Pure Python stdlib: no LLM calls, no embeddings, no server.
 
 ### Backend & Architecture
 

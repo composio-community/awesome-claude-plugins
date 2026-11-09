@@ -171,6 +171,19 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "shipvela",
+      "description": "Publish websites with owner confirmation, deployment status and a live HTTPS URL through an OAuth MCP connector. Requires a Shipvela account.",
+      "category": "devops",
+      "tags": [
+        "hosting",
+        "deployment",
+        "mcp",
+        "oauth",
+        "static-sites"
+      ],
+      "author": "Content Petit LLC"
     }
   ],
   "categories": [

@@ -249,6 +249,22 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "shipvela",
+      "description": "Publish websites with owner confirmation, deployment status and a live HTTPS URL through an OAuth MCP connector. Requires a Shipvela account.",
+      "category": "devops",
+      "tags": [
+        "hosting",
+        "deployment",
+        "mcp",
+        "oauth",
+        "static-sites"
+      ],
+      "author": {
+        "name": "Content Petit LLC"
+      },
+      "source": "./shipvela"
     }
   ]
 }

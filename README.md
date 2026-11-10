@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [myco-notes](https://github.com/LuzianMe/myco-notes) - Project memory as a git-versioned Markdown notes tree that the agent keeps accurate: dated entries, cross-references, a lint for stale facts, a secret-refusing commit hook and a mycelium graph of the notes. ([Live demo](https://luzianme.github.io/myco-notes/graph.html))
 
 ### Backend & Architecture
 

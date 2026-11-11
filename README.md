@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [OpenQodex](https://github.com/openqodex/openqodex) - Code review before every push. A separate reviewer process checks each change Claude Code writes, with 22 built-in scanners and a code graph. Claude Code plugin, Apache-2.0.
 
 ### Agent Memory
 

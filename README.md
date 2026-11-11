@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [toolbox-pod](https://github.com/Toolbox-POD/toolbox-pod-mcp) - Design custom tees and hoodies, see mockups, and order prints made and shipped from Utah. Connects Toolbox POD's hosted MCP server with OAuth sign-in; orders come back as a checkout link you pay on toolboxpod.com. Install: `/plugin install toolbox-pod --marketplace Toolbox-POD/toolbox-pod-mcp`.
 
 ### Frontend & Design
 

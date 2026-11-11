@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [dawnmere](https://github.com/LF-Labs-Inc/dawnmere) - One local memory on your Mac shared by Claude Code, Codex and Cursor. A note you type in Claude Code comes up in Codex when you ask about it. Local file and local search, no account; macOS on Apple silicon. ([Website](https://dawnmere.app))
 
 ### Backend & Architecture
 

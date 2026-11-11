@@ -162,7 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
-- [kitden](https://github.com/KonstantinStarovoytov/kitden) - A skill and a read-only MCP server that answer "what does this agent load": the MCP servers, plugins, skills, hooks and instruction files of Claude Code, Codex and Cursor, with duplicates flagged. Needs Kitden installed (`uv tool install kitden`); changes are made on its local page, with a preview, a backup and Undo.
+- [kitden](https://github.com/KonstantinStarovoytov/kitden) - Six read-only skills that answer "what does this agent load": the MCP servers, plugins, skills, hooks and instruction files of Claude Code, Codex and Cursor, with duplicates flagged, and whether your skills fit in the context. Needs Kitden installed (`uv tool install kitden`); changes are made on its local page, with a preview, a backup and Undo.
 
 ### Companion & Personality
 

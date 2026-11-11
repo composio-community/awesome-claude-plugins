@@ -125,6 +125,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [carveout](https://github.com/lunox-work/carveout) - Hands one part of a closed TypeScript repository to a contractor or agent as a folder that builds and tests on its own, and checks the patch that comes back. A second skill, carveout-gate, reports what an agent's change reaches, which tests to run, and any weakened test.
+- [duediligence](https://github.com/lunox-work/duediligence) - Turns a spec into a public test suite for a coding agent and a calibrated hidden suite it never sees, which judges the result. TypeScript, Python, Go and Rust.
 
 ### Agent Memory
 

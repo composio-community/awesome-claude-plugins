@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [ClickHouse Loom](https://github.com/ClickHouse/loom) - Shared long-term memory, document search with citations and a code index of your repositories for Claude Code, served by a self-hosted MCP server that stores its data in ClickHouse. Maintained by ClickHouse.
 
 ### Backend & Architecture
 

@@ -182,6 +182,14 @@
     {"id": "devops", "name": "DevOps & Performance", "icon": "rocket"},
     {"id": "docs", "name": "Documentation", "icon": "book"},
     {"id": "security", "name": "Security", "icon": "shield"},
-    {"id": "productivity", "name": "Developer Productivity", "icon": "zap"}
+    {"id": "productivity", "name": "Developer Productivity", "icon": "zap"},
+    {
+      "name": "clausper",
+      "source": { "source": "github", "repo": "kenawak/clausper" },
+      "category": "productivity",
+      "description": "Voice mod: speaks a short summary of every reply, captions it live, lists the files that changed, and takes your next prompt by voice",
+      "author": "kenawak",
+      "tags": ["voice", "text-to-speech", "speech-to-text", "accessibility", "hands-free"]
+    }
   ]
 }

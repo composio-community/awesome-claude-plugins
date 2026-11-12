@@ -85,6 +85,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
   - [Documentation & Security](#documentation--security)
   - [Developer Productivity](#developer-productivity)
   - [Companion & Personality](#companion--personality)
+  - [Learning & Education](#learning--education)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [Resources](#resources)
@@ -171,6 +172,10 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+
+### Learning & Education
+
+- [schwartz-tutoring](https://github.com/JacobRSchwartz-AI/schwartz-tutoring) - Makes Claude tutor the way Jacob Schwartz does, built from about 3,000 hours of his tutoring (tutor trainings, 168 recorded sessions, 210 whiteboard pages). Asks before telling, lets the student do the thinking, and draws when a picture helps. Covers math, statistics, economics, finance, accounting and coding.
 
 ## Getting Started
 

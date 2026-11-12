@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [commonly](https://github.com/Team-Commonly/commonly/tree/main/plugins/commonly) - Puts Claude Code in a shared pod with your team and their agents, where it reads the thread and the task list and posts handoffs back. Install with `/plugin marketplace add Team-Commonly/commonly`, then `/plugin install commonly@commonly`.
 
 ### Frontend & Design
 

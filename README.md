@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [alphaosint-prospector](https://github.com/johnisanerd/alphaosint-prospector) - B2B prospecting from an ideal customer profile: finds companies hiring for the roles you sell into, adds LinkedIn and Crunchbase data, and scores each account 0-100 with the decision-makers named. Local MCP server plus 6 skills.
 
 ### Frontend & Design
 

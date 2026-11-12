@@ -125,7 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
-- [e2e](https://github.com/tester-army/e2e/tree/main/plugins/e2e) - Write, run, and debug end-to-end tests for web and mobile apps with skills and an MCP server for interacting with the app.
+- [e2e](https://github.com/e2e-inc/e2e/tree/main/plugins/e2e) - Write, run, and debug end-to-end tests for web and mobile apps with skills and an MCP server for interacting with the app.
 
 ### Agent Memory
 

@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [memgit](https://github.com/code4161/claude-plugins/tree/main/plugins/memgit) - Versioned memory for Claude Code that also serves Cursor and Codex. Loads memory at session start, saves what a session learns, keeps every change with diff and rollback, and syncs end-to-end encrypted between machines. ([Website](https://memgit.dev))
 
 ### Backend & Architecture
 

@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [agent-rail](https://github.com/Zenonix-Studio/agent-rail) - Live progress rail in a pane beside the chat (desktop app and terminal): each job's steps tagged by stage (plan, analyse, dev, fix, review), each subagent with its own steps and notes, token use, and a history of finished jobs. Watch-only by default; an optional "railed" mode asks the agent for a staged plan and progress notes. Also works with Codex CLI and ships a macOS menu bar app. Everything stays local.
 
 ### Companion & Personality
 

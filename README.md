@@ -100,6 +100,12 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [aisend](https://github.com/airdropfi/aisend-claude-plugin) - Send transactional email from your verified domain, check delivery and validate addresses through the hosted AISend MCP server (OAuth).
+- [cvposh](https://github.com/airdropfi/cvposh-claude-plugin) - Read your CVPosh resumes, score them for ATS compatibility and compare them with a job posting; read-only agent tools over the hosted MCP server.
+- [growfast](https://github.com/airdropfi/growfast-claude-plugin) - Scan a product's domain, find matching B2B companies and draft outreach emails through the hosted GrowFast MCP server (OAuth).
+- [seobolt](https://github.com/airdropfi/seobolt-claude-plugin) - Crawl a site, read the SEO and AI-search audit and prioritized fix plan, apply approved fixes and re-crawl through the hosted SEOBolt MCP server.
+- [showmrr](https://github.com/airdropfi/showmrr-claude-plugin) - Look up startups, MRR history and leaderboards, each figure labelled verified or self-reported; read-only, no account needed.
+- [datafast](https://github.com/airdropfi/datafast-claude-plugin) - Ask about your DataFast web analytics (visitors, top pages, traffic sources, revenue) over the read-only hosted MCP server.
 
 ### Frontend & Design
 
@@ -144,6 +150,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [bugsly](https://github.com/airdropfi/bugsly-claude-plugin) - Read, search and triage Bugsly error-tracking issues, check cron and uptime monitors and crash-free rate; resolve or ignore only when asked.
 
 ### Documentation & Security
 
@@ -171,6 +178,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+- [remixviral](https://github.com/airdropfi/remixviral-claude-plugin) - Read ranked, captioned 9:16 Shorts cut from long videos you own, start faceless Shorts and check credits through the hosted RemixViral MCP server.
 
 ## Getting Started
 

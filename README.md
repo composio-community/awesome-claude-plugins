@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [BeReach LinkedIn prospecting](https://github.com/bereach-ai/linkedin-prospecting-skills) - 6 skills for LinkedIn prospecting and cold email: find the right people, sort them into personas, learn your voice, write invitations, first messages and follow-ups, measure acceptance and replies at 7 days. Connects to BeReach (free trial).
 
 ### Frontend & Design
 

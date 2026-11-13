@@ -84,6 +84,7 @@ Ask Claude to send you a test email. If you receive it, Claude is now connected 
   - [DevOps & Performance](#devops--performance)
   - [Documentation & Security](#documentation--security)
   - [Developer Productivity](#developer-productivity)
+  - [Career & Leadership](#career--leadership)
   - [Companion & Personality](#companion--personality)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
@@ -162,6 +163,10 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+
+### Career & Leadership
+
+- [marian-coach](https://github.com/marian-kamenistak/engineering-leadership-plugin) - A marketplace with two plugins for engineering leaders. `marian-coach` covers your own career: team-lead readiness, salary and market value, a one-minute pitch score, the promotion case, your first 90 days in a new role and your next 1:1 with your manager. `engineering-leadership` covers the team: delivery KPIs from Jira exports with a 6-sprint plan, and the manager-to-senior-IC ratio.
 
 ### Companion & Personality
 

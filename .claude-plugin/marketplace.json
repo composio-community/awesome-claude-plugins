@@ -249,6 +249,22 @@
       "author": {
         "name": "Composio"
       }
+    },
+    {
+      "name": "studio-kit",
+      "source": "./studio-kit",
+      "description": "Website launch QA at three widths, defensive pre-launch checks, copy linting, deploy confirmation and secret-pattern hooks.",
+      "category": "quality",
+      "tags": [
+        "website",
+        "qa",
+        "playwright",
+        "security",
+        "hooks"
+      ],
+      "author": {
+        "name": "MEG Web Studio"
+      }
     }
   ]
 }

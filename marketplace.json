@@ -171,6 +171,19 @@
       "description": "Analyze coding patterns and get personalized learning resources",
       "author": "Composio",
       "tags": ["productivity", "learning", "growth", "analytics"]
+    },
+    {
+      "name": "studio-kit",
+      "description": "Website launch QA at three widths, defensive pre-launch checks, copy linting, deploy confirmation and secret-pattern hooks.",
+      "category": "quality",
+      "author": "MEG Web Studio",
+      "tags": [
+        "website",
+        "qa",
+        "playwright",
+        "security",
+        "hooks"
+      ]
     }
   ],
   "categories": [

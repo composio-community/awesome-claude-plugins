@@ -1,0 +1,14 @@
+{
+  "name": "studio-kit",
+  "version": "1.0.0",
+  "description": "Guardrails and QA for building websites with Claude Code: render-and-check before 'done', a 10-minute pre-launch security test, concrete copy rules with an HTML linter, a deploy gate that asks a human before recognized production deploys, and a secret guard that blocks common API key formats in source, bundles and git.",
+  "author": {
+    "name": "MEG Web Studio",
+    "email": "info@megwebstudio.com",
+    "url": "https://megwebstudio.com"
+  },
+  "homepage": "https://megwebstudio.com/kit/",
+  "repository": "https://github.com/megwebstudio/studio-kit",
+  "license": "MIT",
+  "keywords": ["website", "qa", "playwright", "security", "hooks", "deploy", "secrets", "copywriting", "web-studio"]
+}

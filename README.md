@@ -136,6 +136,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
+- [Loamkit](https://github.com/jaymadeapp/Loamkit) - Security-first WordPress/WooCommerce starter kit. An interactive setup skill scaffolds Bedrock + Sage 11 projects with an art-directed design system (6 theme.json directions), role-based agents, a Playwright design-review gate, and fail-closed guard hooks that keep the database and payment paths out of the agent's hands.
 
 ### DevOps & Performance
 

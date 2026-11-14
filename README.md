@@ -136,6 +136,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [mcp-builder](./mcp-builder) - Guides creation of high-quality MCP (Model Context Protocol) servers for integrating external APIs and services with LLMs.
 - [agent-sdk-dev](./agent-sdk-dev) - Claude Agent SDK development helper for building custom AI agents.
 - [maestro-orchestrate](https://github.com/josstei/maestro-orchestrate) - Multi-agent development orchestration coordinating 22 specialized subagents through 4-phase workflows with native parallel execution, persistent sessions, and standalone commands for code review, debugging, security audit, and more.
+- [zetetic-team-subagents](https://github.com/cdeust/zetetic-team-subagents) - 97 genius reasoning patterns (Feynman, Dijkstra, Pearl, Turing) + 23 team specialists, 76 skills, 20 lifecycle hooks. Every agent loads a 15-section engineering standard as binding constraints: claims cite sources, unsourced constants block at commit, the task definition is the contract. Shape-based problem routing, multi-model Advisor/Orchestrator loops, redaction pass on generated prose. Pairs with [Cortex](https://github.com/cdeust/Cortex) for persistent memory.
 
 ### DevOps & Performance
 

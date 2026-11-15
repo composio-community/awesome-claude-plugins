@@ -26,6 +26,7 @@ import os
 import re
 import subprocess
 import sys
+from shell_git import OVERRIDE, SEGMENT_SPLIT, git_invocation
 
 HIGH = "high"
 MEDIUM = "medium"
@@ -64,6 +65,9 @@ CLIENT_SECRET_NAME_RE = re.compile(r"SECRET|PRIVATE|PASSWORD|PASSWD|SERVICE_ROLE
 PLACEHOLDER_RE = re.compile(r"(?i)x{4,}|your|example|placeholder|dummy|changeme|replace|redacted|<|>|\.\.\.|\*{3,}|0{8,}")
 ENV_FILE_RE = re.compile(r"^\.env(?:\.[A-Za-z0-9_\-]+)*$")
 ENV_EXAMPLE_RE = re.compile(r"(?i)\.(?:example|sample|template|dist|defaults?)$")
+SOURCE_EXTENSIONS = {'.js','.ts','.mjs','.cjs','.jsx','.tsx','.json','.py','.html','.css','.vue','.svelte','.php','.rb','.go','.rs','.swift','.sh'}
+ALLOWLIST_NAMES = {'deploy-gate-allow','secret-guard-allow'}
+PUBLIC_DIRECTORIES = {'public','static','dist','build','www','htdocs'}
 
 
 def _mask(value):
@@ -145,7 +149,15 @@ def _allowlisted_path(path, payload):
     if not path:
         return False
     project = _project_dir(payload)
-    rel = os.path.relpath(os.path.abspath(path), project) if os.path.isabs(path) else path
+    project = os.path.realpath(project)
+    absolute = os.path.realpath(os.path.join(project, path))
+    try:
+        inside_project = os.path.commonpath([project, absolute]) == project
+    except ValueError:
+        inside_project = False
+    if not inside_project:
+        return False
+    rel = os.path.relpath(absolute, project)
     try:
         with open(os.path.join(project, ".claude", "secret-guard-allow"), encoding="utf-8") as fh:
             for line in fh:
@@ -158,9 +170,12 @@ def _allowlisted_path(path, payload):
 
 
 def _file_findings(path, text):
+    path = os.path.normpath(path or '')
     base = os.path.basename(path or "")
     findings = scan_client_env(text)
-    if ENV_FILE_RE.match(base) and not ENV_EXAMPLE_RE.search(base):
+    public_path = any(p.lower() in PUBLIC_DIRECTORIES for p in path.replace('\\','/').split('/')[:-1])
+    if (ENV_FILE_RE.match(base) and not ENV_EXAMPLE_RE.search(base) and not public_path
+            and os.path.splitext(base)[1].lower() not in SOURCE_EXTENSIONS):
         return findings  # a real, server-side .env is the right home for secrets
     covered = {f["masked"] for f in findings}
     for f in scan_text(text):
@@ -172,43 +187,57 @@ def _file_findings(path, text):
     return findings
 
 
-def _env_files_not_ignored(cwd):
-    bad = []
+def _env_files_not_ignored(cwd, paths=None, whole_repo=False):
+    """Use Git's pathspec/ignore rules; include tracked envs even if now ignored."""
     try:
-        names = os.listdir(cwd or ".")
-    except OSError:
-        return bad
-    for name in names:
-        if ENV_FILE_RE.match(name) and not ENV_EXAMPLE_RE.search(name):
-            try:
-                r = subprocess.run(["git", "check-ignore", "-q", name], cwd=cwd or None,
-                                   capture_output=True, timeout=3)
-                if r.returncode == 1:  # 1 = not ignored, 128 = not a repo
-                    bad.append(name)
-            except Exception:
-                continue
-    return bad
+        if whole_repo:
+            root = subprocess.run(['git','rev-parse','--show-toplevel'],cwd=cwd or None,
+                                  capture_output=True,text=True,timeout=3)
+            if root.returncode:
+                return []
+            cwd = root.stdout.strip()
+        result = subprocess.run(['git','-c','core.fsmonitor=false','ls-files','-z',
+                                 '--cached','--others','--exclude-standard','--'] + (paths or []),
+                                cwd=cwd or None,capture_output=True,text=True,timeout=3)
+        if result.returncode:
+            return []
+        return sorted({n for n in result.stdout.split('\0') if n and
+                       ENV_FILE_RE.match(os.path.basename(n)) and
+                       not ENV_EXAMPLE_RE.search(os.path.basename(n))})
+    except (OSError, subprocess.TimeoutExpired):
+        return []
 
 
 def _bash_findings(command, cwd):
     findings = []
-    for seg in re.split(r"\|\||&&|;|\n", command or ""):
-        m = re.search(r"\bgit\b(?:\s+-C\s+\S+)?\s+(add|commit|stage)\b(.*)", seg)
-        if not m:
+    for seg in SEGMENT_SPLIT.split(command or ""):
+        parsed = git_invocation(seg, cwd)
+        if not parsed or parsed[0] not in ('add','commit','stage'):
             continue
-        verb, rest = m.group(1), m.group(2)
-        args = rest.split()
+        verb, args, directory, flag = parsed
         named_env = [a for a in args if ENV_FILE_RE.match(os.path.basename(a.strip("'\"")))
                      and not ENV_EXAMPLE_RE.search(a.strip("'\""))]
         if named_env and verb in ("add", "stage"):
             findings.append({"provider": "git %s of %s" % (verb, ", ".join(named_env)), "severity": HIGH,
                              "masked": "env file", "kind": "git"})
             continue
-        broad = (verb in ("add", "stage") and any(a in (".", "-A", "--all", "*", ":/") for a in args)) or \
-                (verb == "commit" and any(re.match(r"^-[a-zA-Z]*a", a) or a == "--all" for a in args))
+        if flag == OVERRIDE:
+            findings.append({'provider':'git staging with repository/configuration overrides needs review',
+                             'severity':HIGH,'masked':'Git context override','kind':'git'})
+            continue
+        if flag:  # UNRESOLVED or UNPARSED: do not scan a repository Git might not use
+            findings.append({'provider':'git %s the hook could not resolve (-C with ~, $VAR, a missing path, '
+                                        'or unusual quoting) needs review' % verb,
+                             'severity':MEDIUM,'masked':'Git context unknown','kind':'git'})
+            continue
+        paths = [a for a in args if not a.startswith('-')]
+        broad = verb in ('add','stage') or (verb=='commit' and
+                any(re.match(r'^-[a-zA-Z]*a',a) or a=='--all' for a in args))
         if broad:
-            for name in _env_files_not_ignored(cwd):
-                findings.append({"provider": "%s is not in .gitignore and 'git %s' would include it" % (name, verb),
+            whole_repo = not paths and any(a in ('-A','--all') for a in args)
+            for name in _env_files_not_ignored(directory, paths if verb!='commit' else [],
+                                             whole_repo=whole_repo or verb=='commit'):
+                findings.append({"provider": "%s is tracked or not ignored and 'git %s' may include it" % (name, verb),
                                  "severity": HIGH, "masked": "env file", "kind": "git"})
     # secrets written to a file from the shell (echo/printf/tee/heredoc), outside .env files
     if re.search(r">>?|\btee\b", command or ""):
@@ -239,10 +268,18 @@ def decide(payload):
         findings = _bash_findings(ti.get("command") or "", payload.get("cwd") or "")
     else:
         return None
-    if not findings or (path and _allowlisted_path(path, payload)):
+    normalized_path = os.path.realpath(os.path.join(_project_dir(payload), path)) if path else ''
+    policy_edit = (tool in ('Write','Edit','MultiEdit','NotebookEdit') and
+                   os.path.basename(normalized_path) in ALLOWLIST_NAMES and
+                   os.path.basename(os.path.dirname(normalized_path))=='.claude')
+    if policy_edit:
+        findings.append({'provider':'guardrail allowlist change requires confirmation',
+                         'severity':MEDIUM,'masked':'policy file','kind':'policy'})
+    if not findings or (path and not policy_edit and _allowlisted_path(path, payload)):
         return None
     high = any(f["severity"] == HIGH for f in findings)
-    decision = "deny" if (high and mode != "ask") else "ask"
+    unattended = payload.get('permission_mode') in ('bypassPermissions','dontAsk')
+    decision = "deny" if (unattended or (high and mode != "ask")) else "ask"
     lines = ["- %s: %s" % (f["provider"], f["masked"]) for f in findings[:6]]
     advice = ("Keep secrets server-side: put the value in a gitignored .env under a name WITHOUT a "
               "browser prefix (not VITE_/NEXT_PUBLIC_/PUBLIC_/REACT_APP_), read it only in server code "

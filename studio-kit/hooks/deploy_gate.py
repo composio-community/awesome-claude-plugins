@@ -12,7 +12,7 @@ Settings (environment variables, read when Claude Code starts):
 
 Per-project allowlist: put one regular expression per line in
   .claude/deploy-gate-allow   (relative to the project directory)
-Commands matching any line pass without a prompt (e.g. a staging deploy).
+The entire command must match a line to pass without a prompt (e.g. staging).
 
 Python 3.8+ standard library only. If the hook itself crashes it fails open with a
 message on stderr, because a broken guardrail must not stop all Bash work.
@@ -22,6 +22,7 @@ import os
 import re
 import subprocess
 import sys
+from shell_git import OVERRIDE, SEGMENT_SPLIT, UNPARSED, UNRESOLVED, git_invocation
 
 DEFAULT_PROD_BRANCHES = "main,master,production,prod,release,live"
 
@@ -51,9 +52,6 @@ DEPLOY_PATTERNS = [
     ("Expo/EAS release", r"\beas\b\s+(?:submit|update)\b"),
 ]
 
-SEGMENT_SPLIT = re.compile(r"\|\||&&|;|\||\n")
-
-
 def _prod_branches():
     raw = os.environ.get("STUDIO_KIT_PROD_BRANCHES", DEFAULT_PROD_BRANCHES)
     return [b.strip() for b in raw.split(",") if b.strip()]
@@ -73,13 +71,22 @@ def _current_branch(cwd):
 
 def _git_push_target(segment, cwd):
     """Return a reason string if this git push would update a production branch."""
-    m = re.search(r"\bgit\b(?:\s+-C\s+\S+)?\s+push\b(.*)", segment)
-    if not m:
+    parsed = git_invocation(segment, cwd)
+    if not parsed or parsed[0] != 'push':
         return ""
-    args = [a for a in m.group(1).split() if a]
+    _, args, cwd, flag = parsed
+    if flag == OVERRIDE:
+        return "git push with repository/configuration overrides"
+    if flag == UNPARSED:
+        return "git push the hook could not parse reliably"
+    unknown = "git push from a directory the hook cannot resolve (-C with ~, $VAR or a missing path)"
     flags = [a for a in args if a.startswith("-")]
     positional = [a for a in args if not a.startswith("-")]
     prod = _prod_branches()
+
+    def branch():
+        return None if flag == UNRESOLVED else _current_branch(cwd)
+
     # git push <remote> <refspec>...  -> look at destination side of each refspec
     for ref in positional[1:]:
         dest = ref.split(":")[-1].lstrip("+")
@@ -87,19 +94,21 @@ def _git_push_target(segment, cwd):
         if dest in prod:
             return "git push to production branch '%s'" % dest
         if dest == "HEAD" or ref in ("HEAD",):
-            branch = _current_branch(cwd)
-            if branch in prod:
-                return "git push of HEAD while on '%s'" % branch
+            current = branch()
+            if current is None:
+                return unknown
+            if current in prod:
+                return "git push of HEAD while on '%s'" % current
     if "--all" in flags or "--mirror" in flags:
         return "git push of all branches"
-    if len(positional) <= 1:
-        branch = _current_branch(cwd)
-        if branch in prod:
-            return "git push while on production branch '%s'" % branch
-    if any(f in ("-f", "--force") for f in flags):
-        branch = _current_branch(cwd)
-        if branch in prod:
-            return "force push while on '%s'" % branch
+    if len(positional) <= 1 or any(f in ("-f", "--force") for f in flags):
+        current = branch()
+        if current is None:
+            return unknown
+        if current in prod:
+            if len(positional) <= 1:
+                return "git push while on production branch '%s'" % current
+            return "force push while on '%s'" % current
     return ""
 
 
@@ -127,7 +136,7 @@ def _allowlisted(command, cwd):
                 line = line.strip()
                 if line and not line.startswith("#"):
                     try:
-                        if re.search(line, command):
+                        if re.fullmatch(line, command.strip()):
                             return True
                     except re.error:
                         continue

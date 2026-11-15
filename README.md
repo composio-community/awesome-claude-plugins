@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [claude-snapshot](https://github.com/adhenawer/claude-snapshot) - Portable Claude Code setup snapshots. Export your config, plugins, hooks, and global MDs as a `.tar.gz` and apply on another machine in under 2 minutes. Includes inspect/diff/apply commands with automatic backups — useful for syncing between machines, backing up before OS reinstall, or rolling back risky changes.
 
 ### Companion & Personality
 

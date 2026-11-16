@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [m2b](https://github.com/Kolibee-GmbH/m2b) - Personal second brain across projects and machines. What you ask it to remember in any session is filed into plain Markdown files you own by a background run, every later session starts knowing it, and facts with an end date are rewritten once the day has passed.
 
 ### Backend & Architecture
 

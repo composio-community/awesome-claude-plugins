@@ -155,6 +155,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Developer Productivity
 
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
+- [ccx](https://github.com/AaronWong1999/ccx) - macOS menu bar app that moves a task, with its context, between Claude Code, Codex and Antigravity. Each app has its own 5-hour quota, so when one runs out the work continues in another instead of waiting. Also ships as a Claude Code plugin.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.
 - [skill-bus](./skill-bus) - The skill for connecting skills. Wire context, conditions, and other skills into any skill invocation — declaratively, without modification. Zero dependencies.

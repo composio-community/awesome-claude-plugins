@@ -22,7 +22,7 @@ import os
 import re
 import subprocess
 import sys
-from shell_git import OVERRIDE, SEGMENT_SPLIT, UNPARSED, UNRESOLVED, git_invocation, rerouting
+from shell_git import COMPUTED, OVERRIDE, SEGMENT_SPLIT, UNPARSED, UNRESOLVED, git_invocation, rerouting
 
 DEFAULT_PROD_BRANCHES = "main,master,production,prod,release,live"
 
@@ -72,8 +72,10 @@ def _current_branch(cwd):
 def _git_push_target(segment, cwd, reroute=False):
     """Return a reason string if this git push would update a production branch."""
     parsed = git_invocation(segment, cwd)
-    if not parsed or parsed[0] != 'push':
+    if not parsed or parsed[0] not in ('push', COMPUTED):
         return ""
+    if parsed[0] == COMPUTED:
+        return "git command whose subcommand is computed ($VAR, a substitution or deep nesting)"
     _, args, cwd, flag = parsed
     if flag == OVERRIDE:
         return "git push with repository/configuration overrides"
@@ -91,6 +93,8 @@ def _git_push_target(segment, cwd, reroute=False):
 
     # git push <remote> <refspec>...  -> look at destination side of each refspec
     for ref in positional[1:]:
+        if "$" in ref or "`" in ref:
+            return "git push to a computed destination ($VAR or a substitution)"
         dest = ref.split(":")[-1].lstrip("+")
         dest = dest.replace("refs/heads/", "")
         if dest in prod:

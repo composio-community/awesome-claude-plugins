@@ -26,7 +26,7 @@ import os
 import re
 import subprocess
 import sys
-from shell_git import OVERRIDE, SEGMENT_SPLIT, git_invocation, rerouting
+from shell_git import COMPUTED, OVERRIDE, SEGMENT_SPLIT, git_invocation, rerouting
 
 HIGH = "high"
 MEDIUM = "medium"
@@ -212,18 +212,29 @@ READ_ONLY_COMMANDS = {'cat', 'less', 'more', 'head', 'tail', 'wc', 'grep', 'egre
                       'stat', 'file', 'diff', 'cmp', 'shasum', 'sha256sum', 'md5', 'md5sum', 'bat'}
 
 
+_POLICY_NAME = re.compile(r"(?:deploy-gate-allow|secret-guard-allow)")
+# a .claude path with a glob, variable or substitution in it, or the bare .claude folder
+_POLICY_FUZZY = re.compile(r"\.claude/(?:[^\s;|&<>]*[*?\[{$`]|(?=[\s'\";|&<>)]|$))")
+_CD_POLICY_DIR = re.compile(r"\b(?:cd|pushd)\b[^;|&]*?\.cl(?:aude\b|[^\s;|&/]*[*?\[])")
+_SHELL_WRITE = re.compile(r">|\b(?:tee|cp|mv|ln|sed|dd|install|rsync|truncate|rm|perl|python3?|node|ruby)\b")
+
+
 def _policy_shell_edit(command):
-    """True if a shell command names an allowlist file and is not a plain read."""
-    if not re.search(r"(?:deploy-gate-allow|secret-guard-allow)", command or ""):
-        return False
+    """True if a shell command may write an allowlist file and is not a plain read."""
+    plain_command = re.sub(r"[\"'\\]", "", command or "")
+    if _CD_POLICY_DIR.search(plain_command) and _SHELL_WRITE.search(plain_command):
+        return True
     for seg in SEGMENT_SPLIT.split(command or ""):
-        if not re.search(r"(?:deploy-gate-allow|secret-guard-allow)", seg):
+        plain = re.sub(r"[\"'\\]", "", seg)  # quotes and backslashes cannot split a name
+        if not (_POLICY_NAME.search(plain) or _POLICY_FUZZY.search(plain)):
             continue
         if re.search(r">|<>", seg):
             return True
         parsed = git_invocation(seg, None)
         if parsed and parsed[0] in ('diff', 'log', 'show', 'status', 'blame') and not parsed[3]:
-            continue
+            if not any(a == '--output' or a.startswith('--output=') for a in parsed[1]):
+                continue
+            return True
         words = seg.split()
         if not words or os.path.basename(words[0].strip("'\"")) not in READ_ONLY_COMMANDS:
             return True
@@ -251,12 +262,12 @@ def _git_findings(command, cwd):
     reroute = rerouting(command or "")
     for seg in SEGMENT_SPLIT.split(command or ""):
         parsed = git_invocation(seg, cwd)
-        if not parsed or parsed[0] not in ('add','commit','stage'):
+        if not parsed or parsed[0] not in ('add','commit','stage',COMPUTED):
             continue
         verb, args, directory, flag = parsed
         named_env = [a for a in args if ENV_FILE_RE.match(os.path.basename(a.strip("'\"")))
                      and not ENV_EXAMPLE_RE.search(a.strip("'\""))]
-        if named_env and verb in ("add", "stage"):
+        if named_env and verb in ("add", "stage", COMPUTED):
             findings.append({"provider": "git %s of %s" % (verb, ", ".join(named_env)), "severity": HIGH,
                              "masked": "env file", "kind": "git"})
             continue
@@ -264,10 +275,9 @@ def _git_findings(command, cwd):
             findings.append({'provider':'git staging with repository/configuration overrides needs review',
                              'severity':HIGH,'masked':'Git context override','kind':'git'})
             continue
-        if reroute:
+        if reroute:  # reported, and the env scan below still runs
             findings.append({'provider':'git %s with repository/configuration changes in the same command needs review' % verb,
                              'severity':MEDIUM,'masked':'Git context changed','kind':'git'})
-            continue
         if flag:  # UNRESOLVED or UNPARSED: do not scan a repository Git might not use
             findings.append({'provider':'git %s the hook could not resolve (-C with ~, $VAR, a missing path, '
                                         'or unusual quoting) needs review' % verb,

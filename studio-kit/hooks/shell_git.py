@@ -1,0 +1,322 @@
+"""Small, non-executing parser for literal Git commands, not a shell interpreter."""
+import os
+import re
+import shlex
+
+# Why a Git invocation could not be read literally. Callers treat any of these as
+# "needs a person": the hooks must never read an unknown context as a safe one.
+OVERRIDE = 'override'            # repository/configuration routing changed (--git-dir, -c ...)
+UNRESOLVED = 'unresolved'        # a -C directory with ~, $VAR, `...` or that does not exist
+UNPARSED = 'unparsed'            # quoting the parser cannot follow; words read loosely
+
+_WORD_BREAK = ' \t\n;|&()<>`'
+_SEPARATORS = ';|&\n'
+_MAX_NESTING = 12
+_MAX_SEGMENTS = 400                 # total work cap; beyond it a Git command asks
+COMPUTED = 'computed'          # the Git subcommand itself is $VAR or a substitution
+ROUTING_ENV = ('GIT_DIR=', 'GIT_WORK_TREE=', 'GIT_INDEX_FILE=', 'GIT_CONFIG', 'GIT_COMMON_DIR=',
+               'GIT_OBJECT_DIRECTORY=', 'GIT_ALTERNATE_OBJECT_DIRECTORIES=', 'GIT_NAMESPACE=')
+SAFE_CONFIG_KEYS = ('user.name', 'user.email', 'color.ui')
+_EXPORTED_ROUTING = re.compile(r'(?:^|[\s;&|(`])(?:export\s+|declare\s+-x\s+|typeset\s+-x\s+)?GIT_(?:DIR|WORK_TREE|'
+                               r'INDEX_FILE|CONFIG\w*|COMMON_DIR|OBJECT_DIRECTORY|ALTERNATE_OBJECT_DIRECTORIES|NAMESPACE)=')
+
+
+class _ShellSegments:
+    """Split literal separators without breaking quoted or escaped paths.
+
+    Comments (an unquoted # at the start of a word) are dropped up to the end of the
+    line, so a quote inside a comment cannot swallow the commands after it. An
+    unquoted "(" that is not $(, <( or >( opens a subshell and separates commands,
+    also when it is glued to a word (then(...), do(...)). The bodies of $(...) and backticks
+    are returned as extra segments, while the outer segment stays whole (so a
+    substitution inside a Git option cannot cut the Git command in two). Every
+    multi-word string in a segment (what sh -c, eval, ssh, watch, a here-string or a
+    pipe into sh would run) is split too: reading a harmless string as a command only
+    adds checks. This is not an evaluator for here-documents or control structures.
+    """
+    @staticmethod
+    def split(command, _depth=0, _budget=None):
+        budget = _budget if _budget is not None else {'segments': 0, 'seen': set()}
+        parts = []
+        bodies = []        # $(...) and `...` bodies, also read as commands
+        stack = []         # 'sub' (subshell), ('cmd', start, outermost) for $( <( >(, 'other'
+        open_cmd = 0       # how many ('cmd', ...) entries are on the stack: no rescans, linear time
+        tick = None        # start of an open backtick body
+        quote = None
+        start = 0
+        word_start = True
+        i = 0
+        n = len(command)
+        while i < n:
+            char = command[i]
+            if char == '\\' and quote != "'":
+                i += 2
+                word_start = False
+                continue
+            in_substitution = tick is not None or open_cmd > 0
+            if quote:
+                if char == quote:
+                    quote = None
+            elif char in ("'", '"'):
+                quote = char
+            elif char == '#' and word_start:
+                parts.append(command[start:i])
+                end = command.find('\n', i)
+                if end == -1:
+                    start = i = n
+                    break
+                start = i = end + 1
+                word_start = True
+                continue
+            elif char == '$' and i + 1 < n and command[i + 1] == '(':
+                stack.append(('cmd', i + 2, not in_substitution))
+                open_cmd += 1
+                i += 2
+                word_start = True
+                continue
+            elif char == '(' and i > 0 and command[i - 1] in '<>':
+                stack.append(('cmd', i + 1, not in_substitution))   # process substitution <( ) or >( )
+                open_cmd += 1
+            elif char == '(':
+                if not in_substitution and (i == 0 or command[i - 1] != '$'):
+                    parts.append(command[start:i])
+                    start = i + 1
+                    stack.append('sub')
+                else:
+                    stack.append('other')
+            elif char == ')':
+                if stack:
+                    top = stack.pop()
+                    if top == 'sub' and not in_substitution:
+                        parts.append(command[start:i])
+                        start = i + 1
+                    elif isinstance(top, tuple):
+                        open_cmd -= 1
+                        if top[2]:  # outermost only: inner bodies are read when this one is split
+                            bodies.append(command[top[1]:i])
+            elif char == '`':
+                if tick is None:
+                    tick = i + 1
+                else:
+                    if open_cmd == 0:
+                        bodies.append(command[tick:i])
+                    tick = None
+            elif char in _SEPARATORS and not in_substitution:
+                parts.append(command[start:i])
+                start = i + 1
+            word_start = quote is None and char in _WORD_BREAK
+            i += 1
+        parts.append(command[start:])
+        if tick is not None and open_cmd == 0:
+            bodies.append(command[tick:])
+        for top in stack:
+            if isinstance(top, tuple) and top[2]:
+                bodies.append(command[top[1]:])  # unclosed: the outermost body runs to the end
+                break
+        budget['segments'] += len(parts)
+        nested = []
+        for text in bodies + [inner for part in list(parts) if part.strip() for inner in _command_strings(part)]:
+            if text not in budget['seen']:
+                budget['seen'].add(text)
+                nested.append(text)
+        for text in nested:
+            if _depth < _MAX_NESTING and budget['segments'] < _MAX_SEGMENTS:
+                parts.extend(_ShellSegments.split(text, _depth + 1, budget))
+            else:
+                parts.append('git $__TOO_DEEP__')  # fail closed: unread text counts as a computed Git command
+                break
+        return parts
+
+
+class _CachedSegments:
+    """The hooks split the same command several times (routing, policy, Git, deploy checks):
+    split it once per process."""
+    def __init__(self):
+        self._cache = {}
+
+    def split(self, command):
+        if command not in self._cache:
+            if len(self._cache) > 16:
+                self._cache.clear()
+            self._cache[command] = tuple(_ShellSegments.split(command))
+        return list(self._cache[command])
+
+
+SEGMENT_SPLIT = _CachedSegments()
+
+
+def _command_strings(segment):
+    """Multi-word strings inside a segment that another command could run."""
+    try:
+        words = shlex.split(segment, posix=True)
+    except ValueError:
+        # quotes that cannot be followed around a substitution: fail closed for Git
+        if re.search(r'\$\(|`', segment) and re.search(r'\bgit\b', segment):
+            return ['git $__UNPARSED__']
+        return []
+    return [w for w in words if w.strip() != segment.strip() and re.search(r'[\s;|&()`]', w.strip())]
+
+
+def rerouting(command):
+    """True if the command also changes where Git reads or writes (exported GIT_* routing
+    variables, git config writes, git remote changes). Used only to ask, never to allow."""
+    if _EXPORTED_ROUTING.search(command or ''):
+        return True
+    for segment in SEGMENT_SPLIT.split(command or ''):
+        parsed = git_invocation(segment, None)
+        if not parsed:
+            continue
+        verb, args = parsed[0], parsed[1]
+        if verb == 'config':
+            reads = {'--get', '--get-all', '--get-regexp', '--list', '-l', '--show-origin', '--show-scope', 'get', 'list'}
+            keys = [a for a in args if not a.startswith('-')]
+            if not reads.intersection(args) and not (keys and keys[0].lower() in SAFE_CONFIG_KEYS):
+                return True
+        if verb == 'remote' and args and args[0] in ('add', 'set-url', 'rename', 'remove', 'rm', 'set-head', 'set-branches'):
+            return True
+    return False
+
+
+def _matching_paren(text, j):
+    """Index of the ")" closing the "(" at j, skipping quoted text; len(text) if none."""
+    depth, quote, k, n = 0, None, j, len(text)
+    while k < n:
+        ch = text[k]
+        if ch == '\\' and quote != "'":
+            k += 2
+            continue
+        if quote:
+            if ch == quote:
+                quote = None
+        elif ch in '"\'':
+            quote = ch
+        elif ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+            if depth == 0:
+                return k
+        k += 1
+    return n
+
+
+def _collapse_substitutions(text):
+    """Replace each $(...), <(...), >(...) and `...` with one opaque word, $__SUB__, so that
+    shlex keeps the Git command around it whole; their bodies are checked as separate segments.
+    <( and >( are literal inside double quotes. Returns (text, unmatched): unmatched is True when
+    a substitution never closes, and the caller then reads the words loosely (fail closed)."""
+    out = []
+    unmatched = False
+    i, n, quote = 0, len(text), None
+    while i < n:
+        c = text[i]
+        if c == '\\' and quote != "'":
+            out.append(text[i:i + 2])
+            i += 2
+            continue
+        if quote == "'":
+            out.append(c)
+            if c == "'":
+                quote = None
+            i += 1
+            continue
+        if i + 1 < n and text[i + 1] == '(' and (c == '$' or (c in '<>' and quote is None)):
+            if c != '$':
+                out.append(c)
+            out.append('$__SUB__')
+            close = _matching_paren(text, i + 1)
+            unmatched = unmatched or close >= n
+            i = close + 1
+            continue
+        if c == '`':
+            j = text.find('`', i + 1)
+            out.append('$__SUB__')
+            unmatched = unmatched or j == -1
+            i = n if j == -1 else j + 1
+            continue
+        if c in '"\'':
+            quote = None if quote == c else (c if quote is None else quote)
+        out.append(c)
+        i += 1
+    return ''.join(out), unmatched
+
+
+def _words(segment):
+    """shlex words, or (loose words, True) when the quoting cannot be followed."""
+    segment, unmatched = _collapse_substitutions(segment)
+    try:
+        words = shlex.split(segment, posix=True)
+    except ValueError:
+        return [w.strip('\'"') for w in segment.split()], True
+    return words, unmatched
+
+
+def _resolve(directory, value):
+    if '$' in value or '`' in value:
+        return None
+    if value.startswith('~'):
+        value = os.path.expanduser(value)
+        if value.startswith('~'):
+            return None
+    return os.path.abspath(os.path.join(directory, value))
+
+
+def git_invocation(segment, cwd):
+    """Return (verb, args, effective cwd, flag), or None.
+
+    flag is False, or OVERRIDE / UNPARSED / UNRESOLVED (see above). With UNRESOLVED the
+    effective cwd is None: the hooks must not guess which repository Git would use.
+    Handles literal global options and repeated -C, including quoted paths. It never
+    executes the pending command or passes its -c settings to our reads. Shell
+    expansion, aliases, functions and scripts are outside this parser.
+    """
+    words, loose = _words(segment)
+    git_at = next((i for i, w in enumerate(words) if os.path.basename(w) == 'git'), None)
+    if git_at is None:
+        return None
+    directory = os.path.abspath(cwd or os.getcwd())
+    unresolved = False
+    override = any(w.startswith(ROUTING_ENV) for w in words[:git_at])
+    i = git_at + 1
+    value_options = {'-c', '--config-env', '--git-dir', '--work-tree', '--namespace', '--super-prefix'}
+    while i < len(words):
+        word = words[i]
+        if word == '--':
+            i += 1
+            break
+        if not word.startswith('-'):
+            break
+        if word == '-C' or word.startswith('-C'):
+            value = word[2:] if len(word) > 2 else (words[i+1] if i+1 < len(words) else None)
+            if value is None:
+                return None
+            if value:
+                resolved = None if unresolved else _resolve(directory, value)
+                if resolved is None or not os.path.isdir(resolved):
+                    unresolved = True
+                else:
+                    directory = resolved
+            i += 1 if len(word) > 2 else 2
+            continue
+        name = word.split('=', 1)[0]
+        if name in {'--git-dir', '--work-tree', '--namespace', '--bare', '--exec-path'}:
+            override = True
+        # Never apply pending configuration to our read-only Git checks. Only
+        # identity/presentation settings are known not to change routing/ignores.
+        if name == '--config-env':
+            override = True
+        if name == '-c' or (word.startswith('-c') and len(word) > 2):
+            value = word[2:] if len(word) > 2 else (words[i+1] if i+1 < len(words) else '')
+            key = value.split('=', 1)[0].lower()
+            if key not in SAFE_CONFIG_KEYS:
+                override = True
+        if name in value_options:
+            i += 1 if '=' in word else 2
+        else:
+            i += 1
+    if i >= len(words):
+        return None
+    flag = OVERRIDE if override else UNPARSED if loose else UNRESOLVED if unresolved else False
+    if '$' in words[i] or '`' in words[i]:
+        return COMPUTED, words[i+1:], (None if unresolved else directory), flag or UNPARSED
+    return words[i], words[i+1:], (None if unresolved else directory), flag

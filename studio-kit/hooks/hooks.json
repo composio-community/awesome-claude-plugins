@@ -1,0 +1,27 @@
+{
+  "description": "studio-kit guardrails: deploy-gate asks a human before the production deploy and publish commands it recognizes and before pushes to production branches; secret-guard blocks common API key formats in source code, in browser-exposed env vars (VITE_, NEXT_PUBLIC_ ...) and git add of a .env that is not ignored. Both are heuristics: if Python is missing they warn and let the call through.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\" \"${CLAUDE_PLUGIN_ROOT}/hooks/deploy_gate.py\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/run.sh\" \"${CLAUDE_PLUGIN_ROOT}/hooks/secret_guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

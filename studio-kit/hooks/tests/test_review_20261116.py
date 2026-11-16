@@ -67,7 +67,9 @@ class ReviewRegressions(unittest.TestCase):
     def test_C_with_tilde_reads_the_real_branch(self):
         self.assertEqual(self.gate("git -C '%s' push" % self.repo, cwd=self.feature), 'ask')
         self.assertEqual(self.gate('git -C ~/"repo main" push', cwd=self.feature), 'ask')
-        self.assertIsNone(deploy_gate.decide(bash('git -C ~/feat push', cwd=str(self.repo))))
+        self.assertIsNone(deploy_gate.decide(bash('git -C ~/feat push', cwd=str(self.feature))))
+        # From a cwd on main the 1.0.0 floor still asks (it reads the cwd branch): stricter by design.
+        self.assertEqual(self.gate('git -C ~/feat push', cwd=self.repo), 'ask')
 
     def test_unresolved_C_with_explicit_feature_refspec_stays_allowed(self):
         self.assertIsNone(deploy_gate.decide(bash('git -C "$SOME_REPO" push origin feature', cwd=str(self.repo))))

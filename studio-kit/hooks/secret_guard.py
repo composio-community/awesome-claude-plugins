@@ -26,7 +26,7 @@ import os
 import re
 import subprocess
 import sys
-from shell_git import OVERRIDE, SEGMENT_SPLIT, git_invocation
+from shell_git import OVERRIDE, SEGMENT_SPLIT, git_invocation, rerouting
 
 HIGH = "high"
 MEDIUM = "medium"
@@ -208,8 +208,47 @@ def _env_files_not_ignored(cwd, paths=None, whole_repo=False):
         return []
 
 
+READ_ONLY_COMMANDS = {'cat', 'less', 'more', 'head', 'tail', 'wc', 'grep', 'egrep', 'fgrep', 'rg', 'ls',
+                      'stat', 'file', 'diff', 'cmp', 'shasum', 'sha256sum', 'md5', 'md5sum', 'bat'}
+
+
+def _policy_shell_edit(command):
+    """True if a shell command names an allowlist file and is not a plain read."""
+    if not re.search(r"(?:deploy-gate-allow|secret-guard-allow)", command or ""):
+        return False
+    for seg in SEGMENT_SPLIT.split(command or ""):
+        if not re.search(r"(?:deploy-gate-allow|secret-guard-allow)", seg):
+            continue
+        if re.search(r">|<>", seg):
+            return True
+        parsed = git_invocation(seg, None)
+        if parsed and parsed[0] in ('diff', 'log', 'show', 'status', 'blame') and not parsed[3]:
+            continue
+        words = seg.split()
+        if not words or os.path.basename(words[0].strip("'\"")) not in READ_ONLY_COMMANDS:
+            return True
+    return False
+
+
 def _bash_findings(command, cwd):
+    findings = _git_findings(command, cwd)
+    if not any(f["kind"] == "git" and f["severity"] == HIGH for f in findings):
+        findings.extend(_legacy_git_findings(command, cwd))  # 1.0.0 floor
+    if _policy_shell_edit(command):
+        findings.append({'provider': 'guardrail allowlist change from the shell requires confirmation',
+                         'severity': MEDIUM, 'masked': 'policy file', 'kind': 'policy'})
+    # secrets written to a file from the shell (echo/printf/tee/heredoc), outside .env files
+    if re.search(r">>?|\btee\b", command or ""):
+        targets = re.findall(r"(?:>>?|\btee\s+(?:-a\s+)?)\s*([^\s;|&]+)", command)
+        if targets and not all(ENV_FILE_RE.match(os.path.basename(t)) and not ENV_EXAMPLE_RE.search(t)
+                               for t in targets):
+            findings.extend(f for f in scan_text(command) if f["kind"] == "secret")
+    return findings
+
+
+def _git_findings(command, cwd):
     findings = []
+    reroute = rerouting(command or "")
     for seg in SEGMENT_SPLIT.split(command or ""):
         parsed = git_invocation(seg, cwd)
         if not parsed or parsed[0] not in ('add','commit','stage'):
@@ -225,6 +264,10 @@ def _bash_findings(command, cwd):
             findings.append({'provider':'git staging with repository/configuration overrides needs review',
                              'severity':HIGH,'masked':'Git context override','kind':'git'})
             continue
+        if reroute:
+            findings.append({'provider':'git %s with repository/configuration changes in the same command needs review' % verb,
+                             'severity':MEDIUM,'masked':'Git context changed','kind':'git'})
+            continue
         if flag:  # UNRESOLVED or UNPARSED: do not scan a repository Git might not use
             findings.append({'provider':'git %s the hook could not resolve (-C with ~, $VAR, a missing path, '
                                         'or unusual quoting) needs review' % verb,
@@ -239,12 +282,49 @@ def _bash_findings(command, cwd):
                                              whole_repo=whole_repo or verb=='commit'):
                 findings.append({"provider": "%s is tracked or not ignored and 'git %s' may include it" % (name, verb),
                                  "severity": HIGH, "masked": "env file", "kind": "git"})
-    # secrets written to a file from the shell (echo/printf/tee/heredoc), outside .env files
-    if re.search(r">>?|\btee\b", command or ""):
-        targets = re.findall(r"(?:>>?|\btee\s+(?:-a\s+)?)\s*([^\s;|&]+)", command)
-        if targets and not all(ENV_FILE_RE.match(os.path.basename(t)) and not ENV_EXAMPLE_RE.search(t)
-                               for t in targets):
-            findings.extend(f for f in scan_text(command) if f["kind"] == "secret")
+    return findings
+
+
+# 1.0.0 reading, unchanged: plain-text splitting and a regular expression for git add/commit.
+# Kept as a floor so that no command the published 1.0.0 stopped can pass now.
+def _legacy_env_files_not_ignored(cwd):
+    bad = []
+    try:
+        names = os.listdir(cwd or ".")
+    except OSError:
+        return bad
+    for name in names:
+        if ENV_FILE_RE.match(name) and not ENV_EXAMPLE_RE.search(name):
+            try:
+                r = subprocess.run(["git", "check-ignore", "-q", name], cwd=cwd or None,
+                                   capture_output=True, timeout=3)
+                if r.returncode == 1:  # 1 = not ignored, 128 = not a repo
+                    bad.append(name)
+            except Exception:
+                continue
+    return bad
+
+
+def _legacy_git_findings(command, cwd):
+    findings = []
+    for seg in re.split(r"\|\||&&|;|\n", command or ""):
+        m = re.search(r"\bgit\b(?:\s+-C\s+\S+)?\s+(add|commit|stage)\b(.*)", seg)
+        if not m:
+            continue
+        verb, rest = m.group(1), m.group(2)
+        args = rest.split()
+        named_env = [a for a in args if ENV_FILE_RE.match(os.path.basename(a.strip("'\"")))
+                     and not ENV_EXAMPLE_RE.search(a.strip("'\""))]
+        if named_env and verb in ("add", "stage"):
+            findings.append({"provider": "git %s of %s" % (verb, ", ".join(named_env)), "severity": HIGH,
+                             "masked": "env file", "kind": "git"})
+            continue
+        broad = (verb in ("add", "stage") and any(a in (".", "-A", "--all", "*", ":/") for a in args)) or \
+                (verb == "commit" and any(re.match(r"^-[a-zA-Z]*a", a) or a == "--all" for a in args))
+        if broad:
+            for name in _legacy_env_files_not_ignored(cwd):
+                findings.append({"provider": "%s is not in .gitignore and 'git %s' would include it" % (name, verb),
+                                 "severity": HIGH, "masked": "env file", "kind": "git"})
     return findings
 
 

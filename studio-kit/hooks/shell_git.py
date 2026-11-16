@@ -9,19 +9,26 @@ OVERRIDE = 'override'            # repository/configuration routing changed (--g
 UNRESOLVED = 'unresolved'        # a -C directory with ~, $VAR, `...` or that does not exist
 UNPARSED = 'unparsed'            # quoting the parser cannot follow; words read loosely
 
-SHELLS = {'sh', 'bash', 'zsh', 'dash', 'ksh'}
-_WORD_BREAK = ' \t\n;|&()<>'
+_WORD_BREAK = ' \t\n;|&()<>`'
+_SEPARATORS = ';|&\n()`'
 _MAX_NESTING = 3
+ROUTING_ENV = ('GIT_DIR=', 'GIT_WORK_TREE=', 'GIT_INDEX_FILE=', 'GIT_CONFIG', 'GIT_COMMON_DIR=',
+               'GIT_OBJECT_DIRECTORY=', 'GIT_ALTERNATE_OBJECT_DIRECTORIES=', 'GIT_NAMESPACE=')
+SAFE_CONFIG_KEYS = ('user.name', 'user.email', 'color.ui')
+_EXPORTED_ROUTING = re.compile(r'(?:^|[\s;&|(`])(?:export\s+|declare\s+-x\s+|typeset\s+-x\s+)?GIT_(?:DIR|WORK_TREE|'
+                               r'INDEX_FILE|CONFIG\w*|COMMON_DIR|OBJECT_DIRECTORY|ALTERNATE_OBJECT_DIRECTORIES|NAMESPACE)=')
 
 
 class _ShellSegments:
     """Split literal separators without breaking quoted or escaped paths.
 
     Comments (an unquoted # at the start of a word) are dropped up to the end of the
-    line, so a quote inside a comment cannot swallow the commands after it. Command
-    strings given to sh/bash/zsh -c are split too and returned after the outer
-    segment. This is not an evaluator for substitutions, here-documents or shell
-    control structures.
+    line, so a quote inside a comment cannot swallow the commands after it. Subshell
+    parentheses and backticks separate commands. Every multi-word string in a segment
+    (what sh -c, eval, ssh, watch, a here-string or a pipe into sh would run, and
+    $(...) inside double quotes) is split too and returned after the outer segment:
+    reading a harmless string as a command only adds checks. This is not an evaluator
+    for here-documents or shell control structures.
     """
     @staticmethod
     def split(command, _depth=0):
@@ -51,7 +58,7 @@ class _ShellSegments:
                 start = i = end + 1
                 word_start = True
                 continue
-            elif char in ';|&\n':
+            elif char in _SEPARATORS:
                 parts.append(command[start:i])
                 start = i + 1
             word_start = quote is None and char in _WORD_BREAK
@@ -59,8 +66,7 @@ class _ShellSegments:
         parts.append(command[start:])
         if _depth < _MAX_NESTING:
             for part in list(parts):
-                inner = _shell_c_string(part)
-                if inner:
+                for inner in _command_strings(part):
                     parts.extend(_ShellSegments.split(inner, _depth + 1))
         return parts
 
@@ -68,24 +74,33 @@ class _ShellSegments:
 SEGMENT_SPLIT = _ShellSegments()
 
 
-def _shell_c_string(segment):
-    """Return the command string of `sh|bash|zsh ... -c '<string>'`, or ''."""
+def _command_strings(segment):
+    """Multi-word strings inside a segment that another command could run."""
     try:
         words = shlex.split(segment, posix=True)
     except ValueError:
-        return ''
-    for j, word in enumerate(words):
-        if os.path.basename(word) not in SHELLS:
+        return []
+    return [w for w in words if w.strip() != segment.strip() and re.search(r'[\s;|&()`]', w.strip())]
+
+
+def rerouting(command):
+    """True if the command also changes where Git reads or writes (exported GIT_* routing
+    variables, git config writes, git remote changes). Used only to ask, never to allow."""
+    if _EXPORTED_ROUTING.search(command or ''):
+        return True
+    for segment in SEGMENT_SPLIT.split(command or ''):
+        parsed = git_invocation(segment, None)
+        if not parsed:
             continue
-        k = j + 1
-        found = False
-        while k < len(words) and words[k].startswith(('-', '+')) and words[k] != '--':
-            if re.fullmatch(r'-[A-Za-z]*c[A-Za-z]*', words[k]):
-                found = True
-            k += 2 if words[k] in ('-o', '+o', '-O', '+O') else 1
-        if found and k < len(words):
-            return words[k]
-    return ''
+        verb, args = parsed[0], parsed[1]
+        if verb == 'config':
+            reads = {'--get', '--get-all', '--get-regexp', '--list', '-l', '--show-origin', '--show-scope', 'get', 'list'}
+            keys = [a for a in args if not a.startswith('-')]
+            if not reads.intersection(args) and not (keys and keys[0].lower() in SAFE_CONFIG_KEYS):
+                return True
+        if verb == 'remote' and args and args[0] in ('add', 'set-url', 'rename', 'remove', 'rm', 'set-head', 'set-branches'):
+            return True
+    return False
 
 
 def _words(segment):
@@ -121,8 +136,7 @@ def git_invocation(segment, cwd):
         return None
     directory = os.path.abspath(cwd or os.getcwd())
     unresolved = False
-    override = any(w.startswith(('GIT_DIR=', 'GIT_WORK_TREE=', 'GIT_INDEX_FILE=', 'GIT_CONFIG_COUNT='))
-                   for w in words[:git_at])
+    override = any(w.startswith(ROUTING_ENV) for w in words[:git_at])
     i = git_at + 1
     value_options = {'-c', '--config-env', '--git-dir', '--work-tree', '--namespace', '--super-prefix'}
     while i < len(words):
@@ -145,7 +159,7 @@ def git_invocation(segment, cwd):
             i += 1 if len(word) > 2 else 2
             continue
         name = word.split('=', 1)[0]
-        if name in {'--git-dir', '--work-tree', '--namespace'}:
+        if name in {'--git-dir', '--work-tree', '--namespace', '--bare', '--exec-path'}:
             override = True
         # Never apply pending configuration to our read-only Git checks. Only
         # identity/presentation settings are known not to change routing/ignores.
@@ -154,7 +168,7 @@ def git_invocation(segment, cwd):
         if name == '-c' or (word.startswith('-c') and len(word) > 2):
             value = word[2:] if len(word) > 2 else (words[i+1] if i+1 < len(words) else '')
             key = value.split('=', 1)[0].lower()
-            if key not in ('user.name', 'user.email', 'color.ui'):
+            if key not in SAFE_CONFIG_KEYS:
                 override = True
         if name in value_options:
             i += 1 if '=' in word else 2

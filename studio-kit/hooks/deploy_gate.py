@@ -22,7 +22,7 @@ import os
 import re
 import subprocess
 import sys
-from shell_git import OVERRIDE, SEGMENT_SPLIT, UNPARSED, UNRESOLVED, git_invocation
+from shell_git import OVERRIDE, SEGMENT_SPLIT, UNPARSED, UNRESOLVED, git_invocation, rerouting
 
 DEFAULT_PROD_BRANCHES = "main,master,production,prod,release,live"
 
@@ -69,7 +69,7 @@ def _current_branch(cwd):
         return ""
 
 
-def _git_push_target(segment, cwd):
+def _git_push_target(segment, cwd, reroute=False):
     """Return a reason string if this git push would update a production branch."""
     parsed = git_invocation(segment, cwd)
     if not parsed or parsed[0] != 'push':
@@ -77,6 +77,8 @@ def _git_push_target(segment, cwd):
     _, args, cwd, flag = parsed
     if flag == OVERRIDE:
         return "git push with repository/configuration overrides"
+    if reroute:
+        return "git push with repository/configuration changes in the same command"
     if flag == UNPARSED:
         return "git push the hook could not parse reliably"
     unknown = "git push from a directory the hook cannot resolve (-C with ~, $VAR or a missing path)"
@@ -113,12 +115,64 @@ def _git_push_target(segment, cwd):
 
 
 def find_deploy(command, cwd=""):
-    """Return a human label for the first deploy-like action in command, or ''."""
+    """Return a human label for the first deploy-like action in command, or ''.
+
+    The 1.0.0 reading runs as a floor: a command it would stop is never let through."""
+    reroute = rerouting(command or "")
     for segment in SEGMENT_SPLIT.split(command or ""):
         seg = segment.strip()
         if not seg:
             continue
-        reason = _git_push_target(seg, cwd)
+        reason = _git_push_target(seg, cwd, reroute)
+        if reason:
+            return reason
+        for label, pattern in DEPLOY_PATTERNS:
+            if re.search(pattern, seg):
+                return label
+    return _legacy_find_deploy(command, cwd)
+
+
+# 1.0.0 reading, unchanged: plain-text splitting and a regular expression for git push.
+# Kept as a floor so that no command the published 1.0.0 stopped can pass now.
+_LEGACY_SPLIT = re.compile(r"\|\||&&|;|\||\n")
+
+
+def _legacy_git_push_target(segment, cwd):
+    m = re.search(r"\bgit\b(?:\s+-C\s+\S+)?\s+push\b(.*)", segment)
+    if not m:
+        return ""
+    args = [a for a in m.group(1).split() if a]
+    flags = [a for a in args if a.startswith("-")]
+    positional = [a for a in args if not a.startswith("-")]
+    prod = _prod_branches()
+    for ref in positional[1:]:
+        dest = ref.split(":")[-1].lstrip("+")
+        dest = dest.replace("refs/heads/", "")
+        if dest in prod:
+            return "git push to production branch '%s'" % dest
+        if dest == "HEAD" or ref in ("HEAD",):
+            branch = _current_branch(cwd)
+            if branch in prod:
+                return "git push of HEAD while on '%s'" % branch
+    if "--all" in flags or "--mirror" in flags:
+        return "git push of all branches"
+    if len(positional) <= 1:
+        branch = _current_branch(cwd)
+        if branch in prod:
+            return "git push while on production branch '%s'" % branch
+    if any(f in ("-f", "--force") for f in flags):
+        branch = _current_branch(cwd)
+        if branch in prod:
+            return "force push while on '%s'" % branch
+    return ""
+
+
+def _legacy_find_deploy(command, cwd=""):
+    for segment in _LEGACY_SPLIT.split(command or ""):
+        seg = segment.strip()
+        if not seg:
+            continue
+        reason = _legacy_git_push_target(seg, cwd)
         if reason:
             return reason
         for label, pattern in DEPLOY_PATTERNS:

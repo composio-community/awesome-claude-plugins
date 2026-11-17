@@ -98,6 +98,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Integrations
 
+- [BatchData](https://github.com/batchdataco/batchdata-mcp-server) - U.S. real estate data in Claude Code: connects the hosted BatchData MCP server and adds skills for property lookup, comps, property search and lead lists, skip tracing, DNC/TCPA phone checks, investor finder and building permits. Requires a BatchData account.
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
 

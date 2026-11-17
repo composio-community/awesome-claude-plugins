@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [craftwork](https://github.com/craftwork-design/skills) - Design direction and taste rules for interfaces, plus the Craftwork MCP server for human-made React components, templates, fonts, shader backgrounds, 3D, icons and mockups. ([Website](https://craftwork.design/skill))
 
 ### Git & Version Control
 

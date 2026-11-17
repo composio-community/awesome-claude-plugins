@@ -171,6 +171,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+- [levea-video-editor](https://github.com/brajendrak00068/agentic-ai-video-production) - Autonomous AI video editing plugin and hosted MCP server (`https://api.livecore.ai/api/v1/misc/mcp` with OAuth 2.1 sign-in): turn natural-language prompts or long recordings into viral clips, 280+ animated caption templates, 9:16 speaker reframing, silence cleanup, B-roll, 2D/3D motion graphics, and cloud MP4 exports. ([Website](https://www.livecore.ai))
 
 ## Getting Started
 

@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [sprout-finance](https://github.com/MindCraftersGroup/sprout-claude-plugin) - Read-only access to your US and Canadian bank and card accounts through Plaid: ask Claude about spending by category or merchant, cash flow, subscriptions and unusual charges, with exact posted amounts. Remote MCP server with OAuth; cannot move money. ([Website](https://sprout.mindcrafters.group))
 
 ### Frontend & Design
 

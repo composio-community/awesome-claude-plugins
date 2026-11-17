@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [clawde](https://github.com/adriancisnerosspeed-hub/clawde) - A context "Tamagotchi" that lives in your status line and feeds on a clear context window: keep context low and it thrives, let it fill and it gets sleepy then sick. Grows through life stages, builds daily streaks, switchable skins (buddy/cat/slime), real-time animation, and a catch-the-crumbs mini-game. Pure Python, zero dependencies.
 
 ### Image and Video Generation
 

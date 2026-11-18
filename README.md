@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [heypip](https://github.com/Pip-Skill/HeyPip) - Creative studio in one plugin: brand, design system, website, posters, social graphics, photo and video prompts, all from one brand.json.
 
 ### Git & Version Control
 

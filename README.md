@@ -230,6 +230,7 @@ Please ensure your plugin:
 - [Plugin Development Guide](https://code.claude.com/docs/en/plugins)
 - [Discover Plugins](https://code.claude.com/docs/en/discover-plugins)
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - More skills and resources
+- [Little Cups of Claude](https://littlecupsofclaude.com) - Short, focused tips for Claude Code, the Claude API, the Agent SDK and MCP, one per weekday.
 
 ## License
 

@@ -128,6 +128,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Agent Memory
 
+- [caprock](https://github.com/dspv/caprock/tree/master/plugins/caprock) - Ask Claude Code about your own past work: decisions and findings kept from earlier sessions, what a past session did, spend and tokens per repo, CI status and stuck sessions. Read-only and local; needs the free Caprock desktop app. ([Website](https://caprock.dev))
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
 
 ### Backend & Architecture

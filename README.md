@@ -166,6 +166,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Companion & Personality
 
 - [claude-familiar](https://github.com/yaniv-golan/claude-familiar) - Enhance Claude Code's `/buddy` companion with personality, mood, lore, and interactive commands (fortune, roast, haiku, focus timer). Mood shifts automatically on tool success/failure. Extensible — other plugins can layer traits and lore via `"x-familiarExtensions"` in their `plugin.json`.
+- [dank-meme-sounds](https://github.com/HalberdLLC/dank-meme-sounds) - Meme soundboard for Claude Code: an MCP server and skill that find the right reaction sound for a moment from 38,000+ meme sounds (search, trending, random) and play it on local speakers. Includes a `play` CLI for hooks, e.g. a sound when a task finishes. ([Website](https://dankmachine.com))
 
 ### Image and Video Generation
 

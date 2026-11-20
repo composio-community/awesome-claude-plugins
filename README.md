@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [linggen](https://github.com/linggen/linggen/tree/main/plugins/linggen) - Durable memory shared across Claude Code, Codex and Linggen, with a per-turn recall hook. Adds one local MCP server with twelve tools: memory, handing tasks to local Linggen agents, and driving your own Chrome. ([Website](https://linggen.dev))
 
 ### Backend & Architecture
 

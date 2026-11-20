@@ -162,6 +162,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [Quarterdeck](https://github.com/shannonbay/Quarterdeck) - Standing goals for Claude Code, like "fix new issues on my repo" or "find the best new job ads each week". Each goal runs on a schedule in a background subagent, asks before it acts, and remembers what you decided; approve or reject from a Goals pane beside the chat. Install: `claude plugin marketplace add shannonbay/Quarterdeck#release` then `claude plugin install quarterdeck-goals@quarterdeck`.
 
 ### Companion & Personality
 

@@ -1,6 +1,8 @@
 # AppStruct Social
 
-![AppStruct](assets/appstruct.svg)
+![AppStruct Social MCP workflow: choose a connected channel, save an unscheduled draft, then review it in Social](assets/draft-review.png)
+
+Illustrated workflow: the publishing time is chosen in Social after reviewing the saved draft.
 
 Read connected social channels, inspect saved posts and available analytics, and save **unscheduled drafts** for review in AppStruct Social. The MCP connection cannot schedule, publish or delete posts.
 

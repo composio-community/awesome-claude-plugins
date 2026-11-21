@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "appstruct-social": {
+      "type": "http",
+      "url": "https://api.appstruct.ai/v1/social/mcp",
+      "headers": {
+        "Authorization": "Bearer ${APPSTRUCT_SOCIAL_MCP_KEY}"
+      }
+    }
+  }
+}

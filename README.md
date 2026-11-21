@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [flashdata-skills](https://github.com/flashdatadev/flashdata-skills) - Agent skills and hosted MCP server (`https://data.flashdata.dev/mcp`) for real-time Google Search SERP, YouTube Data & timestamped transcripts, and cloud-storage YouTube video downloads. Free trial credit at [flashdata.dev](https://flashdata.dev/) (no credit card required).
 
 ### Frontend & Design
 

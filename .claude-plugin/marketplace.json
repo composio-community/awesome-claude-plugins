@@ -11,6 +11,16 @@
   },
   "plugins": [
     {
+      "name": "appstruct-social",
+      "source": "./appstruct-social",
+      "description": "Read AppStruct Social channels, posts and analytics; save unscheduled drafts for review",
+      "category": "integrations",
+      "tags": ["integrations", "mcp", "social-media", "drafts", "appstruct"],
+      "author": {
+        "name": "AppStruct"
+      }
+    },
+    {
       "name": "connect-apps",
       "source": "./connect-apps",
       "description": "Connect Claude to 500+ apps - Gmail, Slack, GitHub, Notion, and more",

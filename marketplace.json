@@ -5,6 +5,13 @@
   "repository": "https://github.com/composio/awesome-claude-plugins",
   "plugins": [
     {
+      "name": "appstruct-social",
+      "category": "integrations",
+      "description": "Read AppStruct Social channels, posts and analytics; save unscheduled drafts for review",
+      "author": "AppStruct",
+      "tags": ["integrations", "mcp", "social-media", "drafts", "appstruct"]
+    },
+    {
       "name": "connect-apps",
       "category": "integrations",
       "description": "Connect Claude to 500+ apps - Gmail, Slack, GitHub, Notion, and more",

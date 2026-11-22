@@ -154,6 +154,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Developer Productivity
 
+- [PlaybookRun](https://github.com/Fcakiroglu16/marketplace) - Plugin marketplace of 98 reviewed playbooks, each bundling agent skills published by the technology owners (Microsoft, Vercel, Anthropic, Google, Redis, MongoDB and others) with the MCP servers they use, one plugin per stack. ([Website](https://playbookrun.com))
 - [CCHub](https://github.com/Moresl/cchub) - Desktop app for managing the Claude Code ecosystem — MCP marketplace, config profiles, skills & plugins browser, workflow templates, security audit. Built with Tauri v2 + React + Rust.
 
 - [developer-growth-analysis](./developer-growth-analysis) - Analyzes your recent Claude Code chat history to identify coding patterns, development gaps, and curates personalized learning resources.

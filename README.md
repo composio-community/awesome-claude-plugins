@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [todox](https://github.com/beydemirfurkan/todox) - Working memory for coding agents. Reads the project's decisions, dead ends and open tasks when a session starts, and writes a handoff before it ends. ([Website](https://www.todox.dev))
 
 ### Backend & Architecture
 

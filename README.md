@@ -171,6 +171,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [nano-banana](https://github.com/Ibrahim-3d/nano-banana-claude-plugin) - Google Gemini image generation plugin. Text-to-image, text-guided image editing, style transfer, 4K output, search grounding, and multi-reference composition — all from a single `/genimage` command. Powered by `gemini-2.5-flash-image` and `gemini-3-pro-image-preview`.
 - [taisly-agent-kit](https://github.com/taisly/agent) - Claude Code plugin, skill, SDK, CLI, and MCP server for publishing short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.
+- [i2v.ai](https://github.com/i2v-ai/i2v-skills) - Claude Code plugin, skill set and hosted MCP server for image and video generation across 12 image and 16 video models, with a USD quote before every paid task and a caller-set spending ceiling.
 
 ## Getting Started
 

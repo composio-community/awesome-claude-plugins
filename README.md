@@ -151,6 +151,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.
 - [asqav-claude-code](https://github.com/jagmarques/asqav-claude-code) - Signs a tamper-evident Asqav receipt at the end of each Claude Code session: files edited (content hashes before/after), commands run (hashed), and git context. Verifiable by anyone at asqav.com/verify.
+- [threatcrush](https://github.com/profullstack/claude-plugins/tree/main/plugins/threatcrush) - ThreatCrush security over a remote MCP server: your org's scan findings and triage, incidents, and IP, domain and file-hash reputation. Install from the profullstack marketplace (`/plugin marketplace add profullstack/claude-plugins`). ([Website](https://threatcrush.com))
 
 ### Developer Productivity
 
@@ -162,6 +163,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [codebase-graph](https://github.com/Phoenixrr2113/codebase-graph) - Code intelligence MCP server that builds knowledge graphs from source code with 42-language tree-sitter AST parsing and FalkorDB.
 - [agntk](https://github.com/Phoenixrr2113/agntk) - Zero-config AI agent CLI with persistent named agents, 20+ built-in tools, and hardware-aware local model selection.
 - [backlog](https://github.com/backloghq/backlog) - Persistent, cross-session task management. 24 MCP tools for tasks, projects, tags, dependencies, and docs. 7 skills for planning, standups, and handoffs. Event-sourced storage, agent coordination, pure TypeScript. ([Website](https://backloghq.io))
+- [boardroom](https://github.com/profullstack/boardroom) - Five advisor agents (CFO, Growth Marketer, Operator, Founder-Time Strategist, Contrarian Investor) and a chair debate a decision in three rounds; `/boardroom:meet` runs the meeting and writes an HTML report. Runs locally in Claude Code.
 
 ### Companion & Personality
 

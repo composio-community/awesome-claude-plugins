@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [preclear](https://github.com/sethimadhav10/preclear) - Claude keeps its own working-memory file during a session, gets told its context usage at 50% and 80%, and reloads that file after /clear or auto-compact instead of the compaction summary.
 
 ### Backend & Architecture
 

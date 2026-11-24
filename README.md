@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [a1-gallery](https://github.com/a1-gallery/a1-mcp) - Real website references for design work. Search 1,150+ hand-picked live sites by style, font, colour and section, and get the type scale, spacing and palette measured off each page. Bundles the A1 MCP server, three skills, slash commands and a research agent.
 
 ### Git & Version Control
 

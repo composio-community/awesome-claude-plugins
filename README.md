@@ -125,6 +125,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [test-writer-fixer](./test-writer-fixer) - Automatically write and fix unit tests. Supports Jest, Vitest, Pytest, and more.
 - [debugger](./debugger) - Advanced debugging assistant for tracking down and fixing complex bugs.
 - [bug-fix](./bug-fix) - Analyzes stack traces and code to identify and fix bugs in your codebase.
+- [runheed](https://github.com/getrunheed/runheed-plugin) - Error tracking your coding agent can read. Agents pull production errors with stack traces from Runheed, fix the code and mark each error resolved. Paid hosted service with a remote MCP server; see [runheed.com](https://runheed.com/).
 
 ### Agent Memory
 

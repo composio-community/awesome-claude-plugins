@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Integrations
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
+- [juncts](https://github.com/eteleieto/juncts-claude-plugin) - Remote MCP server and skill for Juncts, a commercial unified inbox for LinkedIn, X, Instagram, WhatsApp and Telegram DMs: summarize unread chats, find conversations, save reply drafts for review, and label threads. Requires a Juncts account. ([Website](https://juncts.com))
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
 
 ### Frontend & Design

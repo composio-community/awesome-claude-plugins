@@ -108,6 +108,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [theme-factory](./theme-factory) - Applies professional font and color themes to artifacts including slides, docs, reports, and HTML landing pages with 10 pre-set themes.
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
+- [Flavian](https://github.com/PMDevSolutions/Flavian) - WordPress development with 27 agents and 16 skills: Figma, Canva and InDesign to FSE block theme pipelines that end in screenshot and Lighthouse QA, a hook that stops production deploys and local data wipes for a human, and a guard that keeps theme code out of wp-content.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
 
 ### Git & Version Control

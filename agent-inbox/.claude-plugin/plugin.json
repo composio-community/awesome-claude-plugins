@@ -1,0 +1,51 @@
+{
+  "name": "agent-inbox",
+  "version": "0.3.2",
+  "description": "One inbox for every Claude Code session that is waiting on you (permission, question, turn finished), grouped by project, with one-click jump to the session.",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "language": {
+      "type": "string",
+      "title": "Language",
+      "description": "UI language of the inbox pane. 'auto' follows LANG / the macOS system language.",
+      "options": [
+        "auto",
+        "en",
+        "tr",
+        "de",
+        "fr",
+        "es"
+      ],
+      "default": "auto"
+    },
+    "autoOpen": {
+      "type": "boolean",
+      "title": "Open pane automatically",
+      "description": "Open the inbox pane when a Claude Desktop session starts (terminal sessions use /inbox).",
+      "default": true
+    },
+    "inboxPath": {
+      "type": "string",
+      "title": "Inbox file",
+      "description": "The JSONL file the hook writes waiting sessions to.",
+      "default": "~/.claude/inbox.jsonl"
+    }
+  },
+  "author": {
+    "name": "Koray Toksöz",
+    "url": "https://github.com/ktoksoz"
+  },
+  "homepage": "https://github.com/ktoksoz/agent-inbox",
+  "repository": "https://github.com/ktoksoz/agent-inbox",
+  "keywords": [
+    "inbox",
+    "sessions",
+    "notifications",
+    "permissions",
+    "pane",
+    "hooks",
+    "multi-project"
+  ],
+  "icon": ".claude-plugin/icon.png"
+}

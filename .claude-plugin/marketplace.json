@@ -15,7 +15,14 @@
       "source": "./connect-apps",
       "description": "Connect Claude to 500+ apps - Gmail, Slack, GitHub, Notion, and more",
       "category": "integrations",
-      "tags": ["integrations", "oauth", "gmail", "slack", "github", "notion"],
+      "tags": [
+        "integrations",
+        "oauth",
+        "gmail",
+        "slack",
+        "github",
+        "notion"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -25,7 +32,13 @@
       "source": "./frontend-design",
       "description": "Create distinctive, production-grade interfaces avoiding generic AI aesthetics",
       "category": "frontend",
-      "tags": ["frontend", "design", "ui", "css", "react"],
+      "tags": [
+        "frontend",
+        "design",
+        "ui",
+        "css",
+        "react"
+      ],
       "author": {
         "name": "Anthropic"
       }
@@ -35,7 +48,13 @@
       "source": "./artifacts-builder",
       "description": "Build complex HTML artifacts with React, Tailwind CSS, and shadcn/ui",
       "category": "frontend",
-      "tags": ["frontend", "react", "tailwind", "shadcn", "artifacts"],
+      "tags": [
+        "frontend",
+        "react",
+        "tailwind",
+        "shadcn",
+        "artifacts"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -45,7 +64,12 @@
       "source": "./theme-factory",
       "description": "10 professional themes for slides, docs, reports, and landing pages",
       "category": "frontend",
-      "tags": ["design", "themes", "styling", "branding"],
+      "tags": [
+        "design",
+        "themes",
+        "styling",
+        "branding"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -55,7 +79,13 @@
       "source": "./canvas-design",
       "description": "Create museum-quality visual art in PNG and PDF formats",
       "category": "frontend",
-      "tags": ["design", "art", "visual", "pdf", "png"],
+      "tags": [
+        "design",
+        "art",
+        "visual",
+        "pdf",
+        "png"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -65,7 +95,13 @@
       "source": "./senior-frontend",
       "description": "React/Next.js/TypeScript patterns with bundle analysis and optimization",
       "category": "frontend",
-      "tags": ["frontend", "react", "nextjs", "typescript", "performance"],
+      "tags": [
+        "frontend",
+        "react",
+        "nextjs",
+        "typescript",
+        "performance"
+      ],
       "author": {
         "name": "alirezarezvani"
       }
@@ -75,7 +111,11 @@
       "source": "./frontend-developer",
       "description": "Frontend development specialist agent",
       "category": "frontend",
-      "tags": ["frontend", "agent", "development"],
+      "tags": [
+        "frontend",
+        "agent",
+        "development"
+      ],
       "author": {
         "name": "Community"
       }
@@ -85,7 +125,11 @@
       "source": "./commit",
       "description": "Smart git commits using conventional commit format",
       "category": "git",
-      "tags": ["git", "commits", "conventional-commits"],
+      "tags": [
+        "git",
+        "commits",
+        "conventional-commits"
+      ],
       "author": {
         "name": "Community"
       }
@@ -95,7 +139,11 @@
       "source": "./create-pr",
       "description": "Automates pull request creation with proper templates",
       "category": "git",
-      "tags": ["git", "pull-request", "github"],
+      "tags": [
+        "git",
+        "pull-request",
+        "github"
+      ],
       "author": {
         "name": "Community"
       }
@@ -105,7 +153,11 @@
       "source": "./pr-review",
       "description": "Comprehensive PR reviews with detailed feedback",
       "category": "git",
-      "tags": ["git", "code-review", "pull-request"],
+      "tags": [
+        "git",
+        "code-review",
+        "pull-request"
+      ],
       "author": {
         "name": "Community"
       }
@@ -115,7 +167,11 @@
       "source": "./changelog-generator",
       "description": "Transform git commits into user-friendly changelogs",
       "category": "git",
-      "tags": ["git", "changelog", "release-notes"],
+      "tags": [
+        "git",
+        "changelog",
+        "release-notes"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -125,7 +181,12 @@
       "source": "./ship",
       "description": "Complete PR workflow from commit to production",
       "category": "git",
-      "tags": ["git", "workflow", "deployment", "ci-cd"],
+      "tags": [
+        "git",
+        "workflow",
+        "deployment",
+        "ci-cd"
+      ],
       "author": {
         "name": "Community"
       }
@@ -135,7 +196,11 @@
       "source": "./code-review",
       "description": "Comprehensive code review with best practices",
       "category": "quality",
-      "tags": ["code-review", "quality", "best-practices"],
+      "tags": [
+        "code-review",
+        "quality",
+        "best-practices"
+      ],
       "author": {
         "name": "Community"
       }
@@ -145,7 +210,12 @@
       "source": "./test-writer-fixer",
       "description": "Automatically write and fix unit tests",
       "category": "quality",
-      "tags": ["testing", "unit-tests", "jest", "vitest"],
+      "tags": [
+        "testing",
+        "unit-tests",
+        "jest",
+        "vitest"
+      ],
       "author": {
         "name": "Community"
       }
@@ -155,7 +225,10 @@
       "source": "./debugger",
       "description": "Advanced debugging assistant",
       "category": "quality",
-      "tags": ["debugging", "troubleshooting"],
+      "tags": [
+        "debugging",
+        "troubleshooting"
+      ],
       "author": {
         "name": "Community"
       }
@@ -165,7 +238,11 @@
       "source": "./bug-fix",
       "description": "Analyzes and fixes bugs in your codebase",
       "category": "quality",
-      "tags": ["debugging", "bug-fix", "troubleshooting"],
+      "tags": [
+        "debugging",
+        "bug-fix",
+        "troubleshooting"
+      ],
       "author": {
         "name": "Community"
       }
@@ -175,7 +252,12 @@
       "source": "./backend-architect",
       "description": "Backend architecture patterns and system design",
       "category": "backend",
-      "tags": ["backend", "architecture", "api", "database"],
+      "tags": [
+        "backend",
+        "architecture",
+        "api",
+        "database"
+      ],
       "author": {
         "name": "Community"
       }
@@ -185,7 +267,13 @@
       "source": "./mcp-builder",
       "description": "Build high-quality MCP servers for LLM integrations",
       "category": "backend",
-      "tags": ["mcp", "servers", "integrations", "python", "typescript"],
+      "tags": [
+        "mcp",
+        "servers",
+        "integrations",
+        "python",
+        "typescript"
+      ],
       "author": {
         "name": "Composio"
       }
@@ -195,7 +283,11 @@
       "source": "./agent-sdk-dev",
       "description": "Claude Agent SDK development helper",
       "category": "backend",
-      "tags": ["agent-sdk", "agents", "development"],
+      "tags": [
+        "agent-sdk",
+        "agents",
+        "development"
+      ],
       "author": {
         "name": "Community"
       }
@@ -205,7 +297,11 @@
       "source": "./perf",
       "description": "Performance analysis and optimization",
       "category": "devops",
-      "tags": ["performance", "optimization", "profiling"],
+      "tags": [
+        "performance",
+        "optimization",
+        "profiling"
+      ],
       "author": {
         "name": "Community"
       }
@@ -215,7 +311,12 @@
       "source": "./audit-project",
       "description": "Full project audit for quality and issues",
       "category": "devops",
-      "tags": ["audit", "quality", "dependencies", "security"],
+      "tags": [
+        "audit",
+        "quality",
+        "dependencies",
+        "security"
+      ],
       "author": {
         "name": "Community"
       }
@@ -225,7 +326,11 @@
       "source": "./documentation-generator",
       "description": "Generate comprehensive documentation from code",
       "category": "docs",
-      "tags": ["documentation", "readme", "api-docs"],
+      "tags": [
+        "documentation",
+        "readme",
+        "api-docs"
+      ],
       "author": {
         "name": "Community"
       }
@@ -235,7 +340,11 @@
       "source": "./security-guidance",
       "description": "Security best practices and vulnerability detection",
       "category": "security",
-      "tags": ["security", "owasp", "vulnerabilities"],
+      "tags": [
+        "security",
+        "owasp",
+        "vulnerabilities"
+      ],
       "author": {
         "name": "Community"
       }
@@ -245,9 +354,33 @@
       "source": "./developer-growth-analysis",
       "description": "Analyze coding patterns and get personalized learning resources",
       "category": "productivity",
-      "tags": ["productivity", "learning", "growth", "analytics"],
+      "tags": [
+        "productivity",
+        "learning",
+        "growth",
+        "analytics"
+      ],
       "author": {
         "name": "Composio"
+      }
+    },
+    {
+      "name": "agent-inbox",
+      "source": "./agent-inbox",
+      "description": "One inbox pane for every Claude Code session that is waiting on you (permission, question, turn finished), grouped by project, with one-click jump to the session",
+      "category": "productivity",
+      "tags": [
+        "inbox",
+        "sessions",
+        "notifications",
+        "permissions",
+        "hooks",
+        "pane",
+        "multi-project"
+      ],
+      "author": {
+        "name": "Koray Toksöz",
+        "url": "https://github.com/ktoksoz"
       }
     }
   ]

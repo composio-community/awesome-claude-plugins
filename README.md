@@ -144,6 +144,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [seshka](https://github.com/jigjoy-ai/seshka) - Lists the dev servers, watchers and databases closed Claude Code sessions left running, and kills them on request or automatically when a session ends, through a SessionEnd hook and a free macOS menu bar app. Adds `/seshka:status` and `/seshka:clean`. ([Website](https://seshka.dev))
 
 ### Documentation & Security
 

@@ -117,6 +117,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [pr-review](./pr-review) - Comprehensive PR reviews with detailed feedback on code quality, security, and best practices.
 - [changelog-generator](./changelog-generator) - Automatically creates user-facing changelogs from git commits by analyzing history and transforming technical commits into customer-friendly release notes.
 - [ship](./ship) - Complete PR workflow from commit to production. Lint, test, review, and deploy.
+- [delivery](https://github.com/openzigs/claude-delivery-plugin) - Takes a GitHub issue through implement, independent review, fix and re-review, and stops at an open pull request for you to merge. Also turns a topic into a filed epic with sub-issues. MIT. ([Website](https://openzigs.com/claude-delivery-plugin/))
 
 ### Code Quality & Testing
 

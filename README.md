@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [viewlify](https://github.com/benjaminb10/viewlify-mcp) - TikTok research from public TikTok data: three skills that find the videos beating their creator's usual views, turn real breakouts into video ideas and write a weekly trend brief, bundled with the Viewlify MCP server.
 
 ### Frontend & Design
 

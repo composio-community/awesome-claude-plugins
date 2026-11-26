@@ -175,7 +175,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Marketing & SEO
 
-- [AlchemyAgent](https://github.com/alchemyleads-seo/alchemyagent-claude-plugin) - AI search toolkit: checks whether AI crawlers (GPTBot, ClaudeBot, PerplexityBot) can reach a site and what they see without JavaScript, audits llms.txt, schema, PageSpeed and Core Web Vitals, finds brand presence in Wikidata, Wikipedia, news and research, and reads your own Search Console, Bing and Brave data. Read-only MCP tools, 7 workflows and 3 skills. ([Website](https://alchemyagent.ai))
+- [AlchemyAgent](https://github.com/alchemyleads-seo/alchemyagent-claude-plugin) - AI search toolkit through AlchemyAgent's hosted connector: checks whether AI crawlers (GPTBot, ClaudeBot, PerplexityBot) can reach a site and what they see without JavaScript, audits llms.txt, schema, PageSpeed, Core Web Vitals and security headers, and checks brand presence in Wikidata and Wikipedia. 12 read-only tools, 4 workflows and 3 skills, no keys needed. ([Website](https://alchemyagent.ai))
 
 ## Getting Started
 

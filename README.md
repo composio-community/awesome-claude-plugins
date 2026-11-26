@@ -144,6 +144,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [MyVibe](https://www.myvibe.so) - Instant deployment to live URLs with `/myvibe:publish`.
 - [aws-cost-saver](https://github.com/prajapatimehul/aws-cost-saver) - Automated AWS cost optimization with 173 checks across EC2, RDS, S3, Lambda, and more. ML-powered recommendations and real pricing from AWS API.
 - [Manifest](https://github.com/mnfst/manifest) - Real-time cost observability for OpenClaw agents — track tokens, costs, messages, and model usage. Includes Claude Code [skill](https://github.com/mnfst/manifest/blob/main/skills/manifest/SKILL.md) for guided setup. Self-hosted, OTLP ingestion, 28+ LLM models. ([Website](https://manifest.build))
+- [Termalin](https://github.com/termalinapp/termalin-plugin) - SSH, SFTP, databases and monitoring on your own Linux servers through Termalin's hosted MCP server, with ten ops skills (server health, incident triage, deploy checks, safe command execution, database access, backups). OAuth sign-in, no SSH key given to the agent, a command policy and an audit log per connection. ([Website](https://termal.in/mcp/))
 
 ### Documentation & Security
 

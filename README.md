@@ -99,6 +99,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Integrations
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
+- [Databuddy](https://github.com/databuddy-analytics/skills) - Web and product analytics: traffic, funnels, errors, Web Vitals, replays, and why a metric moved. Bundles the hosted Databuddy MCP server (OAuth sign-in) and a skill for adding tracking to an app. Install with `claude plugin marketplace add databuddy-analytics/skills` then `claude plugin install databuddy@databuddy`. ([Website](https://www.databuddy.cc))
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
 
 ### Frontend & Design

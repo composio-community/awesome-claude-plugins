@@ -129,6 +129,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 ### Agent Memory
 
 - [glen](https://github.com/Glen-Web-App/glen-claude-code-plugin) - Shared team memory for coding agents. Recalls past decisions on every turn and records what you build, so your whole team's agents work from one history. ([Website](https://tryglen.com))
+- [keepfold](https://github.com/alenissacsam-2/keepfold) - Local memory that Claude Code shares with Cursor, Codex and Gemini CLI, kept as plain Markdown files on your own computer. A hook gives each new chat your related notes, and the `/keepfold` skill reads and saves them. MIT, no account.
 
 ### Backend & Architecture
 

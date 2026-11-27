@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [feraterra-sdk](https://github.com/FeraTerra/feraterra-sdk) - Zero-dependency 24-tool MCP server and Python SDK for autonomous trading on Arena Exchange (`https://mcp.feraterra.app/mcp` remote Streamable HTTP or local `uvx feraterra-sdk --testnet`). Includes stateless `POST /order/preview` margin dry-runs, notional risk caps, CCXT/LangChain/PydanticAI adapters, and client-side `Keccak-256` / `secp256k1` solvency verification. ([Website](https://feraterra.app))
 
 ### Frontend & Design
 

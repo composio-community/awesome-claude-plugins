@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [tote](https://github.com/generalmachines/tote-plugin) - Shopping memory for your AI. Remembers your sizes and taste, finds deals that fit, checks 90 days of price history to tell if a sale is real, and saves items or Deal Watch price alerts. Never buys or pays; you check out yourself. ([Website](https://tote.machinecommerce.co))
 
 ### Frontend & Design
 

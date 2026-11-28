@@ -1,0 +1,31 @@
+{
+  "name": "tabretake",
+  "displayName": "TabRetake",
+  "version": "0.5.2",
+  "description": "Create repeatable product demo videos, browser walkthroughs and README GIFs from web apps or existing recordings. Local MP4, GIF and poster export.",
+  "author": {
+    "name": "gnawbit",
+    "url": "https://github.com/gnawbit"
+  },
+  "homepage": "https://github.com/gnawbit/tabretake",
+  "repository": "https://github.com/gnawbit/tabretake",
+  "license": "MIT",
+  "keywords": [
+    "demo",
+    "product-demo",
+    "readme-gif",
+    "screen-recording",
+    "walkthrough",
+    "9-16",
+    "vertical-video",
+    "video",
+    "gif",
+    "playwright",
+    "ffmpeg",
+    "product-launch",
+    "agent-skill"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/gnawbit/tabretake#install",
+  "supportUrl": "https://github.com/gnawbit/tabretake/issues"
+}

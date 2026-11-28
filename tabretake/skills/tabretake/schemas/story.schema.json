@@ -1,0 +1,632 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/gnawbit/tabretake/main/schemas/story.schema.json",
+  "title": "TabRetake story, recording marks or recorded timeline",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/story"
+    },
+    {
+      "$ref": "#/definitions/marks"
+    },
+    {
+      "$ref": "#/definitions/record"
+    }
+  ],
+  "definitions": {
+    "brand": {
+      "type": "object",
+      "properties": {
+        "preset": {
+          "type": "string",
+          "enum": [
+            "midnight",
+            "daylight",
+            "paper",
+            "slate"
+          ]
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+        },
+        "frame": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "browser",
+            "phone",
+            "none"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "viewport": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height"
+      ]
+    },
+    "vertical": {
+      "type": "object",
+      "properties": {
+        "zoom": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Portrait focus magnification; --vertical-zoom overrides this value."
+        },
+        "badge": {
+          "type": "string"
+        },
+        "titleLines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "titleSize": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "titleY": {
+          "type": "number",
+          "minimum": 0
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "subtitleSize": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "subtitleGap": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cta": {
+          "type": "string"
+        },
+        "ctaSize": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "ctaY": {
+          "type": "number",
+          "minimum": 0
+        },
+        "watermark": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "wait",
+            "goto",
+            "click",
+            "type",
+            "select",
+            "hover",
+            "focus",
+            "drag",
+            "scroll",
+            "press",
+            "waitFor",
+            "screenshot"
+          ]
+        },
+        "selector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Milliseconds."
+        },
+        "pause": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Milliseconds."
+        },
+        "timeout": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Milliseconds."
+        },
+        "dx": {
+          "type": "number"
+        },
+        "dy": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "caption": {
+          "type": "string"
+        },
+        "zoom": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "action"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "click",
+                  "type",
+                  "select",
+                  "hover",
+                  "focus",
+                  "drag"
+                ]
+              }
+            }
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "selector"
+                ]
+              },
+              {
+                "required": [
+                  "role"
+                ]
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              },
+              {
+                "required": [
+                  "text"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "type",
+                  "select"
+                ]
+              }
+            }
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "value"
+                ]
+              },
+              {
+                "required": [
+                  "text"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "waitFor"
+              }
+            }
+          },
+          "then": {
+            "anyOf": [
+              {
+                "required": [
+                  "url"
+                ]
+              },
+              {
+                "required": [
+                  "selector"
+                ]
+              },
+              {
+                "required": [
+                  "text"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "goto"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "mark": {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Seconds on the output timeline."
+        },
+        "duration": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Seconds on the output timeline."
+        },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Values from 0 to 1 are normalized source coordinates; larger values are source pixels."
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Values from 0 to 1 are normalized source coordinates; larger values are source pixels."
+        },
+        "caption": {
+          "type": "string"
+        },
+        "zoom": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Milliseconds on the recorded timeline."
+        },
+        "tEnd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Milliseconds on the recorded timeline."
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "caption": {
+          "type": "string"
+        },
+        "zoom": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "t"
+      ]
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "displayUrl": {
+          "type": "string"
+        },
+        "out": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewport": {
+          "$ref": "#/definitions/viewport"
+        },
+        "brand": {
+          "$ref": "#/definitions/brand"
+        },
+        "vertical": {
+          "$ref": "#/definitions/vertical"
+        },
+        "posterAt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "zoomDuration": {
+          "type": "number",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "scale": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "initialWait": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tail": {
+          "type": "number",
+          "minimum": 0
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/step"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "story": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "displayUrl": {
+          "type": "string"
+        },
+        "out": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewport": {
+          "$ref": "#/definitions/viewport"
+        },
+        "brand": {
+          "$ref": "#/definitions/brand"
+        },
+        "vertical": {
+          "$ref": "#/definitions/vertical"
+        },
+        "posterAt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "zoomDuration": {
+          "type": "number",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "scale": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "initialWait": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tail": {
+          "type": "number",
+          "minimum": 0
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/step"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "steps"
+      ]
+    },
+    "marks": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "displayUrl": {
+          "type": "string"
+        },
+        "out": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewport": {
+          "$ref": "#/definitions/viewport"
+        },
+        "brand": {
+          "$ref": "#/definitions/brand"
+        },
+        "vertical": {
+          "$ref": "#/definitions/vertical"
+        },
+        "posterAt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "zoomDuration": {
+          "type": "number",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mark"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "marks"
+      ]
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "config": {
+          "$ref": "#/definitions/settings"
+        },
+        "url": {
+          "type": "string"
+        },
+        "viewport": {
+          "$ref": "#/definitions/viewport"
+        },
+        "scale": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "video": {
+          "type": "string",
+          "minLength": 1
+        },
+        "videoOffset": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/event"
+          }
+        },
+        "recordedAt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "video",
+        "events"
+      ]
+    }
+  }
+}

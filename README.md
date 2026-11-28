@@ -147,6 +147,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 ### Documentation & Security
 
+- [Insomnia Security Plugin & Skill](https://github.com/vulnz/insomnia-mcp) - Claude Code / Cursor / Antigravity security plugin & MCP server delivering 160 SAST/taint, live secret validation, SCA/SBOM, Web DAST, OSINT, and 21,100+ 1-Day CVE verification tools (`https://mcp.insom.ai/mcp`, 50 free credits).
 - [documentation-generator](./documentation-generator) - Generate comprehensive documentation from code. READMEs, API docs, and guides.
 - [security-guidance](./security-guidance) - Security best practices and vulnerability detection. OWASP guidelines and secure coding.
 - [security-sweep](https://github.com/Onome-AJ/security-sweep-plugin) - Comprehensive security scanner covering OWASP Top 10 (2025), Mobile Top 10 (2024), and LLM Top 10 (2025). Scans for hardcoded secrets, injection flaws, auth issues, misconfigurations, and AI-specific vulnerabilities.

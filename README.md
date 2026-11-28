@@ -100,6 +100,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [b2b-market-intel-mcp](https://github.com/truonggiang0111/b2b-market-intel-mcp) - Zero-dependency STDIO MCP server and portable plugin (`npx -y github:truonggiang0111/b2b-market-intel-mcp`) with 3 instant zero-key tools (Google News URL decoding, UK Gov Tenders, ClinicalTrials.gov) plus 5 optional APIFY_TOKEN batch scrapers.
 
 ### Frontend & Design
 

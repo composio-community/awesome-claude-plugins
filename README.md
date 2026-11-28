@@ -100,6 +100,8 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 
 - [connect-apps](./connect-apps) - Connect Claude to any app. Send emails, create issues, post messages, update databases - take real actions across Gmail, Slack, GitHub, Notion, and 1000+ services.
 - [kaggle-skill](https://github.com/shepsci/kaggle-skill) - Complete Kaggle integration — account setup, competition reports, dataset/model downloads, notebook execution, submissions, and badge collection.
+- [watch](https://github.com/clipy-recorder/clipy/tree/main/plugins/watch) - Adds /watch for YouTube videos, Loom links and local video files: Claude gets a timestamped transcript, key moments and frames as AREC Markdown. Free, no account.
+- [record](https://github.com/clipy-recorder/clipy/tree/main/plugins/record) - Adds /record: record your screen on a Mac or Windows PC and talk Claude through it, then Claude reads the transcript, key moments and a screenshot of each as AREC Markdown and gets to work. The video stays on your computer.
 
 ### Frontend & Design
 

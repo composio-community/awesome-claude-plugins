@@ -109,6 +109,7 @@ Claude Plugins are extensions that enhance Claude Code with custom slash command
 - [canvas-design](./canvas-design) - Creates beautiful visual art in PNG and PDF documents using design philosophy and aesthetic principles for posters and static pieces.
 - [senior-frontend](./senior-frontend) - React/Next.js/TypeScript development patterns with bundle analysis, component generation, and accessibility best practices.
 - [frontend-developer](./frontend-developer) - Frontend development specialist agent for building modern web interfaces.
+- [Kosha](https://github.com/blisse-code/kosha) - 15 skills for running design projects with AI (motion design with a motion-audit checker, slides, logos, research, writing and code standards, quality gates, harness building); installs as a Claude Code plugin or with one npx command.
 
 ### Git & Version Control
 
